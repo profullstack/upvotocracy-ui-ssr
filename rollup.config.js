@@ -1,3 +1,4 @@
+import {} from 'dotenv/config'
 import resolve from '@rollup/plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
 import commonjs from '@rollup/plugin-commonjs';
