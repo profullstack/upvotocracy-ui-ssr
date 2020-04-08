@@ -8,6 +8,8 @@ config();
 const { PORT, NODE_ENV } = process.env;
 const dev = NODE_ENV === 'development';
 
+console.log(PORT);
+
 polka() // You can also use Express
 	.use(
 		compression({ threshold: 0 }),
