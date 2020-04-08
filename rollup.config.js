@@ -1,4 +1,4 @@
-import {} from 'dotenv/config'
+import { config as envConfig } from 'dotenv-flow'
 import resolve from '@rollup/plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
 import commonjs from '@rollup/plugin-commonjs';
@@ -7,6 +7,10 @@ import babel from 'rollup-plugin-babel';
 import { terser } from 'rollup-plugin-terser';
 import config from 'sapper/config/rollup.js';
 import pkg from './package.json';
+
+envConfig({
+	purge_dotenv: true
+});
 
 const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
