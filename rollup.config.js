@@ -66,7 +66,9 @@ export default {
 		plugins: [
 			replace({
 				'process.browser': false,
-				'process.env.NODE_ENV': JSON.stringify(mode)
+				'process.env.NODE_ENV': JSON.stringify(mode),
+				API_BASE_URL: process.env.API_BASE_URL,
+				BASE_URL: process.env.BASE_URL,
 			}),
 			svelte({
 				generate: 'ssr',
@@ -91,7 +93,9 @@ export default {
 			resolve(),
 			replace({
 				'process.browser': true,
-				'process.env.NODE_ENV': JSON.stringify(mode)
+				'process.env.NODE_ENV': JSON.stringify(mode),
+				API_BASE_URL: process.env.API_BASE_URL,
+				BASE_URL: process.env.BASE_URL,
 			}),
 			commonjs(),
 			!dev && terser()
