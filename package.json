@@ -16,8 +16,10 @@
     "compression": "^1.7.1",
     "dotenv": "^8.2.0",
     "jwt-decode": "^2.2.0",
+    "moment": "^2.24.0",
     "node-localstorage": "^2.1.5",
     "polka": "next",
+    "showdown": "^1.9.1",
     "sirv": "^0.4.0"
   },
   "devDependencies": {
