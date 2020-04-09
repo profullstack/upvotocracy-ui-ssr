@@ -1,10 +1,9 @@
 <script context="module">
   export async function preload(page, session) {
-    //const { category } = page.params;
+    const { category } = page.params;
 
     let url = 'API_BASE_URL'
     let headers
-    let username
     let sort
     let type
 
@@ -22,22 +21,26 @@
       sort = '+score';
     }
 
-    url += `/posts/?sort=${sort}&page=0`
+    if (category) url += `/posts/${category}?sort=${sort}&page=0`
 
     let res = await this.fetch(url);
     res = await res.json();
     const posts = res.posts;
     const morePosts = res.more;
 
-    return { posts, page, morePosts, sort };
+    return { category, posts, page, morePosts };
   }
 </script>
 <script>
-  import Home from '../components/Home.svelte'
+  import Home from '../../components/Home.svelte'
+  export let category;
   export let posts;
   export let page;
   export let morePosts;
-  export let sort;
 </script>
 
-<Home posts={posts} page={page} morePosts={morePosts} sort={sort}/>
+<svelte:head>
+ <title>{category} - upvotocracy.com</title>
+</svelte:head>
+
+<Home posts={posts} page={page} category={category} morePosts={morePosts}/>
