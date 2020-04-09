@@ -1,3 +1,4 @@
+import showdown from 'showdown';
 const converter = new showdown.Converter({simplifiedAutoLink: true});
 
 function parseContent(content) {
