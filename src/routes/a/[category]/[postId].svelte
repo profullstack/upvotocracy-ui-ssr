@@ -22,7 +22,7 @@
   {#if post.thumb}
     <meta property="og:image" content="{post.thumb}">
     <meta property="twitter:image" content="{post.thumb}">
-    <meta property="twitter:card" content="summary_large_image">
+    <meta name="twitter:card" content="summary_large_image">
   {/if}
 </svelte:head>
 
