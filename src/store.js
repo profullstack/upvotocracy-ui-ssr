@@ -5,14 +5,16 @@ import decode from 'jwt-decode'
 let token
 let payload
 
-// const token = localStorage.getItem('token')
+if (typeof window !== 'undefined') {
+  const token = localStorage.getItem('token')
 
-if (token) {
-  try {
-    payload = decode(token).user
-  } catch (error) {
-    console.log(error)
-  }
+  if (token) {
+    try {
+      payload = decode(token).user
+    } catch (error) {
+      console.log(error)
+    }
+  }  
 }
 
 export const userStore = writable(payload)
