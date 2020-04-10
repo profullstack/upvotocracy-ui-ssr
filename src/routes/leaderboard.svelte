@@ -33,16 +33,6 @@ function sort(type = 'top') {
     })
   }
 }
-
-
-// onMount(async () => {
-//   const res = await getLeaderBoard()
-//     .catch(console.error);
-
-//   if (res) {
-//     leaders = res.leaders;
-//   }
-// })
 </script>
 
 <style>
