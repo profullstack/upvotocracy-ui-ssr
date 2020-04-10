@@ -12,7 +12,6 @@
   export let posts = []
   export let page;
   export let morePosts = false
-  console.log(page)
   export let sort
   let type = 'hot'
   let categoryData = {}
@@ -151,6 +150,19 @@
     font-size: 1.8rem;
   }
 </style>
+
+<svelte:head>
+  <meta property="og:title" content="Zero-moderation Reddit clone - Upvotocracy.com" />
+  <meta property="og:url" content="https://upvotocracy.com" />
+  <meta property="og:image" content="https://upvotocracy.com/images/title.png" />
+  <meta property="og:description" content="Zero-moderation Reddit clone - Upvotocracy.com">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Zero-moderation Reddit clone - Upvotocracy.com" />
+  <meta name="twitter:url" content="https://upvotocracy.com/" />
+  <meta property="twitter:image" content="https://upvotocracy.com/images/title.png" />
+  <meta name="description" content="Zero-moderation Reddit clone - Upvotocracy.com" />
+</svelte:head>
 
 {#if category}
   <h4 class="category">

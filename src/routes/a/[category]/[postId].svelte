@@ -1,15 +1,30 @@
 <script context="module">
   export async function preload(page, session) {
     let post
-    const { postId } = page.params
+    const { postId, category } = page.params
     const url = `API_BASE_URL/post/${postId}`
 
     const res = await this.fetch(url)
     if (!res.ok) return alert('Something wrong!')
     post = await res.json()
-    return { post }
+    return { post, category }
   }
 </script>
+
+<svelte:head>
+  <title>{post.title} - upvotocracy.com</title>
+  <meta property="og:description" content={post.text || post.title}>
+  <meta property="description" content={post.text || post.title}>
+  <meta property="og:title" content="{post.title}">
+  <meta property="og:url" content="BASE_URL/a/{post.category.name}/{post.id}">
+  <meta property="twitter:title" content="{post.title}">
+  <meta property="twitter:url" content="BASE_URL/a/{post.category.name}/{post.id}">
+  {#if post.thumb}
+    <meta property="og:image" content="{post.thumb}">
+    <meta property="twitter:image" content="{post.thumb}">
+  {/if}
+</svelte:head>
+
 <script>
   import Post from '../../../components/Post.svelte'
   import Comment from '../../../components/Comment.svelte'
@@ -17,40 +32,12 @@
   import { userStore } from '../../../store'
 
   export let category = null
-  export let postId = null
   export let post = null
 
   let user
   userStore.subscribe(value => {
     user = value
   })
-
-
-  function setMetaTags(post){
-    document.querySelector('meta[name="description"]').setAttribute("content", post.text || post.title);
-    document.querySelector('meta[property="og:description"]').setAttribute("content", post.text || post.title);
-    document.querySelector('meta[property="og:title"]').setAttribute('content', post.title);
-    document.querySelector('meta[property="og:url"]').setAttribute('content', `BASE_URL/a/${post.category.name}/${post.id}`);
-    document.querySelector('meta[name="twitter:title"]').setAttribute('content', post.title);
-    document.querySelector('meta[name="twitter:url"]').setAttribute('content', `BASE_URL/a/${post.category.name}/${post.id}`);
-    
-    if (post.thumb) {
-      document.querySelector('meta[property="og:image"]').setAttribute('content', post.thumb);
-      document.querySelector('meta[property="twitter:image"]').setAttribute('content', post.thumb);
-    }
-  }
-
-  // const fetchPost = async ({ postId }) => {
-  //   const url = `API_BASE_URL/post/${postId}`
-
-  //   const res = await fetch(url)
-  //   if (!res.ok) return alert('Something wrong!')
-  //   post = await res.json()
-  //   document.title = `${post.title} - upvotocracy.com`
-  //   setMetaTags(post);
-  // }
-
-  // $: fetchPost({ postId })
 
   const updateComment = (event) => {
     post = event.detail
