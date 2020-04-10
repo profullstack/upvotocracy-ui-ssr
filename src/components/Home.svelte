@@ -13,8 +13,7 @@
   export let page;
   export let morePosts = false
   export let sort
-  let type = 'hot'
-  let categoryData = {}
+  export let categoryData = {}
   let pageNumber = 1
 
   let currentCat
@@ -32,22 +31,20 @@
   })
 
   onMount(() => {
-    // const rss = document.querySelector('link[type="application/rss+xml"]');
+    const rss = document.querySelector('link[type="application/rss+xml"]');
           
-    // if (category) {
-    //   rss.setAttribute('href', `https://upvotocracy.com/api/1/posts/${category}/rss?sort=-created`);
-    //   rss.setAttribute('title', `Upvotocracy ${category} RSS Feed`);
-    //   currentCategory.set(category)
-    // }
-    // else {
-    //   rss.setAttribute('href', `https://upvotocracy.com/api/1/posts/rss?sort=-created`);
-    //   rss.setAttribute('title', `Upvotocracy RSS Feed`);
-    // }
+    if (category) {
+      rss.setAttribute('href', `https://upvotocracy.com/api/1/posts/${category}/rss?sort=-created`);
+      rss.setAttribute('title', `Upvotocracy ${category} RSS Feed`);
+      currentCategory.set(category)
+    }
+    else {
+      rss.setAttribute('href', `https://upvotocracy.com/api/1/posts/rss?sort=-created`);
+      rss.setAttribute('title', `Upvotocracy RSS Feed`);
+    }
   })
 
   const fetchPost = async () => {
-    console.log(sort)
-
     pageNumber += 1;
 
     let url = 'API_BASE_URL'
@@ -69,69 +66,6 @@
     morePosts = res.more
     posts = posts.concat(res.posts)
   }
-
-  // const fetchCategory = async (category) => {
-  //   if (!category) return;
-  //   page = 0
-  //   let url = 'API_BASE_URL' + `/category/${category}`
-
-  //   const res = await fetch(url)
-  //   .catch(console.error)
-  //   if (!res.ok) return alert('Failed to fetch category info!')
-  //   categoryData = await res.json()
-  // }
-
-  // const fetchUser = async (username) => {
-  //   if (!username) return;
-
-  //   let url = 'API_BASE_URL' + `/users/${username}`
-
-  //   const res = await fetch(url)
-  //   .catch(console.error);
-  //   if (!res.ok) return alert('Failed to fetch user info!')
-  //   pageUser = await res.json()
-  // }
-
-  // const fetchMe = async () => {
-  //   if (!user) return;
-  //   let url = 'API_BASE_URL/me';
-  //   const token = localStorage.getItem('token');
-
-  //   const res = await fetch(url, {
-  //     headers: {
-  //       Authorization: `Bearer ${token}`
-  //     }
-  //   })
-  //   .catch(console.error);
-
-  //   if (!res.ok) return alert('Failed to fetch user info!')
-  //   user = await res.json();
-  //   userStore.set(user);
-  // }
-
-// const sorter = () => {
-//     const urlParams = new URLSearchParams(window.location.search)
-//     if (urlParams.get('sort')) type = urlParams.get('sort')
-    
-//     if (type === 'hot') {
-//       sort = '-rank'
-//     } else if (type === 'top') {
-//       sort = '-score'
-//     } else if (type === 'new') {
-//       sort = '-created'
-//     } else if (type === 'comments') {
-//       sort = 'comments';
-//     } else if (type === 'not') {
-//       sort = '+score';
-//     }
-
-//     sort = encodeURIComponent(sort)
-//     return true;
-//   }
-
-  // $: fetchCategory(category)
-  // $: fetchUser(username);
-  // $: fetchMe();
 </script>
 <style>
   .load-more {

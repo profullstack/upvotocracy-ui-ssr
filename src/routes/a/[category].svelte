@@ -23,12 +23,17 @@
 
     if (category) url += `/posts/${category}?sort=${sort}&page=0`
 
-    let res = await this.fetch(url);
-    res = await res.json();
+    const categoryUrl = 'API_BASE_URL' + `/category/${category}`
+
+    const requests = await Promise.all([ this.fetch(url), this.fetch(categoryUrl) ]);
+
+    const res = await requests[0].json();
     const posts = res.posts;
     const morePosts = res.more;
 
-    return { category, posts, page, morePosts };
+    const categoryData = await requests[1].json();
+
+    return { category, posts, page, morePosts, categoryData };
   }
 </script>
 <script>
@@ -37,10 +42,11 @@
   export let posts;
   export let page;
   export let morePosts;
+  export let categoryData;
 </script>
 
 <svelte:head>
  <title>{category} - upvotocracy.com</title>
 </svelte:head>
 
-<Home posts={posts} page={page} category={category} morePosts={morePosts}/>
+<Home posts={posts} page={page} category={category} morePosts={morePosts} categoryData={categoryData}/>
