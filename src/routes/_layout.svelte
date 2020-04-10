@@ -90,7 +90,7 @@
 <div class="container">
   <Navbar {segment}/>
   <div class="main">
-    <Sidebar {cats}/>
+    <Sidebar/>
     <div class="content">
       <main>
       	<slot></slot>

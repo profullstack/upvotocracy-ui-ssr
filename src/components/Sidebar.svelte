@@ -1,19 +1,21 @@
 <script>
   import { onMount } from 'svelte'
-  // import { Link } from 'svelte-routing'
-  // import { categories, userStore } from './store'
-  // import { addSubscription, removeSubscription } from './editSubscriptions';
-  // import { abbreviateNumber } from './utils/abbreviateNumber';
+  import { categories, userStore } from '../store'
+  import { addSubscription, removeSubscription } from './editSubscriptions';
+  import { abbreviateNumber } from '../utils/abbreviateNumber';
 
-  export let cats
   let filtered = [];
   let search = '';
 
-  let user;
-  
-  // userStore.subscribe(value => {
-  //   user = value
-  // })
+  let user;  
+  userStore.subscribe(value => {
+    user = value
+  })
+
+  let cats;  
+  categories.subscribe(value => {
+    cats = value
+  })
 
   function sort(type) {
     filtered = filtered.sort((a, b) => {
@@ -35,18 +37,6 @@
     })
   }
 
-  onMount(async () => {
-    // const url = 'https://local.com/api/1/category'
-    // const res = await fetch(url, {
-    //   method: 'GET'
-    // })
-
-    // cats = await res.json()
-    // //categories.set(cats)
-    //filtered = cats;
-    filterCategories()
-  })
-
   const fetchMe = async () => {
     if (!user) return;
     let url = 'API_BASE_URL/me';
@@ -63,8 +53,11 @@
     user = await res.json();
     userStore.set(user);
   }
-  
-  $: fetchMe();
+
+  onMount(async () => {
+    fetchMe()
+    filterCategories()
+  })
 </script>
 <style>
   .sidebar {
@@ -102,9 +95,9 @@
     background-color: #fff;
   }
 
-  /*.join-leave {
+  .join-leave {
     float: right;
-  }*/
+  }
   
   @media only screen and (max-width: 850px) {
     .sidebar {
@@ -129,15 +122,15 @@
   <ul>
     {#each filtered as category}
       <li>
-        <!-- <span>{ abbreviateNumber(category.subscriberCount || 0 )}</span> -->
+        <span>{ abbreviateNumber(category.subscriberCount || 0 )}</span>
         <a rel=prefetch href="/a/{ category.name }"><span>{ category.name }</span></a>
-        <!-- {#if user}
+        {#if user}
           {#if user.subscriptions && user.subscriptions.includes(category._id)}
             <a class="join-leave" href="javascript:void(0)" on:click={() => removeSubscription(category._id)}>Leave</a>
           {:else}
             <a class="join-leave" href="javascript:void(0)" on:click={() => addSubscription(category._id)}>Join</a>
           {/if}
-        {/if} -->
+        {/if}
       </li>
     {/each}
   </ul>
