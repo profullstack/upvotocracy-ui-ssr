@@ -40,4 +40,8 @@
   export let sort;
 </script>
 
+<svelte:head>
+  <title>upvotocracy.com</title>
+</svelte:head>
+
 <Home posts={posts} page={page} morePosts={morePosts} sort={sort}/>
