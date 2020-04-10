@@ -17,8 +17,8 @@
   <meta property="description" content={post.text || post.title}>
   <meta property="og:title" content="{post.title}">
   <meta property="og:url" content="BASE_URL/a/{post.category.name}/{post.id}">
-  <meta property="twitter:title" content="{post.title}">
-  <meta property="twitter:url" content="BASE_URL/a/{post.category.name}/{post.id}">
+  <meta name="twitter:title" content="{post.title}">
+  <meta name="twitter:url" content="BASE_URL/a/{post.category.name}/{post.id}">
   {#if post.thumb}
     <meta property="og:image" content="{post.thumb}">
     <meta property="twitter:image" content="{post.thumb}">
