@@ -1,0 +1,60 @@
+<script context="module">
+  export async function preload(page, session) {
+    return { page };
+  }
+</script>
+
+<script>
+  import Home from '../components/Home.svelte'
+  import { onMount } from 'svelte'
+  
+  export let page;
+  let morePosts;
+  let posts;
+  let sort;
+
+  const fetchPage = async () => {
+    let url = 'API_BASE_URL'
+    let headers
+    let type
+
+    console.log(page)
+
+    if (page.query.sort) type = page.query.sort 
+
+    if (type === 'hot') {
+      sort = '-rank'
+    } else if (type === 'top') {
+      sort = '-score'
+    } else if (type === 'new') {
+      sort = '-created'
+    } else if (type === 'comments') {
+      sort = 'comments';
+    } else if (type === 'not') {
+      sort = '+score';
+    }
+
+    url += `/subscriptions?sort=${sort}&page=0`;
+    const token = localStorage.getItem('token')
+    headers = { Authorization: `Bearer ${token}` }
+
+    const req = await fetch(url, { headers });
+    const res = await req.json();
+    posts = res.posts;
+    morePosts = res.more;
+
+    return { posts, page, morePosts, sort };
+  }
+
+  onMount(async () => {
+    fetchPage()
+  })
+
+  $: fetchPage(page)
+</script>
+
+<svelte:head>
+ <title>upvotocracy.com</title>
+</svelte:head>
+
+<Home posts={posts} page={page} morePosts={morePosts} sort={sort}/>
