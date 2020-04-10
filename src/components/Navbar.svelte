@@ -1,14 +1,8 @@
 <script>
-  // import { Link } from 'svelte-routing'
-  // import { getContext } from 'svelte'
+  import { onMount } from 'svelte'
   import { userStore, showOverlay } from '../store'
   import OverlayMenu from './OverlayMenu.svelte'
-  // import {ROUTER} from 'svelte-routing/src/contexts';
   import { abbreviateNumber } from '../utils/abbreviateNumber';
-
-  // const { activeRoute } = getContext(ROUTER);
-
-	export let segment;
 
   let inboxCount
   let unread = false
@@ -61,8 +55,10 @@
     }
   }
 
-
-  // $: getInboxCount()
+  onMount(() => {
+    getInboxCount();
+    setInterval(() => getInboxCount(), 20000);
+  })
 </script>
 
 <style>

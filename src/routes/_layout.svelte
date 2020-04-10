@@ -11,7 +11,6 @@
 	import Sidebar from '../components/Sidebar.svelte';
   import { categories } from '../store'
 
-	export let segment;
 	export let cats;
 
   categories.set(cats)
@@ -88,7 +87,7 @@
 </style>
 
 <div class="container">
-  <Navbar {segment}/>
+  <Navbar/>
   <div class="main">
     <Sidebar/>
     <div class="content">
