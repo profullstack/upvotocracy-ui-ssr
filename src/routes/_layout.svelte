@@ -3,7 +3,6 @@
     const res = await this.fetch(`API_BASE_URL/category`);
     const article = await res.json();
     const cats = article
-    console.log(cats.length)
     return { cats };
   }
 </script>
