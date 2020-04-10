@@ -1,12 +1,24 @@
 <script context="module">
   export async function preload(page, session) {
-    //const { category } = page.params;
+    return { page };
+  }
+</script>
 
+<script>
+  import Home from '../components/Home.svelte'
+  import { onMount } from 'svelte'
+  
+  export let page;
+  let morePosts;
+  let posts;
+  let sort;
+
+  const fetchPage = async () => {
     let url = 'API_BASE_URL'
     let headers
-    let username
-    let sort
     let type
+
+    console.log(page)
 
     if (page.query.sort) type = page.query.sort 
 
@@ -22,26 +34,27 @@
       sort = '+score';
     }
 
-    url += `/posts/?sort=${sort}&page=0`
+    url += `/subscriptions?sort=${sort}&page=0`;
+    const token = localStorage.getItem('token')
+    headers = { Authorization: `Bearer ${token}` }
 
-    let res = await this.fetch(url);
-    res = await res.json();
-    const posts = res.posts;
-    const morePosts = res.more;
+    const req = await fetch(url, { headers });
+    const res = await req.json();
+    posts = res.posts;
+    morePosts = res.more;
 
     return { posts, page, morePosts, sort };
   }
-</script>
-<script>
-  import Home from '../components/Home.svelte'
-  export let posts;
-  export let page;
-  export let morePosts;
-  export let sort;
+
+  onMount(async () => {
+    fetchPage()
+  })
+
+  $: fetchPage(page)
 </script>
 
 <svelte:head>
-  <title>upvotocracy.com</title>
+ <title>upvotocracy.com</title>
 </svelte:head>
 
 <Home posts={posts} page={page} morePosts={morePosts} sort={sort}/>

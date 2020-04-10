@@ -3,7 +3,6 @@
     const res = await this.fetch(`API_BASE_URL/category`);
     const article = await res.json();
     const cats = article
-    console.log(cats.length)
     return { cats };
   }
 </script>
@@ -12,7 +11,6 @@
 	import Sidebar from '../components/Sidebar.svelte';
   import { categories } from '../store'
 
-	export let segment;
 	export let cats;
 
   categories.set(cats)
@@ -89,9 +87,9 @@
 </style>
 
 <div class="container">
-  <Navbar {segment}/>
+  <Navbar/>
   <div class="main">
-    <Sidebar {cats}/>
+    <Sidebar/>
     <div class="content">
       <main>
       	<slot></slot>
