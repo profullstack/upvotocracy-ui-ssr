@@ -14,6 +14,7 @@
   export let morePosts = false
   export let sort
   export let categoryData = {}
+  export let pageUser
   let pageNumber = 1
 
   let currentCat
@@ -22,7 +23,6 @@
   })
 
   let user
-  let pageUser
 
   userStore.subscribe(value => {
     if (value) {

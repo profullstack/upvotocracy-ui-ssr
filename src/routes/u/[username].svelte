@@ -23,25 +23,30 @@
 
     if (username) url += `/user/${username}?sort=${sort}&page=0`
 
-    let res = await this.fetch(url);
-    res = await res.json();
+    const pageUserUrl = 'API_BASE_URL' + `/users/${username}`
+
+    const requests = await Promise.all([ this.fetch(url), this.fetch(pageUserUrl) ]);
+
+    const res = await requests[0].json();
     const posts = res.posts;
     const morePosts = res.more;
 
-    return { posts, page, morePosts, username };
+    const pageUser = await requests[1].json();
+
+    return { posts, page, morePosts, username, pageUser };
   }
 </script>
 <script>
   import Home from '../../components/Home.svelte'
-  export let category;
   export let posts;
   export let page;
   export let morePosts;
   export let username;
+  export let pageUser
 </script>
 
 <svelte:head>
  <title>upvotocracy.com</title>
 </svelte:head>
 
-<Home posts={posts} page={page} morePosts={morePosts} username={username}/>
+<Home posts={posts} page={page} morePosts={morePosts} username={username} pageUser={pageUser}/>
