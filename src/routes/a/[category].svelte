@@ -33,7 +33,7 @@
 
     const categoryData = await requests[1].json();
 
-    return { category, posts, page, morePosts, categoryData };
+    return { category, posts, page, morePosts, categoryData, sort };
   }
 </script>
 <script>
@@ -43,10 +43,11 @@
   export let page;
   export let morePosts;
   export let categoryData;
+  export let sort;
 </script>
 
 <svelte:head>
  <title>{category} - upvotocracy.com</title>
 </svelte:head>
 
-<Home posts={posts} page={page} category={category} morePosts={morePosts} categoryData={categoryData}/>
+<Home posts={posts} page={page} category={category} morePosts={morePosts} categoryData={categoryData} sort={sort}/>

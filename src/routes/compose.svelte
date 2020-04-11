@@ -1,20 +1,40 @@
+<script context="module">
+  export async function preload(page, session) {
+    let scoops
+    const { title, link, text, category } = page.query;
+
+    if (text) scoops = 'text';
+    
+    return { title, link, text, category, scoops };
+  }
+</script>
 <script>
   import { onMount } from 'svelte'
   import { goto } from '@sapper/app';
-  import { userStore, currentCategory } from '../store'
+  import { userStore, currentCategory, categories as cats } from '../store'
 
-  let scoops = 'link'
+  export let scoops = 'link'
+  export let title = ''
+  export let link = ''
+  export let text = ''
+  export let category
+  let currentCat
+  let thumb;
   let categories = []
   let sortedCategories = [];
+
   let user
   userStore.subscribe(value => {
     user = value
   })
 
-  let currentCat
-  let thumb;
+  if (category) currentCategory.set(category)
   currentCategory.subscribe(value => {
     currentCat = value
+  })
+
+  cats.subscribe(value => {
+    categories = value
   })
 
   async function onUrlBlur(e) {
@@ -40,12 +60,6 @@
   onMount(async () => {
     if (!user) goto('/')
 
-    const url = 'API_BASE_URL/category'
-    const res = await fetch(url, {
-      method: 'GET'
-    })
-
-    categories = await res.json()
     sortedCategories = categories.sort((a, b) => {
         const nameA = a.name.toUpperCase();
         const nameB = b.name.toUpperCase();
@@ -113,18 +127,6 @@
     }
 
     return goto('/');
-  }
-
-  const urlParams = new URLSearchParams(window.location.search)
-  const title = urlParams.get('title')
-  const link = urlParams.get('link')
-  const text = urlParams.get('text')
-
-  if (urlParams.get('category')) {
-    currentCat = urlParams.get('category')
-  }
-  if (urlParams.get('text')) {
-    scoops = 'text'
   }
 </script>
 
