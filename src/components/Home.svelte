@@ -86,16 +86,25 @@
 </style>
 
 <svelte:head>
-  <meta property="og:title" content="Zero-moderation Reddit clone - Upvotocracy.com" />
-  <meta property="og:url" content="https://upvotocracy.com" />
   <meta property="og:image" content="https://upvotocracy.com/images/title.png" />
-  <meta property="og:description" content="Zero-moderation Reddit clone - Upvotocracy.com">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Zero-moderation Reddit clone - Upvotocracy.com" />
-  <meta name="twitter:url" content="https://upvotocracy.com/" />
   <meta property="twitter:image" content="https://upvotocracy.com/images/title.png" />
-  <meta name="description" content="Zero-moderation Reddit clone - Upvotocracy.com" />
+  {#if categoryData}
+    <meta property="og:description" content={categoryData.description}>
+    <meta property="description" content={categoryData.description}>
+    <meta property="og:title" content="{category} - upvotocracy.com">
+    <meta property="og:url" content="BASE_URL/a/{category}">
+    <meta name="twitter:title" content="{category} - upvotocracy.com">
+    <meta name="twitter:url" content="BASE_URL/a/{category}">
+  {:else}
+    <meta property="og:title" content="Zero-moderation Reddit clone - Upvotocracy.com" />
+    <meta property="og:url" content="https://upvotocracy.com" />
+    <meta property="og:description" content="Zero-moderation Reddit clone - Upvotocracy.com">
+    <meta name="twitter:title" content="Zero-moderation Reddit clone - Upvotocracy.com" />
+    <meta name="twitter:url" content="https://upvotocracy.com/" />
+    <meta name="description" content="Zero-moderation Reddit clone - Upvotocracy.com" />
+  {/if}
 </svelte:head>
 
 {#if category}
