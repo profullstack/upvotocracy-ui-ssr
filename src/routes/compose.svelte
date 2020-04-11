@@ -80,6 +80,7 @@
       .then(res => {
         console.log(res.title);
         res.title = res.title.slice(0, 200).trim();
+        res.thumb = res.thumb && res.thumb.replace('http://', 'https://');
         console.log(res.title);
         return res;
       })

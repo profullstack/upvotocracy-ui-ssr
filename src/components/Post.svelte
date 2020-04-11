@@ -17,6 +17,8 @@
     else {
       postThumb = post.thumb;
     }
+
+    postThumb = postThumb && postThumb.replace('http://', 'https://');
   }
 
   const getVideo = (post) => {
