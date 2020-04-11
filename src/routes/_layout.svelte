@@ -9,11 +9,16 @@
 <script>
 	import Navbar from '../components/Navbar.svelte';
 	import Sidebar from '../components/Sidebar.svelte';
+  import { onMount } from 'svelte'
   import { categories } from '../store'
 
 	export let cats;
 
   categories.set(cats)
+
+  onMount(() => {
+    document.getElementById('bookmarklet').setAttribute('href', "javascript:void(open(`https://upvotocracy.com/compose?link=${encodeURIComponent(`${location.href}${location.href.includes('?')?'&':'?'}_snoorandom=${crypto.getRandomValues(new Uint8Array(4)).reduce((a,v)=>a+=(v.toString(16).padStart(2,'0')),'')}`)}&title=${encodeURIComponent(document.querySelector('meta[name=title][content]')?document.querySelector('meta[name=title][content]').content:document.title)}`))");
+  })
 </script>
 
 <style>
