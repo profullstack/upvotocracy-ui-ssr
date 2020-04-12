@@ -1,8 +1,9 @@
 <script>
   import moment from 'moment'
   import { userStore } from '../store'
-  //const converter = new showdown.Converter({simplifiedAutoLink: true});
-
+  import showdown from 'showdown'
+  const converter = new showdown.Converter({simplifiedAutoLink: true});
+  
   export let post = {}
   export let withDetails = false
   let postThumb = null;
@@ -232,7 +233,7 @@
         {/if}
       {/if}
     {:else}
-      <!--{@html post.url || converter.makeHtml(post.text) }-->
+      {@html post.url || converter.makeHtml(post.text) }
     {/if}
     </div>
 
