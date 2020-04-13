@@ -12,7 +12,7 @@
 </script>
 
 <svelte:head>
-  <title>{post.title} - upvotocracy.com</title>
+  <title>{post.title}</title>
   <meta property="og:description" content={post.text || post.title}>
   <meta property="description" content={post.text || post.title}>
   <meta property="og:title" content="{post.title}">

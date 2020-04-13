@@ -177,6 +177,23 @@
     max-width: 100%;
     max-height: 100rem;
   }
+
+  .sponsored {
+    border: 1px solid #147b50;
+    padding: .5rem;
+    border-radius: 5px;
+  }
+
+  .sponsored-post {
+    display: inline-block;
+    background-color: #147b50;
+    color: white;
+    padding: .5rem 1rem;
+    margin-left: -.5rem;
+    margin-top: -.5rem;
+    font-weight: 600;
+    border-radius: 0 0 5px 0;
+  }
 </style>
 
 <div class="content">
@@ -197,7 +214,8 @@
       {/if}
     </div>
 
-    <div class="post-preview"> 
+    <div class="post-preview" class:sponsored={post.sponsored}>
+    {#if post.sponsored}<a class="sponsored-post" href="/sponsor">Sponsored</a>{/if} 
     {#if postThumb}
       {#if withDetails}
         {#if !postVideo}

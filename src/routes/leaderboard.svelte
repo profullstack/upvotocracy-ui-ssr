@@ -9,16 +9,18 @@
 import { onMount } from 'svelte';
 import { abbreviateNumber } from '../utils/abbreviateNumber';
 import { timeSince } from '../utils/time';
+import copyToClipboard from '../utils/clipboard';
 
 export let leaders = [];
+let filteredLeaders = leaders;
 
 function sort(type = 'top') {
   if (type === 'top') {
-    leaders = leaders.sort((a, b) => {
+    filteredLeaders = leaders.sort((a, b) => {
       return b.karma - a.karma;
     })
   } else if (type === 'new') {
-    leaders = leaders.sort((a, b) => {
+    filteredLeaders = leaders.sort((a, b) => {
       let aDate = new Date(a.created).getTime();
       let bDate = new Date(b.created).getTime();
 
@@ -31,6 +33,16 @@ function sort(type = 'top') {
       }
       return bDate - aDate;
     })
+  }
+}
+
+function filter(type = 'btc') {
+  if (type === 'btc') {
+    filteredLeaders = leaders.filter(item => {
+      return item.bitcoinAddress;
+    })
+  } else if (type === 'all') {
+    filteredLeaders = leaders;
   }
 }
 </script>
@@ -50,17 +62,19 @@ function sort(type = 'top') {
 <nav>
   <a href="javascript:void" on:click|preventDefault={() => sort('top')}>Top</a>
   <a href="javascript:void" on:click|preventDefault={() => sort('new')}>New</a>
+  <a href="javascript:void" on:click|preventDefault={() => filter('all')}>All</a>
+  <a href="javascript:void" on:click|preventDefault={() => filter('btc')}>BTC</a>
 </nav>
 
 <ol>
-{#each leaders as user}
+{#each filteredLeaders as user}
   <li>
     <a href="/u/{user.username}">{user.username}</a> {user.karma}
     {#if user.created}
       <span class="meta">Joined {timeSince(user.created)} ago</span>
     {/if}
     {#if user.bitcoinAddress}
-      <span class="bitcoin">Bitcoin: <a href="bitcoin:{user.bitcoinAddress}">{user.bitcoinAddress}</a></span>
+      <span class="bitcoin">Bitcoin: <a href="bitcoin:{user.bitcoinAddress}">{user.bitcoinAddress}</a> <a href="#" on:click|preventDefault={() => copyToClipboard(user.bitcoinAddress)}>copy</a></span>
     {/if}
   </li>
 {/each}
