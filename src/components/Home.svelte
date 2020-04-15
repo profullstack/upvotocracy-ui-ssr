@@ -119,7 +119,7 @@
       <button href="javascript:void(0)" on:click={() => addSubscription(categoryData._id)}>Join</button>
     {/if}
   {/if}
-  <div>{ categoryData.description } <a href="https://meet.jit.si/{category}" class="video-chat" target="_new">video chat</a></div>
+  <div>{ categoryData.description }</div>
   {#if categoryData.owner}
     <div>Created by <a href={`/u/${categoryData.owner.username}`}>{ categoryData.owner.username }</a> {timeSince(categoryData.created)} ago.</div>
   {/if}

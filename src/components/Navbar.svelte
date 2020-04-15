@@ -57,7 +57,7 @@
 
   onMount(() => {
     getInboxCount();
-    setInterval(() => getInboxCount(), 20000);
+    setInterval(() => getInboxCount(), 5000);
   })
 </script>
 

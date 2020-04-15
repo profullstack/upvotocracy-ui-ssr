@@ -67,16 +67,16 @@
     width: 100%;
   }
 
-  footer {
+  footer > div {
     font-size: 1.2rem;
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
     flex-wrap: wrap;
-    margin: 2rem;
+    margin: 0 2rem;
   }
 
-  footer > * {
+  footer > div * {
     margin-left: 1rem;
   }
 
@@ -100,17 +100,23 @@
       	<slot></slot>
       </main>
       <footer>
-        <a href="/leaderboard">Leaderboard</a>
-        <a id="bookmarklet" href="#" title="Drag to bookmark bar">Bookmarklet</a>
-        <a href="https://upvotocracy.com/api/1/posts/rss">RSS</a>
-        <a href="mailto:hello@upvotocracy.com?subject=Upvotocracy">hello@upvotocracy.com</a>
-        <a href="https://github.com/profullstack/upvotocracy-ui-ssr" title="MIT">open source</a>
-        <a href="https://www.facebook.com/pg/upvoGoCrazy/" title="Facebook: upvoGoCrazy">Facebook</a>
-        <a href="https://nullvideo.com">nullvideo.com</a>
-        <a href="https://virusoutbreak.wtf">VirusOUTBREAK</a>
-        <a href="https://theultimateprepper.com">The Ultimate Prepper</a>
-        <a href="https://profullstack.com">Profullstack.com</a>
-        <span class="legal">&copy; 2020</span>
+        <div>
+          <a href="/leaderboard">Leaderboard</a>
+          <a id="bookmarklet" href="#" title="Drag to bookmark bar">Bookmarklet</a>
+          <a href="https://upvotocracy.com/api/1/posts/rss">RSS</a>
+          <a href="/sponsor">Advertise</a>
+          <a href="mailto:hello@upvotocracy.com?subject=Upvotocracy">hello@upvotocracy.com</a>
+          <a href="https://github.com/profullstack/upvotocracy-ui-ssr" title="MIT">open source</a>
+          <a href="https://www.facebook.com/pg/upvoGoCrazy/" title="Facebook: upvoGoCrazy">Facebook</a>
+          <a href="https://profullstack.com">Profullstack.com</a>
+          <span class="legal">&copy; 2020</span>
+        </div>
+        <div>
+          <a href="https://discord.gg/VfGmeKn">Discord</a>
+          <a href="https://nullvideo.com">nullvideo.com</a>
+          <a href="https://virusoutbreak.wtf">VirusOUTBREAK</a>
+          <a href="https://theultimateprepper.com">The Ultimate Prepper</a>
+        </div>
       </footer>
     </div>
   </div>
