@@ -24,3 +24,5 @@ export const categories = writable({})
 export const showOverlay = writable(false)
 
 export const currentCategory = writable()
+
+export const globalError = writable()
