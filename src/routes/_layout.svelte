@@ -10,11 +10,23 @@
 	import Navbar from '../components/Navbar.svelte';
 	import Sidebar from '../components/Sidebar.svelte';
   import { onMount } from 'svelte'
-  import { categories } from '../store'
+  import { categories, globalError } from '../store'
+  import { stores } from '@sapper/app';
+  const { page } = stores();
 
 	export let cats;
+  categories.set(cats);
 
-  categories.set(cats)
+  let err;
+  globalError.subscribe(msg => err = msg);
+
+  let currentPath;
+  page.subscribe(data => currentPath = data.path)
+
+  $: {
+    currentPath;
+    globalError.set(false);
+  }
 
   onMount(() => {
     document.getElementById('bookmarklet').setAttribute('href', "javascript:void(open(`https://upvotocracy.com/compose?link=${encodeURIComponent(`${location.href}${location.href.includes('?')?'&':'?'}_snoorandom=${crypto.getRandomValues(new Uint8Array(4)).reduce((a,v)=>a+=(v.toString(16).padStart(2,'0')),'')}`)}&title=${encodeURIComponent(document.querySelector('meta[name=title][content]')?document.querySelector('meta[name=title][content]').content:document.title)}`))");
@@ -66,6 +78,9 @@
     word-wrap: anywhere;
     width: 100%;
   }
+  .error {
+    color: #d70707;
+  }
 
   footer {
     font-size: 1.2rem;
@@ -96,6 +111,11 @@
   <div class="main">
     <Sidebar/>
     <div class="content">
+      {#if err}
+        <div class="error">
+          <p>{err}</p>
+        </div>
+      {/if}
       <main>
       	<slot></slot>
       </main>
