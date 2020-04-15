@@ -5,6 +5,7 @@
   import { slide } from 'svelte/transition'
   import moment from 'moment'
   import { parseContent } from '../utils/parseContent'
+  import { makeApiRequest, globalErrorHandler } from '../components/create-api'
 
   let inbox = []
   let showComment
@@ -17,32 +18,20 @@
   onMount(async () => {
     if (!user) goto('/')
 
-    const url = 'API_BASE_URL/inbox'
-    const token = localStorage.getItem('token')
-    const res = await fetch(url, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
-      }
-    })
+    const url = '/inbox'
+    const res = await makeApiRequest(url, null, { method: 'GET' })
+      .catch(err => globalErrorHandler(err))
 
+    if (!res.ok) return
     inbox = await res.json()
   })
 
   const deleteInbox = async (id) => {
-    const url = `API_BASE_URL/inbox/${id}`
-    const token = localStorage.getItem('token')
+    const url = `/inbox/${id}`
+    const res = await makeApiRequest(url, null, { method: 'DELETE' })
+      .catch(err => globalErrorHandler(err))
 
-    const res = await fetch(url, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
-      }
-    })
-
-    if (!res.ok) alert('Something went wrong')
+    if (!res.ok) return
 
     inbox = inbox.filter(item => item.id !== id)
   }
@@ -51,21 +40,11 @@
     const form = document.getElementById('comment')
     const formData = new FormData(form)
 
-    const url = `API_BASE_URL/post/${postId}`
-    const token = localStorage.getItem('token')
+    const url = `/post/${postId}`
+    const res = await makeApiRequest(url, { comment: formData.get('comment') }, { method: 'POST' })
+      .catch(err => globalErrorHandler(err))
 
-    const res = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
-      },
-      body: JSON.stringify({
-        comment: formData.get('comment')
-      })
-    })
-
-    if (!res.ok) alert('Something went wrong!')
+    if (!res.ok) return
     form.reset()
   }
 
