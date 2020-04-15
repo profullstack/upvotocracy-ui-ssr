@@ -3,6 +3,7 @@
   import { goto } from '@sapper/app'
   import { userStore } from '../store'
   import decode from 'jwt-decode'
+  import { makeApiRequest, globalErrorHandler } from '../components/create-api'
 
   let user
   userStore.subscribe(value => {
@@ -19,17 +20,13 @@
     const formData = new FormData(form)
     form.reset()
 
-    const url = 'API_BASE_URL/login'
-    const res = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        username: formData.get('username'),
-        password: formData.get('password')
-      })
-    })
+    const url = '/login'
+    const res = await makeApiRequest(url, {
+      username: formData.get('username'),
+      password: formData.get('password')
+    },
+    { method: 'POST' })
+      .catch(err => globalErrorHandler(err))
 
     if (!res.ok) alert('Invalid credentials')
     const { token, user } = await res.json()
