@@ -3,6 +3,7 @@
   import moment from 'moment'
   import { userStore } from '../store'
   import { parseContent } from '../utils/parseContent'
+  import { makeApiRequest, globalErrorHandler } from '../components/create-api'
   
   export let id, comments
   const dispatch = createEventDispatcher()
@@ -16,36 +17,23 @@
     event.preventDefault()
     const { srcElement: { id: commentId } } = event
 
-    const url = `API_BASE_URL/post/${id}/${commentId}`
-    const token = localStorage.getItem('token')
+    const url = `/post/${id}/${commentId}`
 
-    const res = await fetch(url, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
-      }
-    })
+    const res = await makeApiRequest(url, null, { method: 'DELETE' })
+      .catch(err => globalErrorHandler(err))
 
-    if (!res.ok) alert('Something went wrong!')
+    if (!res.ok) return
     const post = await res.json()
     dispatch('update-comment', post)
   }
 
   const voteComment = async (comment, state) => {
-    const url = `API_BASE_URL/post/${id}/${comment.id}/${state}`
-    const token = localStorage.getItem('token')
+    const url = `/post/${id}/${comment.id}/${state}`
 
-    const res = await fetch(url, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
-      }
-    })
+    const res = await makeApiRequest(url, null, { method: 'GET' })
+      .catch(err => globalErrorHandler(err))
 
-
-    if (!res.ok) alert('Invalid credentials')
+    if (!res.ok) return
     const data = await res.json()
     
     for (let i = 0; i < comments.length; i += 1) {

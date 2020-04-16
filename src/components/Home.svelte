@@ -5,6 +5,7 @@
   import { abbreviateNumber } from '../utils/abbreviateNumber';
   import { timeSince } from '../utils/time';
   import { addSubscription, removeSubscription } from './editSubscriptions';
+  import { makeApiRequest, globalErrorHandler } from '../components/create-api'
 
   export let username = null
   export let category = null
@@ -47,21 +48,20 @@
   const fetchPost = async () => {
     pageNumber += 1;
 
-    let url = 'API_BASE_URL'
-    let headers
+    let url = ''
+    let noauth = true
 
     if (username) url += `/user/${username}?sort=${sort}&page=${pageNumber}`
     else if (category) url += `/posts/${category}?sort=${sort}&page=${pageNumber}`
     else if (subscriptions) {
-      const token = localStorage.getItem('token')
-      headers = { Authorization: `Bearer ${token}` }
+      noauth = false
       url += `/subscriptions?sort=${sort}&page=${page}`
     }
     else url += `/posts?sort=${sort}&page=${pageNumber}`
 
-    let res = await fetch(url, { headers })
-      .catch(console.error);
-    if (!res.ok) return alert('Something wrong!')
+    let res = await makeApiRequest(url, null, { method: 'GET', noauth })
+      .catch(err => globalErrorHandler(err));
+    if (!res.ok) return
     res = await res.json()
     morePosts = res.more
     posts = posts.concat(res.posts)
