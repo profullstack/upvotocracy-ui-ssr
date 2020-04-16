@@ -12,6 +12,7 @@
   import { onMount } from 'svelte'
   import { goto } from '@sapper/app';
   import { userStore, currentCategory, categories as cats } from '../store'
+  import { makeApiRequest, globalErrorHandler } from '../components/create-api'
 
   export let scoops = 'link'
   export let title = ''
@@ -75,16 +76,14 @@
   })
 
   async function getTitle(url) {
-    return fetch('API_BASE_URL/retrieve?url='+url)
-      .then(res => res.json())
-      .then(res => {
-        console.log(res.title);
-        res.title = res.title.slice(0, 200).trim();
-        res.thumb = res.thumb && res.thumb.replace('http://', 'https://');
-        console.log(res.title);
-        return res;
-      })
-      .catch(console.error);
+    let res = await makeApiRequest(`/retrieve?url=${url}`, null, { method: 'GET', noauth: true })
+      .catch(err => globalErrorHandler(err))
+
+    if (!res.ok) return
+    res = await res.json()
+    res.title = res.title.slice(0, 200).trim();
+    res.thumb = res.thumb && res.thumb.replace('http://', 'https://');
+    return res;
   }
 
   const createPost = async (event) => {
@@ -94,34 +93,25 @@
     const formData = new FormData(form);
     form.reset()
 
-    const token = localStorage.getItem('token')
-
-    const api = 'API_BASE_URL/posts'
     const url = formData.get('url');
     const category = formData.get('category');
     const thumbEl = document.getElementById('thumb');
     const thumb = thumbEl && thumbEl.src.indexOf('placeholder.png') === -1 ? thumbEl.src : null;
     console.log(thumb, 'thumb');
-    const res = await fetch(api, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
-      },
-      body: JSON.stringify({
-        type: formData.get('type'),
-        category,
-        title: formData.get('title').slice(0, 200).trim(),
-        url: url && url.trim(),
-        text: formData.get('text'),
-        thumb,
-      })
-    }).then(res => {
-      if (!res.ok) alert('Something went wrong!')
-  
-      return res.json()
-    })
-    .catch(console.error);
+
+    let res = await makeApiRequest('/posts', {
+      type: formData.get('type'),
+      category,
+      title: formData.get('title').slice(0, 200).trim(),
+      url: url && url.trim(),
+      text: formData.get('text'),
+      thumb,
+    }, { method: 'POST' })
+      .catch(err => globalErrorHandler(err))
+    
+    if (!res.ok) return
+
+    res = await res.json()
 
     if (res.category) {
       return goto(`/a/${res.category.name}/${res.id}`);
