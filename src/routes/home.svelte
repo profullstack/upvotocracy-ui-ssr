@@ -7,6 +7,7 @@
 <script>
   import Home from '../components/Home.svelte'
   import { onMount } from 'svelte'
+  import { makeApiRequest, globalErrorHandler } from '../components/create-api'
   
   export let page;
   let morePosts;
@@ -14,11 +15,7 @@
   let sort;
 
   const fetchPage = async () => {
-    let url = 'API_BASE_URL'
-    let headers
     let type
-
-    console.log(page)
 
     if (page.query.sort) type = page.query.sort 
 
@@ -34,11 +31,10 @@
       sort = '+score';
     }
 
-    url += `/subscriptions?sort=${sort}&page=0`;
-    const token = localStorage.getItem('token')
-    headers = { Authorization: `Bearer ${token}` }
+    let url = `/subscriptions?sort=${sort}&page=0`;
 
-    const req = await fetch(url, { headers });
+    const req = await makeApiRequest(url, null, { method: 'GET' })
+      .catch(err => globalErrorHandler(err))
     const res = await req.json();
     posts = res.posts;
     morePosts = res.more;
@@ -57,4 +53,4 @@
  <title>upvotocracy.com</title>
 </svelte:head>
 
-<Home posts={posts} page={page} morePosts={morePosts} sort={sort}/>
+<Home posts={posts} page={page} morePosts={morePosts} sort={sort} subscriptions={true}/>

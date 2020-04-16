@@ -18,6 +18,11 @@
   export let pageUser
   let pageNumber = 1
 
+  $: {
+    page
+    pageNumber = 1
+  }
+
   let currentCat
   currentCategory.subscribe(value => {
     currentCat = value
@@ -54,8 +59,10 @@
     if (username) url += `/user/${username}?sort=${sort}&page=${pageNumber}`
     else if (category) url += `/posts/${category}?sort=${sort}&page=${pageNumber}`
     else if (subscriptions) {
+      pageNumber-= 1
       noauth = false
-      url += `/subscriptions?sort=${sort}&page=${page}`
+      url += `/subscriptions?sort=${sort}&page=${pageNumber}`
+      pageNumber += 1
     }
     else url += `/posts?sort=${sort}&page=${pageNumber}`
 
@@ -151,7 +158,7 @@
   <a rel=prefetch href="{page.path}?sort=top">Top</a>
   <a rel=prefetch href="{page.path}?sort=comments">Comments</a>
   <a rel=prefetch href="{page.path}?sort=not">Controversial</a>
-  {#if subscriptions}
+  {#if subscriptions && user}
     <a href={`/api/1/posts/rss/${user.id}`}>RSS</a>
   {:else}
     <a href={`/api/1/${(username ? 'user' : 'posts' )}/${category || username ? (category || username)+'/' : ''}rss?sort=${sort}`}>RSS</a>
