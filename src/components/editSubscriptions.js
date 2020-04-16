@@ -1,4 +1,5 @@
 import { userStore } from '../store'
+import { makeApiRequest, globalErrorHandler } from './create-api'
 
 let user;
 userStore.subscribe(value => {
@@ -6,33 +7,21 @@ userStore.subscribe(value => {
 })
 
 const addSubscription = async (id) => {
-  const url = `API_BASE_URL/me/subscriptions/${id}`
-  const token = localStorage.getItem('token')
+  const url = `/me/subscriptions/${id}`
 
-  const res = await fetch(url, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  })
+  await makeApiRequest(url, null, { method: 'POST', raw: true })
+    .catch(err => globalErrorHandler(err))
 
-  if (!res.ok) alert('Something went wrong!')
   user.subscriptions.push(id)
   userStore.set(user);
 }
 
 const removeSubscription = async (id) => {
-  const url = `API_BASE_URL/me/subscriptions/${id}`
-  const token = localStorage.getItem('token')
+  const url = `/me/subscriptions/${id}`
+  
+  await makeApiRequest(url, null, { method: 'DELETE', raw: true })
+    .catch(err => globalErrorHandler(err))
 
-  const res = await fetch(url, {
-    method: 'DELETE',
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  })
-
-  if (!res.ok) alert('Something went wrong!')
   const index = user.subscriptions.findIndex(i => i == id);
   user.subscriptions.splice(index, 1);
   userStore.set(user);

@@ -3,6 +3,7 @@
   import { userStore, showOverlay } from '../store'
   import OverlayMenu from './OverlayMenu.svelte'
   import { abbreviateNumber } from '../utils/abbreviateNumber';
+  import { makeApiRequest, globalErrorHandler } from '../components/create-api'
 
   let inboxCount
   let unread = false
@@ -28,19 +29,11 @@
 
   const getInboxCount = async (link) => {
     if (user) {
-      const url = `API_BASE_URL/inbox/count`
-      const token = localStorage.getItem('token')
+      const url = `/inbox/count`
+      const res = await makeApiRequest(url, null, { method: 'GET' })
+        .catch(err => globalErrorHandler(err))
 
-      const res = await fetch(url, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        }
-      })
-      .catch(console.error);
-
-      if (!res.ok) alert('Something went wrong')
+      if (!res.ok) return
 
       inboxCount = (await res.json()).count
       if (inboxCount > 0) {

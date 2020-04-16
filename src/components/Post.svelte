@@ -1,6 +1,8 @@
 <script>
   import moment from 'moment'
+  import { goto } from '@sapper/app'
   import { userStore } from '../store'
+  import { makeApiRequest, globalErrorHandler } from '../components/create-api'
   import showdown from 'showdown'
   const converter = new showdown.Converter({simplifiedAutoLink: true});
   
@@ -54,18 +56,11 @@
   })
 
   const vote = async (state) => {
-    const url = `API_BASE_URL/post/${post.id}/${state}`
-    const token = localStorage.getItem('token')
+    const url = `/post/${post.id}/${state}`
+    const res = await makeApiRequest(url, null, { method: 'GET' })
+      .catch(err => globalErrorHandler(err))
 
-    const res = await fetch(url, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
-      }
-    })
-
-    if (!res.ok) alert('Invalid credentials')
+    if (!res.ok) return
     const data = await res.json()
     post.score = data.score
     post.upvotePercentage = data.upvotePercentage
@@ -75,19 +70,13 @@
   const downvote = () => vote('downvote')
 
   const removePost = async () => {
-    const url = `API_BASE_URL/post/${post.id}`
-    const token = localStorage.getItem('token')
+    const url = `/post/${post.id}`
 
-    const res = await fetch(url, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
-      }
-    })
+    const res = await makeApiRequest(url, null, { method: 'DELETE' })
+      .catch(err => globalErrorHandler(err))
 
-    if (!res.ok) alert('Something went wrong')
-    return navigate('/')
+    if (!res.ok) return
+    return goto('/')
   }
 </script>
 

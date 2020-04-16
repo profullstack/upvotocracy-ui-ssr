@@ -3,6 +3,7 @@
   import { categories, userStore } from '../store'
   import { addSubscription, removeSubscription } from './editSubscriptions';
   import { abbreviateNumber } from '../utils/abbreviateNumber';
+  import { makeApiRequest, globalErrorHandler } from '../components/create-api'
 
   let filtered = [];
   let search = '';
@@ -39,17 +40,10 @@
 
   const fetchMe = async () => {
     if (!user) return;
-    let url = 'API_BASE_URL/me';
-    const token = localStorage.getItem('token');
+    const res = await makeApiRequest('/me', null, { method: 'GET' })
+      .catch(err => globalErrorHandler(err))
 
-    const res = await fetch(url, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
-    .catch(console.error);
-
-    if (!res.ok) return alert('Failed to fetch user info!')
+    if (!res.ok) return
     user = await res.json();
     userStore.set(user);
   }

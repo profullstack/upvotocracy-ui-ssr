@@ -1,9 +1,9 @@
 <script>
   import { onMount } from 'svelte'
- import { goto } from '@sapper/app'
-//  import { navigate } from 'svelte-routing'
+  import { goto } from '@sapper/app'
   import { userStore } from '../store'
   import decode from 'jwt-decode'
+  import { makeApiRequest, globalErrorHandler } from '../components/create-api'
 
   let user
   userStore.subscribe(value => {
@@ -11,7 +11,7 @@
   })
 
   onMount(() => {
-    if (user) navigate('/')
+    if (user) goto('/')
   })
 
   const register = async (event) => {
@@ -20,17 +20,13 @@
     const formData = new FormData(form)
     form.reset()
 
-    const url = 'API_BASE_URL/register'
-    const res = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        username: formData.get('username'),
-        password: formData.get('password')
-      })
-    })
+    const url = '/register'
+    const res = await makeApiRequest(url, {
+      username: formData.get('username'),
+      password: formData.get('password')
+    },
+    { method: 'POST' })
+      .catch(err => globalErrorHandler(err))
 
     if (!res.ok) alert('Something went wrong!')
     const { token } = await res.json()
@@ -43,8 +39,6 @@
     }
 
     return goto('/')
-
-    // return navigate('/')
   }
 </script>
 

@@ -1,5 +1,6 @@
 <script>
   import { createEventDispatcher } from 'svelte'
+  import { makeApiRequest, globalErrorHandler } from '../components/create-api'
 
   export let id
   const dispatch = createEventDispatcher()
@@ -10,21 +11,15 @@
     const formData = new FormData(form)
     form.reset()
 
-    const url = `API_BASE_URL/post/${id}`
-    const token = localStorage.getItem('token')
+    const url = `/post/${id}`
 
-    const res = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
-      },
-      body: JSON.stringify({
-        comment: formData.get('comment')
-      })
-    })
+    const res = await makeApiRequest(url, {
+      comment: formData.get('comment')
+    },
+    { method: 'POST'})
+      .catch(err => globalErrorHandler(err))
 
-    if (!res.ok) alert('Something went wrong!')
+    if (!res.ok) return
     const post = await res.json()
     dispatch('update-comment', post)
   }

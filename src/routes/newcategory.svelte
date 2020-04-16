@@ -2,6 +2,7 @@
   import { onMount } from 'svelte'
   import { goto } from '@sapper/app'
   import { userStore } from '../store'
+  import { makeApiRequest, globalErrorHandler } from '../components/create-api'
 
   let user  
 
@@ -25,34 +26,17 @@
 
     const token = localStorage.getItem('token')
     const name = formData.get('name');
-    const url = 'API_BASE_URL/category'
-    const res = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
-      },
-      body: JSON.stringify({
-        name,
-        description: formData.get('description')
-      })
-    }).then(async (res) => {
-      if (!res.ok) {
-        console.log(res.clone().json())
-        let response = await res.clone().json()
-        let message = `ERROR: ${response.errors[0].param} ${response.errors[0].msg}`
-        return { ok: false, error: message }
-      } else {
-        return { ok: true, ...res.json() }
-      }
-    })
+    const url = '/category'
+    const res = await makeApiRequest(url, {
+      name,
+      description: formData.get('description')
+    },
+    { method: 'POST' })
+      .catch(err => globalErrorHandler(err))
 
     if (res.ok) {
       goto(`/a/${name}`);
-    }
-
-    msg = res
-    
+    }    
   }
 </script>
 

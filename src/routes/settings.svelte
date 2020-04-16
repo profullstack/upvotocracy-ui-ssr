@@ -2,6 +2,7 @@
 import { goto } from '@sapper/app'
 import { userStore } from '../store'
 import { onMount } from 'svelte'
+import { makeApiRequest, globalErrorHandler } from '../components/create-api'
 
 let user
 let isEditingFieldBT = false;
@@ -35,20 +36,12 @@ const updateBT = async (event) => {
   const token = localStorage.getItem('token')
   const formData = new FormData(form)
 
-  const url = 'API_BASE_URL/me/bitcoinaddress'
-  const res = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
-    },
-    body: JSON.stringify({
-      bitcoinaddress: formData.get('bitcoinAddress')
-    })
-  })
-
-  if (!res.ok) alert('Something went wrong!')
-
+  const url = '/me/bitcoinaddress'
+  const res = await makeApiRequest(url, {
+    bitcoinaddress: formData.get('bitcoinAddress')
+  },
+  { method: 'POST' })
+    .catch(err => globalErrorHandler(err))
 }
 
 const updateLinks = async (event) => {
@@ -63,33 +56,20 @@ const updateLinks = async (event) => {
       links.push({name: formData.get(`link-name${i}`), url: formData.get(`link-url${i}`)})
     }
   }
-  const url = 'API_BASE_URL/me/links'
-  const res = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-    },
-    body: JSON.stringify({
-      socialLinks: links
-    })
-  })
-
-  if (!res.ok) alert('Something went wrong!')
+  const url = '/me/links'
+  const res = await makeApiRequest(url, {
+    socialLinks: links
+  },
+  { method: 'POST' })
+    .catch(err => globalErrorHandler(err))
 }
 
 const fetchMe = async () => {
-  let url = 'API_BASE_URL/me';
-  const token = localStorage.getItem('token');
+  let url = '/me';
+  const res = await makeApiRequest(url, null, { method: 'GET' })
+    .catch(err => globalErrorHandler(err))
 
-  const res = await fetch(url, {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  })
-  .catch(console.error);
-
-  if (!res.ok) return alert('Failed to fetch user info!')
+  if (!res.ok) return
   user = await res.json();
   userStore.set(user);
 }
