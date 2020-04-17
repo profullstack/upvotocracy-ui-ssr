@@ -76,7 +76,7 @@
     background-color: #f9f9f9;
   }
   
-  .sidebar header nav {
+  .sidebar header .sort-nav {
     padding: 1rem 0;
   }
 
@@ -107,13 +107,14 @@
     {#if user}
     <a href="/home"><button>My Categories</button></a>
     {/if}
-    <nav>
+    <div class="sort-nav">
       Sort: <a href="javascript:void(0)" on:click|preventDefault={() => sort('new')}>New</a>
       <a href="javascript:void(0)" on:click|preventDefault={() => sort('original')}>Original</a>
       <a href="javascript:void(0)" on:click|preventDefault={() => sort('top')}>Top</a>
-    </nav>
+    </div>
   </header>
-  <ul>
+  <nav>
+    <ul>
     {#each filtered as category}
       <li>
         <span>{ abbreviateNumber(category.subscriberCount || 0 )}</span>
@@ -127,5 +128,6 @@
         {/if}
       </li>
     {/each}
-  </ul>
+    </ul>
+  </nav>
 </div>
