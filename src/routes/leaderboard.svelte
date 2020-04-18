@@ -16,7 +16,7 @@ let filteredLeaders = leaders;
 let usd = 1;
 let mbtc = 0;
 let addresses = '';
-
+let usdTotal = 0;
 
 function sort(type = 'top') {
   if (type === 'top') {
@@ -54,11 +54,14 @@ async function getExchangeRate(){
 }
 
 async function getTransactions() {
+  addresses = '';
+  usdTotal = 0;
   mbtc = ((await getExchangeRate()) * 1000).toFixed(4);
   const btcAddresses = leaders.filter(user => user.bitcoinAddress).map(user => user.bitcoinAddress);
 
   btcAddresses.map(address => {
     addresses += `${address},${mbtc}\n`;
+    usdTotal += Number(usd);
   })
 }
 
@@ -86,21 +89,23 @@ function filter(type = 'btc') {
 
 <h1>Leaderboard</h1>
 
+<p>Generate a multiple payments transaction list for <a href="https://electrum.org">Electrum wallet</a>.
+ You can then send a payment to all our members by going to Send -> Tools -> Pay Many in Electrum (make sure your units are set to mBTC which is the default).</p>
+<form on:submit|preventDefault={getTransactions}>
+  USD: <input type="usd" placeholder="USD Amount" bind:value={usd}>
+  <span class="mbtc">mBTC: {mbtc}</span>
+  <button>Go</button>
+  <textarea id="addresses">{addresses}</textarea>
+  <a href="#" on:click|preventDefault={() => copyToClipboard(addresses)}>copy</a>
+  <div class="total">Total USD: ${usdTotal.toFixed(2)}</div>
+</form>
+
 <nav>
   <a href="javascript:void" on:click|preventDefault={() => sort('top')}>Top</a>
   <a href="javascript:void" on:click|preventDefault={() => sort('new')}>New</a>
   <a href="javascript:void" on:click|preventDefault={() => filter('all')}>All</a>
   <a href="javascript:void" on:click|preventDefault={() => filter('btc')}>BTC</a>
 </nav>
-<p>Generate a multiple payments transaction list for <a href="https://electrum.org">Electrum wallet</a>.
- You can then send to all our members a payment.</p>
-<form on:submit|preventDefault={getTransactions}>
-  <input type="usd" placeholder="USD Amount" value={usd}>
-  <span class="mbtc">mBTC: {mbtc}</span>
-  <button>Go</button>
-  <textarea id="addresses">{addresses}</textarea>
-  <a href="#" on:click|preventDefault={() => copyToClipboard(addresses)}>copy</a>
-</form>
 
 <ol>
 {#each filteredLeaders as user}
