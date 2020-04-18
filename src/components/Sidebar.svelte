@@ -109,7 +109,6 @@
     {/if}
     <div class="sort-nav">
       Sort: <a href="javascript:void(0)" on:click|preventDefault={() => sort('new')}>New</a>
-      <a href="javascript:void(0)" on:click|preventDefault={() => sort('original')}>Original</a>
       <a href="javascript:void(0)" on:click|preventDefault={() => sort('top')}>Top</a>
     </div>
   </header>
