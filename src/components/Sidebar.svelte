@@ -108,8 +108,9 @@
     <a href="/home"><button>My Categories</button></a>
     {/if}
     <div class="sort-nav">
-      Sort: <a href="javascript:void(0)" on:click|preventDefault={() => sort('new')}>New</a>
+      Sort: 
       <a href="javascript:void(0)" on:click|preventDefault={() => sort('top')}>Top</a>
+      <a href="javascript:void(0)" on:click|preventDefault={() => sort('new')}>New</a>
     </div>
   </header>
   <nav>
