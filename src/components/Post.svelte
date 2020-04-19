@@ -36,6 +36,11 @@
         postVideo = post.url.replace('/user/', '/uploads/') + '.mp4';
         postVideo = postVideo.replace(/(\?.*)/, '.mp4$1');
         nullvideo = postVideo;
+      } else if (post.url.indexOf('streamable') > -1) {
+        // https://cdn-b-east.streamable.com/video/mp4/3xa346.mp4?token=yGGZHgB2v7JOlzbwcJaMkw&expires=1587257340
+        postVideo = post.url.replace('/user/', '/uploads/') + '.mp4';
+        postVideo = postVideo.replace(/(\?.*)/, '.mp4$1');
+        nullvideo = postVideo;
       } else if (/\.(mp4|mov|m3u8)/.test(post.url.toLowerCase())) {
         postVideo = post.url;
       } else {
