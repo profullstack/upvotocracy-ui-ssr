@@ -104,6 +104,7 @@ async function getKarmaTransactions() {
 }
 
 function showEvenPayout() {
+  mbtc = 0;
   show.even = true;
   show.karma = false;
 }
@@ -151,6 +152,7 @@ function filter(type = 'btc') {
   <a href="#" on:click|preventDefault={showKarmaPayout}>Payout Distributed by Karma</a>
 </nav>
 <form on:submit|preventDefault={getTransactions} class:active={show.even}>
+  <p>Send the dollar amount below to every user. Each user will get ${usd}</p>
   USD: <input type="usd" placeholder="USD Amount" bind:value={usd}>
   <span class="mbtc">mBTC: {mbtc}</span>
   <button>Go</button>
@@ -159,7 +161,8 @@ function filter(type = 'btc') {
   <div class="total">Total USD: ${usdTotal.toFixed(2)}</div>
 </form>
 <form on:submit|preventDefault={getKarmaTransactions} class:active={show.karma}>
-  <p>Minimum karma payout required must be greater than 0.00546 mBTC (due to <a href="https://support.blockchain.com/hc/en-us/articles/210354003-What-is-the-minimum-amount-I-can-send-" target="_new">dust</a>).</p>
+  <p>Send the dollar amount below distributed by karma ratio to each user.</p>
+  <p>Minimum payout must be greater than 0.00546 mBTC (due to <a href="https://support.blockchain.com/hc/en-us/articles/210354003-What-is-the-minimum-amount-I-can-send-" target="_new">dust</a>).</p>
   Total USD: <input type="usd" placeholder="USD Amount" bind:value={usdKarma}>
   <span class="mbtc">mBTC: {mbtc}</span>
   <button>Go</button>
