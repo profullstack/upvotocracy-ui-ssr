@@ -28,6 +28,7 @@ export default {
 				'process.env.NODE_ENV': JSON.stringify(mode),
 				API_BASE_URL: process.env.API_BASE_URL,
 				BASE_URL: process.env.BASE_URL,
+				STRIPE_API_KEY: process.env.STRIPE_API_KEY,
 			}),
 			svelte({
 				dev,
