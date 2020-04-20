@@ -4,6 +4,8 @@
   import { userStore } from '../store'
   import { makeApiRequest, globalErrorHandler } from '../components/create-api'
 
+  let nsfw = false
+
   let user  
 
   userStore.subscribe(value => {
@@ -29,7 +31,8 @@
     const url = '/category'
     const res = await makeApiRequest(url, {
       name,
-      description: formData.get('description')
+      description: formData.get('description'),
+      nsfw,
     },
     { method: 'POST' })
       .catch(err => globalErrorHandler(err))
@@ -56,6 +59,7 @@
     <input type="text" placeholder="Put the category name here ..." id="name" name="name">
     <label for="description">Description</label>
     <textarea placeholder="Put the description here ..." id="description" name="description"></textarea>
+    <span>Mark NSFW? <input type="checkbox" bind:checked={nsfw}></span>
     <button class="button-primary float-right" type="submit" on:click={ createCategory }>Submit</button>
   </fieldset>
 </form>
