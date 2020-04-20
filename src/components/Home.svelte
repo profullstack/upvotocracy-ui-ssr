@@ -165,7 +165,9 @@
   {/if}
 </nav>
 {#each posts as post}
-  <Post { post }></Post>
+  {#if !post.category.nsfw || subscriptions || category}
+    <Post { post }></Post>
+  {/if}
 {/each}
 
 {#if posts.length > 0 && morePosts}

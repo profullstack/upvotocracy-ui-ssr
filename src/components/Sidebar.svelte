@@ -92,6 +92,10 @@
   .join-leave {
     float: right;
   }
+
+  .nsfw {
+    color: red;
+  }
   
   @media only screen and (max-width: 850px) {
     .sidebar {
@@ -119,6 +123,9 @@
       <li>
         <span>{ abbreviateNumber(category.subscriberCount || 0 )}</span>
         <a rel=prefetch href="/a/{ category.name }"><span>{ category.name }</span></a>
+        {#if category.nsfw}
+          <span class="nsfw">(nsfw)</span>
+        {/if}
         {#if user}
           {#if user.subscriptions && user.subscriptions.includes(category._id)}
             <a class="join-leave" href="javascript:void(0)" on:click={() => removeSubscription(category._id)}>Leave</a>
