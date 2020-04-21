@@ -2,7 +2,7 @@
   import Stripe from '../components/payments/Stripe.svelte'
   import { makeApiRequest, globalErrorHandler } from '../components/create-api.js';
   import { onMount } from 'svelte'
-  import { userStore } from '../store'
+  import { userStore, globalError } from '../store'
 
   let showStripe = false
   let showBTC = false
@@ -18,32 +18,38 @@
   userStore.subscribe(data => user = data)
 
   const pay = async (paymentMethod) => {
-    let postId = []
-    selectedPosts.forEach((post) => postId.push(post.id))
+    if (selectedPosts.length != 0) {
+      let postId = []
+      selectedPosts.forEach((post) => postId.push(post.id))
 
-    const res = await makeApiRequest('/payments/create', {
-      paymentMethod,
-      postId,
-    },{ 
-      method: 'POST'
-    }).catch(err => globalErrorHandler(err))
+      const res = await makeApiRequest('/payments/create', {
+        paymentMethod,
+        postId,
+      },{ 
+        method: 'POST'
+      }).catch(err => globalErrorHandler(err))
 
-    if(paymentMethod == 'CARD') {
-      paymentIntent = await res.json()
-      showStripe = true
+      if(paymentMethod == 'CARD') {
+        paymentIntent = await res.json()
+        showStripe = true
+      }
+
+      if (paymentMethod == 'BTC') {
+        const response = await res.json()
+        qr = response.qr
+        address = response.address
+        amt = response.amount
+        showBTC = true
+      }
     }
-
-    if (paymentMethod == 'BTC') {
-      const response = await res.json()
-      qr = response.qr
-      address = response.address
-      amt = response.amount
-      showBTC = true
+    else {
+      globalError.set('Please choose 1 or more posts')
     }
   }
 
   const addToSelected = async () => {
     if (currentPost !== 'Select post...') {
+      globalError.set(false)
 
       selectedPosts.push(currentPost)
       selectedPosts = selectedPosts
@@ -85,17 +91,11 @@
 
 <h1>Sponsored posts</h1>
 
-<p>You can help fund our growing community by sponsoring a post:</p>
-
-<ol>
-    <li>Create a post in any category</li>
-    <li>Send a $10 USD one-time payment in Bitcoin to <a href="bitcoin:bc1q6xxfelk5u86cs59uw528dz9gr3whhxajqcdj22">bc1q6xxfelk5u86cs59uw528dz9gr3whhxajqcdj22</a></li>
-    <li>Email us with the transaction id and the link to your post at <a href="mailto:hello@upvotocracy.com?subject=Sponsored%20Post">hello@upvotocracy.com</a></li>
-</ol>
-
-<p>Your sponsored post will be rotated randomly along with other sponsored posts throughout the category. It does not expire.</p>
+<h5>You can help fund our growing community by sponsoring a post.</h5>
+<p>Sponsored posts cost $10 each and will be rotated randomly along with other sponsored posts throughout the category. It does not expire.</p>
 
 <form>
+  <label>Choose from your posts</label>
   <select bind:value={currentPost}>
     <option>Select post...</option>
     {#each userPosts as post}
