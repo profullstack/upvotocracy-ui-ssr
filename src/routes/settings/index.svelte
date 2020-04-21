@@ -1,8 +1,8 @@
 <script>
 import { goto } from '@sapper/app'
-import { userStore } from '../store'
+import { userStore } from '../../store'
 import { onMount } from 'svelte'
-import { makeApiRequest, globalErrorHandler } from '../components/create-api'
+import { makeApiRequest, globalErrorHandler } from '../../components/create-api'
 
 let user
 let isEditingFieldBT = false;
@@ -82,6 +82,7 @@ onMount(() => {
 
 <div>
 {#if user}
+<a href="/settings/invoices"><button>Your Invoices</button></a>
 <form id="settings">
   <fieldset>
     <legend>Bitcoin Address</legend>
