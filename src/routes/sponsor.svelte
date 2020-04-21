@@ -3,9 +3,12 @@
   import { makeApiRequest, globalErrorHandler } from '../components/create-api.js';
   import { onMount } from 'svelte'
   import { userStore, globalError } from '../store'
+  import copyToClipboard  from '../utils/clipboard'
+  import Spinner from '../components/Spinner.svelte'
 
   let showStripe = false
   let showBTC = false
+  let isLoading = false
   let paymentIntent
   let userPosts = []
   let selectedPosts = []
@@ -19,6 +22,7 @@
 
   const pay = async (paymentMethod) => {
     if (selectedPosts.length != 0) {
+      isLoading = true
       let postId = []
       selectedPosts.forEach((post) => postId.push(post.id))
 
@@ -31,11 +35,13 @@
 
       if(paymentMethod == 'CARD') {
         paymentIntent = await res.json()
+        isLoading = false
         showStripe = true
       }
 
       if (paymentMethod == 'BTC') {
         const response = await res.json()
+        isLoading = false
         qr = response.qr
         address = response.address
         amt = response.amount
@@ -113,8 +119,12 @@
 </form>
 
 
-<button on:click={() => pay('BTC')}>Pay With Bitcoin</button>
-<button on:click={() => pay('CARD')}>Pay by card</button>
+<button on:click={() => { pay('BTC'); showStripe = false }}>Pay With Bitcoin</button>
+<button on:click={() => { pay('CARD'); showBTC = false }}>Pay by card</button>
+
+{#if isLoading}
+  <Spinner/>
+{/if}
 
 {#if showStripe}
   <Stripe paymentIntent={paymentIntent} />
