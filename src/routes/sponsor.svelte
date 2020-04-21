@@ -16,6 +16,10 @@
   let qr
   let address
   let amt
+  let invId
+  let isLoadingStatus = false;
+  let intv
+  let payStatus
 
   let user
   userStore.subscribe(data => user = data)
@@ -45,7 +49,9 @@
         qr = response.qr
         address = response.address
         amt = response.amount
+        invId = response.invoiceId
         showBTC = true
+        intv = setInterval(checkPayment, 3000);
       }
     }
     else {
@@ -73,6 +79,30 @@
     const index = selectedPosts.findIndex(i => i.id === post.id);
     selectedPosts.splice(index, 1);
     selectedPosts = selectedPosts;
+  }
+
+  async function checkPayment() {
+    isLoadingStatus = true;
+    let response = await makeApiRequest('/payments', {
+      id: invId,
+    }, {
+      method: 'POST'
+    })
+    .catch(err => {
+      isLoadingStatus = false;
+      globalErrorHandler(err)
+      clearInterval(intv);
+      return;
+    })
+
+    response = await response.json()
+
+    payStatus = response.status
+
+    if (payStatus === 'paid'){
+      isLoadingStatus = false;
+      clearInterval(intv)
+    }
   }
 
 
@@ -142,11 +172,11 @@
       Pay this amount: {amt} BTC
       <a href="javascript:void(0)" on:click|preventDefault={() => copyToClipboard(amt)}>Copy</a>
      </h4>
-    <!-- <h4 class="status">Status: {payStatus} {#if isLoadingStatus}<Spinner /> Awaiting payment...{/if}</h4>
-    {#if payStatus === 'paid'} -->
-    <p>Once an invoice is marked as "paid" you are done; however we wait for 1 confirmation to upgrade your account, which can take 10-30 minutes.</p>
-    <p>You may check your payment status for confirmation on the <a href="/settings">invoices</a> page.</p>
-    <!-- {/if} -->
+    <h4 class="status">Status: {payStatus} {#if isLoadingStatus}<Spinner /> Awaiting payment...{/if}</h4>
+    {#if payStatus === 'paid'}
+      <p>Once an invoice is marked as "paid" you are done; however we wait for 1 confirmation to complete your purchase, which can take 10-30 minutes.</p>
+      <p>You may check your payment status for confirmation on the <a href="/settings">invoices</a> page.</p>
+    {/if}
   </div>
 </div>
 {/if}

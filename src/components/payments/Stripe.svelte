@@ -75,12 +75,12 @@
           } else {
             if (result.paymentIntent.status === 'succeeded') {
               alert('paid')
-              makeApiRequest(`/payments/${paymentIntent.id}`, null, {
-                method: 'GET'
+              makeApiRequest(`/payments`, {
+                id: paymentIntent.id
+              }, {
+                method: 'POST'
               })
-              .catch(err => {
-                console.log(err.message)
-              })
+              .catch(err => { globalErrorHandler(err) })
             }
           }
         });
