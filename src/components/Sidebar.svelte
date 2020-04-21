@@ -7,6 +7,7 @@
 
   let filtered = [];
   let search = '';
+  let showNsfw = false;
 
   let user;  
   userStore.subscribe(value => {
@@ -109,17 +110,19 @@
     <h3>Categories</h3>
     <input type="text" bind:value={search} on:keyup={filterCategories} />
     {#if user}
-    <a href="/home"><button>My Categories</button></a>
+      <a href="/home"><button>My Categories</button></a>
     {/if}
     <div class="sort-nav">
       Sort: 
       <a href="javascript:void(0)" on:click|preventDefault={() => sort('top')}>Top</a>
       <a href="javascript:void(0)" on:click|preventDefault={() => sort('new')}>New</a>
     </div>
+    Show NSFW: <input type="checkbox" bind:checked={showNsfw} />
   </header>
   <nav>
     <ul>
     {#each filtered as category}
+      {#if (!showNsfw && !category.nsfw) || showNsfw}
       <li>
         <span>{ abbreviateNumber(category.subscriberCount || 0 )}</span>
         <a rel=prefetch href="/a/{ category.name }"><span>{ category.name }</span></a>
@@ -134,6 +137,7 @@
           {/if}
         {/if}
       </li>
+      {/if}
     {/each}
     </ul>
   </nav>

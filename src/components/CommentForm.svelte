@@ -42,7 +42,7 @@
   <form id="comment" class="comment-form">
     <fieldset>
       <textarea class="comment-textarea" placeholder="Enter your comment" id="comment" name="comment"></textarea>
-      <button class="button button-outline float-right" type="submit" on:click={ createComment }>Comment</button>
+      Markdown OK <button class="button button-outline float-right" type="submit" on:click={ createComment }>Comment</button>
     </fieldset>
   </form>
 </div>
