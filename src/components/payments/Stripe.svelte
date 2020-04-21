@@ -8,9 +8,14 @@
 
 <style>
    #card-element {
-    width: 500px;
-    background-color: #424242;
+    max-width: 500px;
+    background-color: white;
     padding: 20px;
+    border-width: 1px;
+    border-color: #c2c2c2;
+    background-color: #f0f0f0;
+    border-style: solid;
+    margin-bottom: 1rem;
   }
 </style>
 <script>
@@ -49,7 +54,7 @@
       var elements = stripe.elements();
       var style = {
         base: {
-          color: "white",
+          color: "black",
         }
       };
 

@@ -120,25 +120,23 @@
   <Stripe paymentIntent={paymentIntent} />
 {/if}
 
-{#if showBTC}
+{#if showBTC && qr}
 <div>
-  {#if qr}
-    <img src="{qr}" alt={address}>
-    <a href="javascript:void(0)" on:click|preventDefault={() => copyToClipboard(address)}>Copy</a>
+  <img src="{qr}" alt={address}>
+  <a href="javascript:void(0)" on:click|preventDefault={() => copyToClipboard(address)}>Copy</a>
 
-    <div class="payment">
-      <h4>Payment address:</h4>
-      <input value="{address}">
-      <h4>
-        Pay this amount: {amt} BTC
-        <a href="javascript:void(0)" on:click|preventDefault={() => copyToClipboard(amt)}>Copy</a>
-       </h4>
-      <!-- <h4 class="status">Status: {payStatus} {#if isLoadingStatus}<Spinner /> Awaiting payment...{/if}</h4>
-      {#if payStatus === 'paid'} -->
-      <p>Once an invoice is marked as "paid" you are done; however we wait for 1 confirmation to upgrade your account, which can take 10-30 minutes.</p>
-      <p>You may check your payment status for confirmation on the <a href="/settings">invoices</a> page.</p>
-      <!-- {/if} -->
-    </div>
-  {/if}
+  <div class="payment">
+    <h4>Payment address:</h4>
+    <input value="{address}">
+    <h4>
+      Pay this amount: {amt} BTC
+      <a href="javascript:void(0)" on:click|preventDefault={() => copyToClipboard(amt)}>Copy</a>
+     </h4>
+    <!-- <h4 class="status">Status: {payStatus} {#if isLoadingStatus}<Spinner /> Awaiting payment...{/if}</h4>
+    {#if payStatus === 'paid'} -->
+    <p>Once an invoice is marked as "paid" you are done; however we wait for 1 confirmation to upgrade your account, which can take 10-30 minutes.</p>
+    <p>You may check your payment status for confirmation on the <a href="/settings">invoices</a> page.</p>
+    <!-- {/if} -->
+  </div>
 </div>
 {/if}
