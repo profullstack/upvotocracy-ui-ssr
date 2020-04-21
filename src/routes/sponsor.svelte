@@ -175,7 +175,7 @@
     <h4 class="status">Status: {payStatus} {#if isLoadingStatus}<Spinner /> Awaiting payment...{/if}</h4>
     {#if payStatus === 'paid'}
       <p>Once an invoice is marked as "paid" you are done; however we wait for 1 confirmation to complete your purchase, which can take 10-30 minutes.</p>
-      <p>You may check your payment status for confirmation on the <a href="/settings">invoices</a> page.</p>
+      <p>You may check your payment status for confirmation on the <a href="/settings/invoices">invoices</a> page.</p>
     {/if}
   </div>
 </div>
