@@ -69,6 +69,7 @@
       .catch(err => globalErrorHandler(err))
     if (!res.ok) return
     userPosts = await res.json()
+    userPosts = userPosts.filter((post) => post.sponsored != true)
   })
 </script>
 
