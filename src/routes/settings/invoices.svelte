@@ -22,7 +22,7 @@
   <li>
     <b>{invoice.date} {invoice.product}</b>
     {#each invoice.postId as post}
-      <div>{post.title}</div>
+      <div><a rel="prefetch" href="/a/{post.category.name}/{post.id}">{post.title}</a></div>
     {/each}
     <div>Amount: ${invoice.amount} - {invoice.status} </div>
     <div>Payment Method: {invoice.paymentMethod}</div>
