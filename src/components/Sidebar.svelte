@@ -51,8 +51,9 @@
 
   onMount(async () => {
     fetchMe()
-    filterCategories()
   })
+
+  filterCategories()
 </script>
 <style>
   .sidebar {
