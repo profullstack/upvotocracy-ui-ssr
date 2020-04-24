@@ -1,3 +1,11 @@
+<script context="module">
+  export async function preload(page, session) {
+    let queryPostId
+    if (page.query.postId) queryPostId = page.query.postId
+    
+    return { queryPostId };
+  }
+</script>
 <script>
   import Stripe from '../components/payments/Stripe.svelte'
   import { makeApiRequest, globalErrorHandler } from '../components/create-api.js';
@@ -6,6 +14,7 @@
   import copyToClipboard  from '../utils/clipboard'
   import Spinner from '../components/Spinner.svelte'
 
+  export let queryPostId
   let showStripe = false
   let showBTC = false
   let isLoading = false
@@ -112,6 +121,10 @@
     if (!res.ok) return
     userPosts = await res.json()
     userPosts = userPosts.filter((post) => post.sponsored != true)
+
+    const index = userPosts.findIndex(post => post.id == queryPostId);
+    currentPost = userPosts[index];
+
   })
 </script>
 

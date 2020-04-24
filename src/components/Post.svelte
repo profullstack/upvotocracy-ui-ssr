@@ -263,7 +263,7 @@
         {#if post.author.id === user.id }
           <span id={ post.id } class="remove-button float-right" on:click={ removePost }>Delete</span>
         {/if}
-        {#if !post.sponsored && post.author.id === user.id}<a href="/sponsor" style="margin-left: 1rem;">Sponsor this post</a>{/if}
+        {#if !post.sponsored && post.author.id === user.id}<a href="/sponsor?postId={post.id}" style="margin-left: 1rem;">Sponsor this post</a>{/if}
       </div>
       <hr>
     {/if}
