@@ -21,6 +21,8 @@ export const userStore = writable(payload)
 
 export const categories = writable({})
 
+export const searchResults = writable({[]})
+
 export const showOverlay = writable(false)
 
 export const currentCategory = writable()

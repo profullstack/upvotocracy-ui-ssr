@@ -1,12 +1,14 @@
 <script>
   import { onMount } from 'svelte'
-  import { userStore, showOverlay } from '../store'
+  import { goto } from '@sapper/app'
+  import { userStore, showOverlay, searchResults } from '../store'
   import OverlayMenu from './OverlayMenu.svelte'
   import { abbreviateNumber } from '../utils/abbreviateNumber';
   import { makeApiRequest, globalErrorHandler } from '../components/create-api'
 
   let inboxCount
   let unread = false
+  let q = '';
 
   let show
   showOverlay.subscribe(value => {
@@ -46,6 +48,14 @@
         unread = false
       }
     }
+  }
+
+  async function doSearch(){
+    const res = await makeApiRequest('/search/posts?q='+encodeURIComponent(q), null, { method: 'GET' })
+      .catch(console.error);
+
+      searchResults.set(res);
+      return goto('/search')
   }
 
   onMount(() => {
@@ -116,6 +126,7 @@
 {/if}
 <div class="navbar">
   <span><a href="/"><img class="logo" src="/images/logo.svg" alt="upvotocracy" /></a></span>
+  <span><input type="text" bind:value={q}> <button on:click|preventDefault={doSearch}>Search</button></span>
   <div class="float-right">
     {#if user}
       <a href="/compose"><button class="navbar-item">Create a post</button></a>
