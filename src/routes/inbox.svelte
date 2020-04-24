@@ -9,6 +9,7 @@
 
   let inbox = []
   let showComment
+  let quote;
 
   let user
   userStore.subscribe(value => {
@@ -49,6 +50,7 @@
   }
 
   const showReply = (message) => {
+    quote = typeof window !== 'undefined' && window.getSelection().toString();
     showComment === message.id ? showComment = '' : showComment = message.id
   }
 </script>
@@ -87,7 +89,11 @@
     {#if showComment === message.id}
       <form id="comment" class="comment-form" transition:slide="{{ duration: 400 }}">
         <fieldset>
+        {#if quote}
+          <textarea class="comment-textarea" placeholder="Enter your comment" id="comment" name="comment">> {quote}</textarea>
+        {:else}
           <textarea class="comment-textarea" placeholder="Enter your comment" id="comment" name="comment"></textarea>
+        {/if}
           <button class="button button-outline float-right" type="submit" on:click|preventDefault={() => createComment(message.postId) }>Comment</button>
         </fieldset>
       </form>

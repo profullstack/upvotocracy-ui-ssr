@@ -130,6 +130,8 @@
 <h5>You can help fund our growing community by sponsoring a post.</h5>
 <p>Sponsored posts cost $10 each and will be rotated randomly along with other sponsored posts throughout the category. It does not expire.</p>
 
+<p>We currently get around 12k pageviews a month. 20% of profits get distributed back to active members based on karma.</p>
+
 <form>
   <label>Choose from your posts</label>
   <select bind:value={currentPost}>
