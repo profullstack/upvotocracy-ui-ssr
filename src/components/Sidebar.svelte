@@ -41,10 +41,10 @@
 
   const fetchMe = async () => {
     if (!user) return;
-    const user = await makeApiRequest('/me', null, { method: 'GET' })
+    const me = await makeApiRequest('/me', null, { method: 'GET' })
       .catch(err => globalErrorHandler(err))
 
-    userStore.set(user);
+    userStore.set(me);
   }
 
   onMount(async () => {
