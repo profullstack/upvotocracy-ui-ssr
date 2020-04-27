@@ -29,8 +29,6 @@
     const res = await makeApiRequest(url, null, { method: 'DELETE' })
       .catch(err => globalErrorHandler(err))
 
-    if (!res) return
-
     inbox = inbox.filter(item => item.id !== id)
   }
 
