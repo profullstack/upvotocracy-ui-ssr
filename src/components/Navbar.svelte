@@ -35,9 +35,7 @@
       const res = await makeApiRequest(url, null, { method: 'GET' })
         .catch(err => globalErrorHandler(err))
 
-      if (!res.ok) return
-
-      inboxCount = (await res.json()).count
+      inboxCount = res.count
       if (inboxCount > 0) {
         unread = true
       }
@@ -51,11 +49,11 @@
   }
 
   async function doSearch(){
-    const res = await makeApiRequest('/search/posts?q='+encodeURIComponent(q), null, { method: 'GET' })
+    let res = await makeApiRequest('/search/posts?q='+encodeURIComponent(q), null, { method: 'GET' })
       .catch(console.error);
 
-      searchResults.set(res);
-      return goto('/search')
+    searchResults.set(res);
+    return goto('/search')
   }
 
   onMount(() => {

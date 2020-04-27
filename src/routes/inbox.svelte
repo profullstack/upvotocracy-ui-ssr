@@ -20,11 +20,8 @@
     if (!user) goto('/')
 
     const url = '/inbox'
-    const res = await makeApiRequest(url, null, { method: 'GET' })
+    inbox = await makeApiRequest(url, null, { method: 'GET' })
       .catch(err => globalErrorHandler(err))
-
-    if (!res.ok) return
-    inbox = await res.json()
   })
 
   const deleteInbox = async (id) => {

@@ -19,22 +19,17 @@
 
     const url = `/post/${id}/${commentId}`
 
-    const res = await makeApiRequest(url, null, { method: 'DELETE' })
+    const post = await makeApiRequest(url, null, { method: 'DELETE' })
       .catch(err => globalErrorHandler(err))
 
-    if (!res.ok) return
-    const post = await res.json()
     dispatch('update-comment', post)
   }
 
   const voteComment = async (comment, state) => {
     const url = `/post/${id}/${comment.id}/${state}`
 
-    const res = await makeApiRequest(url, null, { method: 'GET' })
+    const data = await makeApiRequest(url, null, { method: 'GET' })
       .catch(err => globalErrorHandler(err))
-
-    if (!res.ok) return
-    const data = await res.json()
     
     for (let i = 0; i < comments.length; i += 1) {
       console.log(comments[i])

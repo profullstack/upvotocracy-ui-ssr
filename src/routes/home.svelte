@@ -33,9 +33,9 @@
 
     let url = `/subscriptions?sort=${sort}&page=0`;
 
-    const req = await makeApiRequest(url, null, { method: 'GET' })
+    const res = await makeApiRequest(url, null, { method: 'GET' })
       .catch(err => globalErrorHandler(err))
-    const res = await req.json();
+
     posts = res.posts;
     morePosts = res.more;
 

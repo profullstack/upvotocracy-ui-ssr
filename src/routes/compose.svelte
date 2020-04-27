@@ -79,8 +79,6 @@
     let res = await makeApiRequest(`/retrieve?url=${url}`, null, { method: 'GET', noauth: true })
       .catch(err => globalErrorHandler(err))
 
-    if (!res.ok) return
-    res = await res.json()
     res.title = res.title.slice(0, 200).trim();
     res.thumb = res.thumb && res.thumb.replace('http://', 'https://');
     return res;
@@ -109,10 +107,6 @@
     }, { method: 'POST' })
       .catch(err => globalErrorHandler(err))
     
-    if (!res.ok) return
-
-    res = await res.json()
-
     if (res.category) {
       return goto(`/a/${res.category.name}/${res.id}`);
     }

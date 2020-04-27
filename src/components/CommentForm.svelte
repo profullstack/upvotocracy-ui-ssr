@@ -13,14 +13,12 @@
 
     const url = `/post/${id}`
 
-    const res = await makeApiRequest(url, {
+    const post = await makeApiRequest(url, {
       comment: formData.get('comment')
     },
     { method: 'POST'})
       .catch(err => globalErrorHandler(err))
 
-    if (!res.ok) return
-    const post = await res.json()
     dispatch('update-comment', post)
   }
 </script>
