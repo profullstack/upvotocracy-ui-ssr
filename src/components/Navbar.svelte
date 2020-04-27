@@ -1,14 +1,14 @@
 <script>
   import { onMount } from 'svelte'
   import { goto } from '@sapper/app'
-  import { userStore, showOverlay, searchResults } from '../store'
+  import { userStore, showOverlay } from '../store'
   import OverlayMenu from './OverlayMenu.svelte'
   import { abbreviateNumber } from '../utils/abbreviateNumber';
   import { makeApiRequest, globalErrorHandler } from '../components/create-api'
+  import Searchbar from './Searchbar.svelte'
 
   let inboxCount
   let unread = false
-  let q = '';
 
   let show
   showOverlay.subscribe(value => {
@@ -35,9 +35,9 @@
       const res = await makeApiRequest(url, null, { method: 'GET' })
         .catch(err => globalErrorHandler(err))
 
-      if (!res.ok) return
+      if (!res) return
 
-      inboxCount = (await res.json()).count
+      inboxCount = res.count
       if (inboxCount > 0) {
         unread = true
       }
@@ -50,14 +50,6 @@
     }
   }
 
-  async function doSearch(){
-    const res = await makeApiRequest('/search/posts?q='+encodeURIComponent(q), null, { method: 'GET' })
-      .catch(console.error);
-
-      searchResults.set(res);
-      return goto('/search')
-  }
-
   onMount(() => {
     getInboxCount();
     setInterval(() => getInboxCount(), 5000);
@@ -66,40 +58,38 @@
 
 <style>
   .logo {
+    vertical-align: middle;
     height: 3rem;
   }
   .navbar {
     margin-top: 0;
     padding: 1em;
+    padding-bottom: 1em;
     border-bottom: 2px solid #d1d1d1;
     position: sticky;
     top: 0;
     z-index: 2;
     background-color: white;
   }
-
-  .float-right {
-    display: flex;
+  .navbar * {
+    margin-bottom: 0;
   }
-  .navbar .float-right .navbar-item {
-    margin-left: 1.2em;
+
+  /*.float-right {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    vertical-align: middle;
+  }*/
+  .navbar-item {
+    margin-left: .5em;
   }
   .unread {
     color: #b70000;
     fill: #b70000 !important;
   }
-  .navbar button {
-    margin-left: 1.2em;
-  }
   #toggle-overlay {
     display: none;
   }
   #mail-icon {
-    margin-top: 5px;
+    vertical-align: middle;
     width: 23px;
     fill: #147b50;
   }
@@ -108,7 +98,7 @@
     padding-bottom: .8em;
     vertical-align: middle;
   }
-  @media only screen and (max-width: 850px) {
+  @media only screen and (max-width: 1250px) {
     .navbar-item {
       display: none !important;
     }
@@ -118,6 +108,9 @@
     #toggle-overlay {
       display: block;
     }
+    #searchbar {
+      display: none;
+    }
   }
 
 </style>
@@ -125,8 +118,8 @@
   <OverlayMenu {inboxCount}></OverlayMenu>
 {/if}
 <div class="navbar">
-  <span><a href="/"><img class="logo" src="/images/logo.svg" alt="upvotocracy" /></a></span>
-  <span><input type="text" bind:value={q}> <button on:click|preventDefault={doSearch}>Search</button></span>
+  <a href="/"><img class="logo" src="/images/logo.svg" alt="upvotocracy" /></a>
+  <span id="searchbar"><Searchbar/></span>
   <div class="float-right">
     {#if user}
       <a href="/compose"><button class="navbar-item">Create a post</button></a>

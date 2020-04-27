@@ -1,6 +1,7 @@
 <script>
   import { slide } from 'svelte/transition'
   import { userStore, categories, showOverlay } from '../store'
+  import Searchbar from './Searchbar.svelte'
 
   export let inboxCount
 
@@ -98,6 +99,7 @@
       <a on:click={ hideOverlay } href="/login"><button class="navbar-item">LOGIN</button></a>
       <a on:click={ hideOverlay } href="/register"><button class="navbar-item">REGISTER</button></a>
     {/if}
+    <Searchbar/>
   </div>
   <div class="categories">
     <h3> Categories </h3>

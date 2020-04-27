@@ -65,7 +65,7 @@
   }
 
   .container {
-    max-width: 70%;
+    max-width: 75%;
   }
   .main {
     width: 100%;
@@ -95,7 +95,7 @@
     margin-left: 1rem;
   }
 
-  @media only screen and (max-width: 1250px) {
+  @media only screen and (max-width: 1650px) {
     .container {
       max-width: 100%;
       padding: 0px;

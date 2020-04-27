@@ -62,11 +62,11 @@
 
   const vote = async (state) => {
     const url = `/post/${post.id}/${state}`
-    const res = await makeApiRequest(url, null, { method: 'GET' })
+    const data = await makeApiRequest(url, null, { method: 'GET' })
       .catch(err => globalErrorHandler(err))
 
-    if (!res.ok) return
-    const data = await res.json()
+    if (!data) return
+
     post.score = data.score
     post.upvotePercentage = data.upvotePercentage
   }

@@ -66,11 +66,11 @@ const updateLinks = async (event) => {
 
 const fetchMe = async () => {
   let url = '/me';
-  const res = await makeApiRequest(url, null, { method: 'GET' })
+  user = await makeApiRequest(url, null, { method: 'GET' })
     .catch(err => globalErrorHandler(err))
 
-  if (!res.ok) return
-  user = await res.json();
+  if (!user) return
+
   userStore.set(user);
 }
 

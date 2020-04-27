@@ -20,19 +20,14 @@
     if (!user) goto('/')
 
     const url = '/inbox'
-    const res = await makeApiRequest(url, null, { method: 'GET' })
+    inbox = await makeApiRequest(url, null, { method: 'GET' })
       .catch(err => globalErrorHandler(err))
-
-    if (!res.ok) return
-    inbox = await res.json()
   })
 
   const deleteInbox = async (id) => {
     const url = `/inbox/${id}`
     const res = await makeApiRequest(url, null, { method: 'DELETE' })
       .catch(err => globalErrorHandler(err))
-
-    if (!res.ok) return
 
     inbox = inbox.filter(item => item.id !== id)
   }
@@ -45,7 +40,7 @@
     const res = await makeApiRequest(url, { comment: formData.get('comment') }, { method: 'POST' })
       .catch(err => globalErrorHandler(err))
 
-    if (!res.ok) return
+    if (!res) return
     form.reset()
   }
 

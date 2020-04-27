@@ -10,6 +10,7 @@
   export let username = null
   export let category = null
   export let subscriptions = null
+  export let searchResults = null
   export let posts = []
   export let page;
   export let morePosts = false
@@ -68,8 +69,9 @@
 
     let res = await makeApiRequest(url, null, { method: 'GET', noauth })
       .catch(err => globalErrorHandler(err));
-    if (!res.ok) return
-    res = await res.json()
+
+    if (!res) return
+      
     morePosts = res.more
     posts = posts.concat(res.posts)
   }
@@ -152,18 +154,20 @@
   {/if}
 {/if}
 
-<nav class="topnav">
-  <a rel=prefetch href="{page.path}?sort=hot">Hot</a>
-  <a rel=prefetch href="{page.path}?sort=new">New</a>
-  <a rel=prefetch href="{page.path}?sort=top">Top</a>
-  <a rel=prefetch href="{page.path}?sort=comments">Comments</a>
-  <a rel=prefetch href="{page.path}?sort=not">Controversial</a>
-  {#if subscriptions && user}
-    <a href={`/api/1/posts/rss/${user.id}`}>RSS</a>
-  {:else}
-    <a href={`/api/1/${(username ? 'user' : 'posts' )}/${category || username ? (category || username)+'/' : ''}rss?sort=${sort}`}>RSS</a>
-  {/if}
-</nav>
+{#if !searchResults}
+  <nav class="topnav">
+    <a rel=prefetch href="{page.path}?sort=hot">Hot</a>
+    <a rel=prefetch href="{page.path}?sort=new">New</a>
+    <a rel=prefetch href="{page.path}?sort=top">Top</a>
+    <a rel=prefetch href="{page.path}?sort=comments">Comments</a>
+    <a rel=prefetch href="{page.path}?sort=not">Controversial</a>
+    {#if subscriptions && user}
+      <a href={`/api/1/posts/rss/${user.id}`}>RSS</a>
+    {:else}
+      <a href={`/api/1/${(username ? 'user' : 'posts' )}/${category || username ? (category || username)+'/' : ''}rss?sort=${sort}`}>RSS</a>
+    {/if}
+  </nav>
+{/if}
 {#each posts as post}
   {#if !post.category.nsfw || subscriptions || category || pageUser}
     <Post { post }></Post>

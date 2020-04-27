@@ -40,7 +40,7 @@ async function makeApiRequest(url, payload = null, opts = {}) {
         throw JSON.stringify(err.errors) || res.statusText;
       }
 
-      return res;
+      return opts.raw ? res.text() : res.json();
     })
     .catch(err => {
       throw new Error(err);

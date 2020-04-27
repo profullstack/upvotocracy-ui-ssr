@@ -46,14 +46,16 @@
         method: 'POST'
       }).catch(err => globalErrorHandler(err))
 
+      if (!res) return
+
       if(paymentMethod == 'CARD') {
-        paymentIntent = await res.json()
+        paymentIntent = res
         isLoading = false
         showStripe = true
       }
 
       if (paymentMethod == 'BTC') {
-        const response = await res.json()
+        const response = res
         isLoading = false
         qr = response.qr
         address = response.address
@@ -104,7 +106,7 @@
       return;
     })
 
-    response = await response.json()
+    if (!response) return
 
     payStatus = response.status
 
@@ -116,10 +118,10 @@
 
 
   onMount(async () => {
-    const res = await makeApiRequest(`/posts/user/${user.id}`, null, { method: 'GET' })
+    userPosts = await makeApiRequest(`/posts/user/${user.id}`, null, { method: 'GET' })
       .catch(err => globalErrorHandler(err))
-    if (!res.ok) return
-    userPosts = await res.json()
+    if (!userPosts) return
+
     userPosts = userPosts.filter((post) => post.sponsored != true)
 
     const index = userPosts.findIndex(post => post.id == queryPostId);

@@ -5,9 +5,8 @@
   let invoices = []
 
   onMount(async () => {
-    const res = await makeApiRequest('/payments/list', null, { method: 'GET' })
+    invoices = await makeApiRequest('/payments/list', null, { method: 'GET' })
       .catch(err => globalErrorHandler(err))
-    invoices = await res.json()
   })
 </script>
 

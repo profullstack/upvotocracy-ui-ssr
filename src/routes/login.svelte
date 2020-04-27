@@ -28,8 +28,9 @@
     { method: 'POST' })
       .catch(err => globalErrorHandler(err))
 
-    if (!res.ok) alert('Invalid credentials')
-    const { token, user } = await res.json()
+    if (!res) return
+
+    const { token, user } = res
 
     try {
       console.log(user, token);

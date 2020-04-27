@@ -28,8 +28,9 @@
     { method: 'POST' })
       .catch(err => globalErrorHandler(err))
 
-    if (!res.ok) alert('Something went wrong!')
-    const { token } = await res.json()
+    if (!res) return
+
+    const { token } = res
 
     try {
       userStore.update(() => decode(token).user)
