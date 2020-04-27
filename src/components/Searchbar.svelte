@@ -17,16 +17,24 @@
   }
 </script>
 <style>
+  form {
+    all: unset;
+  }
   .search {
     max-width: 200px;
     margin: 0;
   }
+  input {
+    box-sizing: border-box;
+  }
   #search-button {
-    margin-left: 0;
+    margin: 0;
     padding-left: 1.3em;
     padding-right: 1.3em
   }
 </style>
 
-<input class="search" type="text" bind:value={q}>
-<button id="search-button" on:click|preventDefault={doSearch}>Search</button>
+<form on:submit|preventDefault={doSearch}>
+  <input class="search" type="text" bind:value={q}>
+  <button id="search-button">Search</button>
+</form>
