@@ -29,7 +29,7 @@
     const res = await makeApiRequest(url, null, { method: 'DELETE' })
       .catch(err => globalErrorHandler(err))
 
-    if (!res.ok) return
+    if (!res) return
 
     inbox = inbox.filter(item => item.id !== id)
   }
@@ -42,7 +42,7 @@
     const res = await makeApiRequest(url, { comment: formData.get('comment') }, { method: 'POST' })
       .catch(err => globalErrorHandler(err))
 
-    if (!res.ok) return
+    if (!res) return
     form.reset()
   }
 

@@ -9,6 +9,8 @@
     let res = await makeApiRequest('/search/posts?q='+encodeURIComponent(q), null, { method: 'GET' })
       .catch(console.error);
 
+    if (!res) return
+
     searchResults.set(res);
     showOverlay.set(false);
     return goto('/search')

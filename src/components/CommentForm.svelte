@@ -19,6 +19,8 @@
     { method: 'POST'})
       .catch(err => globalErrorHandler(err))
 
+    if (!post) return
+
     dispatch('update-comment', post)
   }
 </script>

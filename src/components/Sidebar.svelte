@@ -43,6 +43,8 @@
     if (!user) return;
     const me = await makeApiRequest('/me', null, { method: 'GET' })
       .catch(err => globalErrorHandler(err))
+      
+    if (!me) return
 
     userStore.set(me);
   }

@@ -65,6 +65,8 @@
     const data = await makeApiRequest(url, null, { method: 'GET' })
       .catch(err => globalErrorHandler(err))
 
+    if (!data) return
+
     post.score = data.score
     post.upvotePercentage = data.upvotePercentage
   }

@@ -35,6 +35,8 @@
       const res = await makeApiRequest(url, null, { method: 'GET' })
         .catch(err => globalErrorHandler(err))
 
+      if (!res) return
+
       inboxCount = res.count
       if (inboxCount > 0) {
         unread = true

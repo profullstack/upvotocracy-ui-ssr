@@ -46,6 +46,8 @@
         method: 'POST'
       }).catch(err => globalErrorHandler(err))
 
+      if (!res) return
+
       if(paymentMethod == 'CARD') {
         paymentIntent = res
         isLoading = false
@@ -104,6 +106,8 @@
       return;
     })
 
+    if (!response) return
+
     payStatus = response.status
 
     if (payStatus === 'paid'){
@@ -116,6 +120,7 @@
   onMount(async () => {
     userPosts = await makeApiRequest(`/posts/user/${user.id}`, null, { method: 'GET' })
       .catch(err => globalErrorHandler(err))
+    if (!userPosts) return
 
     userPosts = userPosts.filter((post) => post.sponsored != true)
 

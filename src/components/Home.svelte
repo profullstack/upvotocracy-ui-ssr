@@ -69,6 +69,9 @@
 
     let res = await makeApiRequest(url, null, { method: 'GET', noauth })
       .catch(err => globalErrorHandler(err));
+
+    if (!res) return
+      
     morePosts = res.more
     posts = posts.concat(res.posts)
   }

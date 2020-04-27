@@ -37,7 +37,7 @@
     { method: 'POST' })
       .catch(err => globalErrorHandler(err))
 
-    
+    if (!res) return
     goto(`/a/${name}`); 
   }
 </script>

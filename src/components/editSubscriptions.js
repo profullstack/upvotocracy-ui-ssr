@@ -9,7 +9,7 @@ userStore.subscribe(value => {
 const addSubscription = async (id) => {
   const url = `/me/subscriptions/${id}`
 
-  await makeApiRequest(url, null, { method: 'POST', raw: true })
+  const res = await makeApiRequest(url, null, { method: 'POST', raw: true })
     .catch(err => globalErrorHandler(err))
 
   user.subscriptions.push(id)
@@ -19,7 +19,7 @@ const addSubscription = async (id) => {
 const removeSubscription = async (id) => {
   const url = `/me/subscriptions/${id}`
   
-  await makeApiRequest(url, null, { method: 'DELETE', raw: true })
+  const res = await makeApiRequest(url, null, { method: 'DELETE', raw: true })
     .catch(err => globalErrorHandler(err))
 
   const index = user.subscriptions.findIndex(i => i == id);

@@ -16,7 +16,6 @@
   import Home from '../components/Home.svelte'
   import { onMount } from 'svelte'
   import { searchResults } from '../store'
-  import { makeApiRequest, globalErrorHandler } from '../components/create-api'
   
   export let page;
   let posts = [];

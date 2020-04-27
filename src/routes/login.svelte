@@ -28,6 +28,8 @@
     { method: 'POST' })
       .catch(err => globalErrorHandler(err))
 
+    if (!res) return
+
     const { token, user } = res
 
     try {

@@ -22,6 +22,8 @@
     const post = await makeApiRequest(url, null, { method: 'DELETE' })
       .catch(err => globalErrorHandler(err))
 
+    if (!post) return
+
     dispatch('update-comment', post)
   }
 
@@ -30,6 +32,8 @@
 
     const data = await makeApiRequest(url, null, { method: 'GET' })
       .catch(err => globalErrorHandler(err))
+
+    if (!data) return
     
     for (let i = 0; i < comments.length; i += 1) {
       console.log(comments[i])
