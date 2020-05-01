@@ -173,14 +173,14 @@
   }
 
   .sponsored {
-    border: 1px solid #147b50;
+    border: 1px solid var(--link-color);
     padding: .5rem;
     border-radius: 5px;
   }
 
   .sponsored-post {
     display: inline-block;
-    background-color: #147b50;
+    background-color: var(--link-color);
     color: white;
     padding: .5rem 1rem;
     margin-left: -.5rem;

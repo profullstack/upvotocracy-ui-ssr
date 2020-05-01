@@ -91,7 +91,7 @@
   #mail-icon {
     vertical-align: middle;
     width: 23px;
-    fill: #147b50;
+    fill: var(--link-color);
   }
   #inbox-count {
     margin-left: .2em;
