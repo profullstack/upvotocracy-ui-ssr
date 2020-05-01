@@ -1,0 +1,18 @@
+version: "3"
+services:
+  ui-ssr:
+    container_name: upvotocracy-ui-ssr
+    restart: always
+    build: .
+    env_file: .env
+    ports:
+      - "7809:3000"
+    volumes:
+      # - ./index.js:/usr/src/app/index.js
+      - ./.env:/usr/src/app/.env
+    networks:
+      - upvotocracy-network
+networks:
+  upvotocracy-network:
+    external:
+      name: upvotocracy-network

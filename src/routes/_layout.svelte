@@ -38,30 +38,30 @@
     justify-content: center;
   }
   :global(a) {
-    color: #147b50;
+    color: var(--link-color);
     font-weight: 500;
   }
 
   :global(button) {
-    background-color: #147b50;
-    border-color: #147b50;
+    background-color: var(--link-color);
+    border-color: var(--link-color);
   }
 
   :global(.button.button-outline, button.button-outline){
-    border-color: #147b50;
-    color: #147b50;
+    border-color: var(--link-color);
+    color: var(--link-color);
   }
 
   :global(input[type="radio"].toggle:checked+label){
-    color: #147b50;
+    color: var(--link-color);
   }
 
   :global(input[type='text']:focus, textarea:focus, select:focus) {
-    border-color: #147b50;
+    border-color: var(--link-color);
   }
 
   :global(input[type="radio"].toggle+label:after) {
-    border-bottom-color: #147b50;
+    border-bottom-color: var(--link-color);
   }
 
   .container {

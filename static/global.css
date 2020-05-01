@@ -19,20 +19,20 @@ pre > code {
 
 .comment-body a, .post-preview a {
     font-weight: normal;
-    color: #147b50;
+    color: var(--link-color);
 }
 
 .navbar a, .topnav a, .post-title a, .sidebar a {
-    color:  #147b50;
+    color:  var(--link-color);
 }
 
 .navbar button {
-    background-color: #147b50;
-    border-color: #147b50;
+    background-color: var(--link-color);
+    border-color: var(--link-color);
 }
 
 .post-detail a {
-    color: #95afa4;
+    color: var(--muted-color);
 }
 
 code {
