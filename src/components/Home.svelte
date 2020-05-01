@@ -176,6 +176,6 @@
 
 {#if posts.length > 0 && morePosts}
   <div class="load-more">
-    <button on:click={fetchPost}>Load More</button>
+    <button on:click={fetchPost} rel="next">Load More</button>
   </div>
 {/if}

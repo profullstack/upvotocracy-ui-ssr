@@ -29,6 +29,7 @@ export default {
 				API_BASE_URL: process.env.API_BASE_URL,
 				BASE_URL: process.env.BASE_URL,
 				STRIPE_API_KEY: process.env.STRIPE_API_KEY,
+				COST_SPONSORED_POST: process.env.COST_SPONSORED_POST,
 			}),
 			svelte({
 				dev,
@@ -75,6 +76,7 @@ export default {
 				'process.env.NODE_ENV': JSON.stringify(mode),
 				API_BASE_URL: process.env.API_BASE_URL,
 				BASE_URL: process.env.BASE_URL,
+				COST_SPONSORED_POST: process.env.COST_SPONSORED_POST,
 			}),
 			svelte({
 				generate: 'ssr',
@@ -102,6 +104,7 @@ export default {
 				'process.env.NODE_ENV': JSON.stringify(mode),
 				API_BASE_URL: process.env.API_BASE_URL,
 				BASE_URL: process.env.BASE_URL,
+				COST_SPONSORED_POST: process.env.COST_SPONSORED_POST,
 			}),
 			commonjs(),
 			!dev && terser()

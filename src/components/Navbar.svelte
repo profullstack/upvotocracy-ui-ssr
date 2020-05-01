@@ -59,7 +59,7 @@
 <style>
   .logo {
     vertical-align: middle;
-    height: 3rem;
+    height: 4rem;
   }
   .navbar {
     margin-top: 0;

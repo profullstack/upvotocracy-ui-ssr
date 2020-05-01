@@ -143,7 +143,7 @@
 <h1>Sponsored posts</h1>
 
 <h5>You can help fund our growing community by sponsoring a post.</h5>
-<p>Sponsored posts cost $10 each and will be rotated randomly along with other sponsored posts throughout the category. It does not expire.</p>
+<p>Sponsored posts cost $COST_SPONSORED_POST each and will be rotated randomly along with other sponsored posts throughout the category. It does not expire.</p>
 
 <p>We currently get around 12k pageviews a month. 20% of profits get distributed back to active members based on karma.</p>
 
@@ -162,7 +162,7 @@
       <li>{post.title} <a href="javascript:void(0)" on:click={() => removeFromSelected(post)}>X</a></li>
     {/each}
   </ul>
-  <h4>Total: ${selectedPosts.length * 10}</h4>
+  <h4>Total: ${selectedPosts.length * COST_SPONSORED_POST}</h4>
 </form>
 
 

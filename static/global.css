@@ -13,6 +13,9 @@ body {
     font-size: 1.6rem;
     margin: 0 auto;
 }
+pre > code {
+    line-height: 1 !important;
+}
 
 .comment-body a, .post-preview a {
     font-weight: normal;
