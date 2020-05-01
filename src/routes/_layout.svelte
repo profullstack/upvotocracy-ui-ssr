@@ -7,6 +7,7 @@
   }
 </script>
 <script>
+  import GoogleAnalytics from "sapper-google-analytics/GoogleAnalytics.svelte"
 	import Navbar from '../components/Navbar.svelte';
 	import Sidebar from '../components/Sidebar.svelte';
   import { onMount } from 'svelte'
@@ -16,7 +17,7 @@
 
 	export let cats;
   categories.set(cats);
-
+  let ga_measurment_id = 'GOOGLE_ANALYTICS'
   let err;
   globalError.subscribe(msg => err = msg);
 
@@ -140,4 +141,5 @@
       </footer>
     </div>
   </div>
+    <GoogleAnalytics {stores} id={ga_measurment_id}/>
 </div>

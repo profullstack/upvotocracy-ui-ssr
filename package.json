@@ -39,6 +39,7 @@
     "rollup-plugin-svelte": "^5.0.1",
     "rollup-plugin-terser": "^5.3.0",
     "sapper": "^0.27.0",
+    "sapper-google-analytics": "^1.0.1",
     "svelte": "^3.0.0",
     "svelte-routing": "^1.4.2"
   }
