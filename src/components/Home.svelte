@@ -15,7 +15,7 @@
   export let page;
   export let morePosts = false
   export let sort = '-rank'
-  export let categoryData = {}
+  export let categoryData
   export let pageUser
   let pageNumber = 1
 
