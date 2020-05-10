@@ -8,3 +8,5 @@ yarn-error.log
 custom.css
 docker-compose.yml
 static/icons/
+static/images/logo.*
+static/custom.css
