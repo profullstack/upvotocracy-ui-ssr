@@ -118,7 +118,7 @@
   <OverlayMenu {inboxCount}></OverlayMenu>
 {/if}
 <div class="navbar">
-  <a href="/"><img class="logo" src="/images/logo.svg" alt="upvotocracy" /></a>
+  <a href="/"><img class="logo" src="/images/logo.png" alt="SITE_NAME" /></a>
   <span id="searchbar"><Searchbar/></span>
   <div class="float-right">
     {#if user}

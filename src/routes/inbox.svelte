@@ -57,7 +57,7 @@
 </style>
 
 <svelte:head>
-  <title>Inbox - upvotocracy.com</title>
+  <title>Inbox - SITE_NAME</title>
 </svelte:head>
 
 <h1>Inbox</h1>

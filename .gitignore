@@ -4,6 +4,7 @@
 yarn-error.log
 /cypress/screenshots/
 /__sapper__/
+.env
 .env.local
 custom.css
 docker-compose.yml
