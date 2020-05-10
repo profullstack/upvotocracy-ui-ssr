@@ -47,7 +47,11 @@
 </script>
 
 <svelte:head>
- <title>{category} - upvotocracy.com</title>
+ <title>{category} - {categoryData.description}</title>
+  <meta property="og:description" content=`${category} - ${categoryData.description}`>
+  <meta property="description" content=`${category} - ${categoryData.description}`>
+  <meta property="og:title" content=`${category} - ${categoryData.description}`>
+  <meta name="twitter:title" content=`${category} - ${categoryData.description}`>
 </svelte:head>
 
 <Home posts={posts} page={page} category={category} morePosts={morePosts} categoryData={categoryData} sort={sort}/>
