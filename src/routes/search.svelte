@@ -9,7 +9,7 @@
 <Home posts={posts} page={page} searchResults={true}/>
 
 <svelte:head>
- <title>Search results - upvotocracy.com</title>
+ <title>Search results - SITE_DOMAIN</title>
 </svelte:head>
 
 <script>

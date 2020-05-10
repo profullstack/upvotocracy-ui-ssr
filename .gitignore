@@ -4,8 +4,10 @@
 yarn-error.log
 /cypress/screenshots/
 /__sapper__/
+.env
 .env.local
 custom.css
 docker-compose.yml
 static/icons/
 static/images/logo.*
+static/custom.css

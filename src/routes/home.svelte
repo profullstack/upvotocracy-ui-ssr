@@ -52,7 +52,7 @@
 </script>
 
 <svelte:head>
- <title>upvotocracy.com</title>
+ <title>SITE_DOMAIN</title>
 </svelte:head>
 
 <Home posts={posts} page={page} morePosts={morePosts} sort={sort} subscriptions={true}/>

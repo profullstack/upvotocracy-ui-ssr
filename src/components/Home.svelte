@@ -41,13 +41,13 @@
     const rss = document.querySelector('link[type="application/rss+xml"]');
           
     if (category) {
-      rss.setAttribute('href', `https://upvotocracy.com/api/1/posts/${category}/rss?sort=-created`);
-      rss.setAttribute('title', `Upvotocracy ${category} RSS Feed`);
+      rss.setAttribute('href', `SITE_URL/api/1/posts/${category}/rss?sort=-created`);
+      rss.setAttribute('title', `SITE_NAME ${category} RSS Feed`);
       currentCategory.set(category)
     }
     else {
-      rss.setAttribute('href', `https://upvotocracy.com/api/1/posts/rss?sort=-created`);
-      rss.setAttribute('title', `Upvotocracy RSS Feed`);
+      rss.setAttribute('href', `SITE_URL/api/1/posts/rss?sort=-created`);
+      rss.setAttribute('title', `SITE_NAME RSS Feed`);
     }
   })
 
@@ -95,24 +95,24 @@
 </style>
 
 <svelte:head>
-  <meta property="og:image" content="https://upvotocracy.com/icons/title.png" />
+  <meta property="og:image" content="SITE_URL/icons/title.png" />
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image" />
-  <meta property="twitter:image" content="https://upvotocracy.com/icons/title.png" />
+  <meta property="twitter:image" content="SITE_URL/icons/title.png" />
   {#if categoryData}
     <meta property="og:description" content={categoryData.description}>
     <meta property="description" content={categoryData.description}>
-    <meta property="og:title" content="{category} - upvotocracy.com">
+    <meta property="og:title" content="{category} - SITE_DOMAIN">
     <meta property="og:url" content="BASE_URL/a/{category}">
-    <meta name="twitter:title" content="{category} - upvotocracy.com">
+    <meta name="twitter:title" content="{category} - SITE_DOMAIN">
     <meta name="twitter:url" content="BASE_URL/a/{category}">
   {:else}
-    <meta property="og:title" content="Zero-moderation Reddit clone - Upvotocracy.com" />
-    <meta property="og:url" content="https://upvotocracy.com" />
-    <meta property="og:description" content="Zero-moderation Reddit clone - Upvotocracy.com">
-    <meta name="twitter:title" content="Zero-moderation Reddit clone - Upvotocracy.com" />
-    <meta name="twitter:url" content="https://upvotocracy.com/" />
-    <meta name="description" content="Zero-moderation Reddit clone - Upvotocracy.com" />
+    <meta property="og:title" content="SITE_DESCRIPTION - SITE_DOMAIN" />
+    <meta property="og:url" content="SITE_URL" />
+    <meta property="og:description" content="SITE_DESCRIPTION - SITE_DOMAIN">
+    <meta name="twitter:title" content="SITE_DESCRIPTION - SITE_DOMAIN" />
+    <meta name="twitter:url" content="SITE_URL" />
+    <meta name="description" content="SITE_DESCRIPTION - SITE_DOMAIN" />
   {/if}
 </svelte:head>
 
