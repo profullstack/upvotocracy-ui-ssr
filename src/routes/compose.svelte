@@ -191,7 +191,7 @@
 <form id="create-post">
   <fieldset>
     <div class="category-toggle">
-      <input id="toggle-on" class="toggle toggle-left" name="type" type="radio" checked bind:group={scoops} value={ 'link' }>
+      <input id="toggle-on" class="toggle toggle-left" name="type" type="radio" checked bind:group={scoops} bind:value={ link }>
       <label for="toggle-on" class="btn">Link</label>
       <input id="toggle-off" class="toggle toggle-right" name="type" type="radio" bind:group={scoops} value={ 'text' }>
       <label for="toggle-off" class="btn">Text</label>

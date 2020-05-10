@@ -6,7 +6,7 @@ services:
     build: .
     env_file: .env
     ports:
-      - "7809:3000"
+      - "127.0.0.1:7809:3000"
     volumes:
       # - ./index.js:/usr/src/app/index.js
       - ./.env:/usr/src/app/.env
