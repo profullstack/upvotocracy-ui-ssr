@@ -95,10 +95,10 @@
 </style>
 
 <svelte:head>
-  <meta property="og:image" content="https://upvotocracy.com/images/title.png" />
+  <meta property="og:image" content="https://upvotocracy.com/icons/title.png" />
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image" />
-  <meta property="twitter:image" content="https://upvotocracy.com/images/title.png" />
+  <meta property="twitter:image" content="https://upvotocracy.com/icons/title.png" />
   {#if categoryData}
     <meta property="og:description" content={categoryData.description}>
     <meta property="description" content={categoryData.description}>

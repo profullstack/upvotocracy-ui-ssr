@@ -213,7 +213,7 @@
       <input type="text" placeholder="https:// ..." id="url" name="url" on:blur={onUrlBlur} value="{link}">
       <label for="thumb">Thumbnail</label>
       <div class="thumbnail">
-        <img id="thumb" src="/images/placeholder.png" alt="Thumbnail" />
+        <img id="thumb" src="/placeholder.png" alt="Thumbnail" />
         <button type="button" on:click={onUrlBlur}>Fetch</button>
       </div>
       {:else}

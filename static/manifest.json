@@ -7,7 +7,7 @@
 	"start_url": "/",
 	"icons": [
 		{
-			"src": "images/favicon-196x196.png",
+			"src": "icons/favicon-196x196.png",
 			"sizes": "196x196",
 			"type": "image/png"
 		}

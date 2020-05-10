@@ -7,3 +7,4 @@ yarn-error.log
 .env.local
 custom.css
 docker-compose.yml
+static/icons/
