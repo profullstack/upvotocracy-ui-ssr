@@ -6,8 +6,10 @@
     let headers
     let sort
     let type
+    let pageNumber = 0
 
-    if (page.query.sort) type = page.query.sort 
+    if (page.query.sort) type = page.query.sort
+    if (page.query.page) pageNumber = parseInt(page.query.page)
 
     if (type === 'hot') {
       sort = '-rank'
@@ -21,7 +23,7 @@
       sort = '+score';
     }
 
-    if (category) url += `/posts/${category}?sort=${sort}&page=0`
+    if (category) url += `/posts/${category}?sort=${sort}&page=${pageNumber}`
 
     const categoryUrl = 'API_BASE_URL' + `/category/${category}`
 
