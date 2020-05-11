@@ -53,7 +53,7 @@
     fetchPage()
   })
 
-  $: fetchPage(page)
+  $: if (typeof window != 'undefined') fetchPage(page.query)
 </script>
 
 <svelte:head>
