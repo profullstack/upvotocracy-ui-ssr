@@ -16,6 +16,11 @@
 
   const fetchPage = async () => {
     let type
+    let pageNumber
+    let currentURL = new URLSearchParams(window.location.search)
+
+    if (currentURL.get('page')) pageNumber = parseInt(currentURL.get('page'))
+    else pageNumber = 0
 
     if (page.query.sort) type = page.query.sort 
 
@@ -31,7 +36,7 @@
       sort = '+score';
     }
 
-    let url = `/subscriptions?sort=${sort}&page=0`;
+    let url = `/subscriptions?sort=${sort}&page=${pageNumber}`;
 
     const res = await makeApiRequest(url, null, { method: 'GET' })
       .catch(err => globalErrorHandler(err))
@@ -48,7 +53,7 @@
     fetchPage()
   })
 
-  $: fetchPage(page)
+  $: if (typeof window != 'undefined') fetchPage(page.query)
 </script>
 
 <svelte:head>

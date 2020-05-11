@@ -7,8 +7,10 @@
     let username
     let sort
     let type
+    let pageNumber = 0
 
-    if (page.query.sort) type = page.query.sort 
+    if (page.query.sort) type = page.query.sort
+    if (page.query.page) pageNumber = parseInt(page.query.page)
 
     if (type === 'hot') {
       sort = '-rank'
@@ -22,7 +24,7 @@
       sort = '+score';
     }
 
-    url += `/posts/?sort=${sort}&page=0`
+    url += `/posts/?sort=${sort}&page=${pageNumber}`
 
     let res = await this.fetch(url);
     res = await res.json();

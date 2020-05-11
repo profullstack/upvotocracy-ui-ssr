@@ -17,12 +17,6 @@
   export let sort = '-rank'
   export let categoryData
   export let pageUser
-  let pageNumber = 1
-
-  $: {
-    page
-    pageNumber = 1
-  }
 
   let currentCat
   currentCategory.subscribe(value => {
@@ -52,7 +46,13 @@
   })
 
   const fetchPost = async () => {
-    pageNumber += 1;
+    let pageNumber
+    let currentURL = new URLSearchParams(window.location.search)
+
+    if (currentURL.get('page')) pageNumber = parseInt(currentURL.get('page')) + 1
+    else pageNumber = 1
+
+    updateUrl(pageNumber)
 
     let url = ''
     let noauth = true
@@ -60,10 +60,8 @@
     if (username) url += `/user/${username}?sort=${sort}&page=${pageNumber}`
     else if (category) url += `/posts/${category}?sort=${sort}&page=${pageNumber}`
     else if (subscriptions) {
-      pageNumber-= 1
       noauth = false
       url += `/subscriptions?sort=${sort}&page=${pageNumber}`
-      pageNumber += 1
     }
     else url += `/posts?sort=${sort}&page=${pageNumber}`
 
@@ -74,6 +72,27 @@
       
     morePosts = res.more
     posts = posts.concat(res.posts)
+  }
+
+  const updateUrl = (pageNumber) => {
+    const currentURL = new URL(window.location.href)
+    const searchParams = currentURL.searchParams
+    searchParams.set('page', pageNumber)
+    currentURL.search = searchParams.toString()
+
+    history.pushState({}, '', currentURL)
+  }
+
+  const getNextUrl = () => {
+    if (page.query.page) page.query.page = parseInt(page.query.page) + 1
+    else page.query.page = 1
+
+    let queries = ''
+    Object.keys(page.query).forEach((key, i) => {
+      queries += `${key}=${page.query[key]}${i != Object.keys(page.query).length - 1 ? '&' : ''}`
+    })
+
+    return `${page.path}?${queries}`
   }
 </script>
 <style>
@@ -176,6 +195,6 @@
 
 {#if posts.length > 0 && morePosts}
   <div class="load-more">
-    <button on:click={fetchPost} rel="next">Load More</button>
+    <a class="button" href={getNextUrl()} on:click|preventDefault={fetchPost}>Load More</a>
   </div>
 {/if}

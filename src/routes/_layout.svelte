@@ -43,7 +43,7 @@
     font-weight: 500;
   }
 
-  :global(button) {
+  :global(button, .button) {
     background-color: var(--link-color);
     border-color: var(--link-color);
   }
