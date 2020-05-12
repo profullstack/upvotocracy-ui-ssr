@@ -91,6 +91,9 @@
   };
 
   const getNextUrl = () => {
+    if (typeof page == 'undefined') return;
+    if (typeof page.query == 'undefined') return;
+    
     if (page.query.page) page.query.page = parseInt(page.query.page);
     else page.query.page = 0;
 
@@ -110,7 +113,7 @@
     url.searchParams.set("page", parseInt(page.query.page) + 1);
     nextURL = `${page.path}?${url.searchParams.toString()}`;
   };
-  // getNextUrl()
+  getNextUrl()
 </script>
 
 <style>
