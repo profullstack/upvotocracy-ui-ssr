@@ -17,6 +17,9 @@
   export let sort = '-rank'
   export let categoryData
   export let pageUser
+  let previousURL
+  let nextURL
+  let currentURL
 
   let currentCat
   currentCategory.subscribe(value => {
@@ -84,16 +87,24 @@
   }
 
   const getNextUrl = () => {
-    if (page.query.page) page.query.page = parseInt(page.query.page) + 1
-    else page.query.page = 1
+    if (page.query.page) page.query.page = parseInt(page.query.page)
+    else page.query.page = 0
 
     let queries = ''
     Object.keys(page.query).forEach((key, i) => {
       queries += `${key}=${page.query[key]}${i != Object.keys(page.query).length - 1 ? '&' : ''}`
     })
 
-    return `${page.path}?${queries}`
+    const url = new URL(`${page.host}${page.path}?${queries}`)
+    currentURL = `${page.path}?${queries}`
+
+    url.searchParams.set('page', parseInt(page.query.page) - 1)
+    previousURL = `${page.path}?${url.searchParams.toString()}`  
+    
+    url.searchParams.set('page', parseInt(page.query.page) + 1)
+    nextURL = `${page.path}?${url.searchParams.toString()}`
   }
+  getNextUrl()
 </script>
 <style>
   .load-more {
@@ -114,6 +125,11 @@
 </style>
 
 <svelte:head>
+  {#if page.query.page != 0}
+    <link rel="prev" href={'BASE_URL' + previousURL}>
+  {/if}
+  <link rel="next" href={'BASE_URL' + nextURL}>
+  <link rel="canonical" href={'BASE_URL' + currentURL}>
   <meta property="og:image" content="SITE_URL/icons/title.png" />
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image" />
@@ -195,6 +211,6 @@
 
 {#if posts.length > 0 && morePosts}
   <div class="load-more">
-    <a class="button" href={getNextUrl()} on:click|preventDefault={fetchPost}>Load More</a>
+    <a class="button" href={'BASE_URL' + nextURL} on:click|preventDefault={fetchPost}>Load More</a>
   </div>
 {/if}
