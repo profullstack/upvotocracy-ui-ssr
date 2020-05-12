@@ -113,7 +113,7 @@
     url.searchParams.set("page", parseInt(page.query.page) + 1);
     nextURL = `${page.path}?${url.searchParams.toString()}`;
   };
-  getNextUrl()
+  //getNextUrl()
 </script>
 
 <style>
