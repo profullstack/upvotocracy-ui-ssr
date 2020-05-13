@@ -104,16 +104,16 @@
       }`;
     });
 
-    const url = new URL(`${page.host}${page.path}?${queries}`);
-    currentURL = `${page.path}?${queries}`;
+    const url = new URL(`${'BASE_URL'}${page.path}?${queries}`);
+    currentURL = url.href;
 
     url.searchParams.set("page", parseInt(page.query.page) - 1);
-    previousURL = `${page.path}?${url.searchParams.toString()}`;
+    previousURL = url.href;
 
     url.searchParams.set("page", parseInt(page.query.page) + 1);
-    nextURL = `${page.path}?${url.searchParams.toString()}`;
+    nextURL = url.href;
   };
-  //getNextUrl()
+  getNextUrl()
 </script>
 
 <style>
@@ -136,10 +136,10 @@
 
 <svelte:head>
   {#if page.query.page != 0}
-    <link rel="prev" href={'BASE_URL' + previousURL} />
+    <link rel="prev" href={previousURL} />
   {/if}
-  <link rel="next" href={'BASE_URL' + nextURL} />
-  <link rel="canonical" href={'BASE_URL' + currentURL} />
+  <link rel="next" href={nextURL} />
+  <link rel="canonical" href={currentURL} />
   <meta property="og:image" content="SITE_URL/icons/title.png" />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -253,7 +253,7 @@
   <div class="load-more">
     <a
       class="button"
-      href={'BASE_URL' + nextURL}
+      href={nextURL}
       on:click|preventDefault={fetchPost}>
       Load More
     </a>
