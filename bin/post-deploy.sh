@@ -16,5 +16,5 @@ echo "current name: $name"
 
 cd $HOME/www/${name}/${project}
 CURRENT_UID=$(id -u):$(id -g) docker-compose pull
-CURRENT_UID=$(id -u):$(id -g) docker-compose build
+CURRENT_UID=$(id -u):$(id -g) docker-compose build --no-cache
 CURRENT_UID=$(id -u):$(id -g) docker-compose up -d

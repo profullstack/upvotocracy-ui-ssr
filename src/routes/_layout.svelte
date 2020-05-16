@@ -8,12 +8,20 @@
 </script>
 <script>
   import GoogleAnalytics from "sapper-google-analytics/GoogleAnalytics.svelte"
+  import Matomo, { matomo } from '@dexlib/svelte-matomo'
 	import Navbar from '../components/Navbar.svelte';
 	import Sidebar from '../components/Sidebar.svelte';
   import { onMount } from 'svelte'
   import { categories, globalError } from '../store'
   import { stores } from '@sapper/app';
   const { page } = stores();
+ 
+  const url = 'MATOMO_URL';
+  const siteId = MATOMO_ID;
+ 
+  onMount(() => {
+    matomo.trackPageView()
+  })
 
 	export let cats;
   categories.set(cats);
@@ -27,6 +35,7 @@
   $: {
     currentPath;
     globalError.set(false);
+    if ($page) matomo.trackPageView()
   }
 
   onMount(() => {
@@ -139,5 +148,6 @@
       </footer>
     </div>
   </div>
-    <GoogleAnalytics {stores} id={ga_measurment_id}/>
+  <GoogleAnalytics {stores} id={ga_measurment_id}/>
+  <Matomo {url} {siteId} />
 </div>
