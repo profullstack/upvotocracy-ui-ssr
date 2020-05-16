@@ -16,7 +16,7 @@
   import { stores } from '@sapper/app';
   const { page } = stores();
  
-  const url = 'MATOMO_SITE';
+  const url = 'MATOMO_URL';
   const siteId = MATOMO_ID;
  
   onMount(() => {
