@@ -16,8 +16,8 @@
   import { stores } from '@sapper/app';
   const { page } = stores();
  
-  const url = process.env.MATOMO_URL;
-  const siteId = process.env.MATOMO_ID;
+  const url = 'MATOMO_SITE';
+  const siteId = MATOMO_ID;
  
   onMount(() => {
     matomo.trackPageView()

@@ -37,6 +37,8 @@ export default {
 				SITE_DESCRIPTION: process.env.SITE_DESCRIPTION,
 				SITE_EMAIL: process.env.SITE_EMAIL,
 				SITE_EMAIL_SUBJECT: process.env.SITE_EMAIL_SUBJECT,
+				MATOMO_URL: process.env.MATOMO_URL,
+				MATOMO_ID: process.env.MATOMO_ID,
 			}),
 			svelte({
 				dev,
@@ -91,6 +93,8 @@ export default {
 				SITE_DESCRIPTION: process.env.SITE_DESCRIPTION,
 				SITE_EMAIL: process.env.SITE_EMAIL,
 				SITE_EMAIL_SUBJECT: process.env.SITE_EMAIL_SUBJECT,
+				MATOMO_URL: process.env.MATOMO_URL,
+				MATOMO_ID: process.env.MATOMO_ID,
 			}),
 			svelte({
 				generate: 'ssr',
@@ -126,6 +130,8 @@ export default {
 				SITE_DESCRIPTION: process.env.SITE_DESCRIPTION,
 				SITE_EMAIL: process.env.SITE_EMAIL,
 				SITE_EMAIL_SUBJECT: process.env.SITE_EMAIL_SUBJECT,
+				MATOMO_URL: process.env.MATOMO_URL,
+				MATOMO_ID: process.env.MATOMO_ID,
 			}),
 			commonjs(),
 			!dev && terser()
