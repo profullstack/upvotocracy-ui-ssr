@@ -9,6 +9,7 @@
 
   export let username = null;
   export let category = null;
+  export let hashtag = null;
   export let subscriptions = null;
   export let searchResults = null;
   export let posts = [];
@@ -224,6 +225,8 @@
   {#if pageUser.created}
     <p>Joined {timeSince(pageUser.created)} ago</p>
   {/if}
+{:else if hashtag}
+  <h3>#{hashtag}</h3>
 {/if}
 
 {#if !searchResults}
