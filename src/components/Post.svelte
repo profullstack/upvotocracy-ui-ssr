@@ -265,6 +265,11 @@
         {/if}
         {#if !post.sponsored && post.author.id === user.id}<a href="/sponsor?postId={post.id}" style="margin-left: 1rem;">Sponsor this post</a>{/if}
       </div>
+      <div class="hashtags">
+        {#each post.hashtags as hashtag}
+          <a rel=prefetch href="/tag/{hashtag}">#{hashtag}</a>&nbsp
+        {/each}
+      </div>
       <hr>
     {/if}
   </div>
