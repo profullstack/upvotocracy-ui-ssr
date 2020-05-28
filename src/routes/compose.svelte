@@ -19,10 +19,12 @@
   export let link = ''
   export let text = ''
   export let category
+  export let hashtags = []
   let currentCat
   let thumb;
   let categories = []
   let sortedCategories = [];
+  let newHashtag = '';
 
   let user
   userStore.subscribe(value => {
@@ -106,6 +108,7 @@
       url: url && url.trim(),
       text: formData.get('text'),
       thumb,
+      hashtags,
     }, { method: 'POST' })
       .catch(err => globalErrorHandler(err))
     
@@ -114,6 +117,20 @@
     }
 
     return goto('/');
+  }
+
+  const addHashtag = async (event) => {
+    if (newHashtag.trim(' ') != '') {
+      hashtags.push(newHashtag.trim(' '));
+      hashtags = hashtags;
+      newHashtag = '';
+    }
+  };
+
+  const removeHashtag = (val) => {
+    const index = hashtags.indexOf(val);
+    hashtags.splice(index, 1);
+    hashtags = hashtags;
   }
 </script>
 
@@ -220,6 +237,13 @@
       <label for="text">Text</label>
       <textarea placeholder="Put your text here ..." id="text" name="text" value="{text}"></textarea>
     {/if}
+    <label for="hashtags">Hashtags</label>
+    {#each hashtags as hashtag}
+      #{hashtag} <a href="javascript:void(0)" on:click={ removeHashtag(hashtag) }>x</a>&nbsp
+    {/each}
+    <br>
+    <input id="hashtags" bind:value={newHashtag}>
+    <button on:click|preventDefault={addHashtag}>Add</button>
     <footer>
       <button class="button-primary float-right" type="submit" on:click={ createPost }>Create Post</button>
     </footer>
