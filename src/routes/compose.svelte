@@ -1,11 +1,20 @@
 <script context="module">
   export async function preload(page, session) {
     let scoops
-    const { title, link, text, category } = page.query;
+    let { title, link, text, category, hashtags } = page.query;
 
     if (text) scoops = 'text';
+    if (hashtags) {
+      hashtags = JSON.parse(hashtags);
+      hashtags = hashtags.map(hashtag => {
+        if (hashtag.slice(0, 1) == '#') {
+          hashtag = hashtag.substring(1);
+        }
+        return hashtag;
+      });
+    }
     
-    return { title, link, text, category, scoops };
+    return { title, link, text, category, scoops, hashtags };
   }
 </script>
 <script>
