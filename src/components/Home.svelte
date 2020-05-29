@@ -245,6 +245,11 @@
     <a rel="prefetch" href="{page.path}?sort=not">Controversial</a>
     {#if subscriptions && user}
       <a href={`/api/1/posts/rss/${user.id}`}>RSS</a>
+    {:else if hashtag}
+      <a
+        href={`/api/1/posts/rss/tags/${hashtag}?sort=${sort}`}>
+        RSS
+      </a>
     {:else}
       <a
         href={`/api/1/${username ? 'user' : 'posts'}/${category || username ? (category || username) + '/' : ''}rss?sort=${sort}`}>
