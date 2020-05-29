@@ -120,9 +120,16 @@
   }
 
   const addHashtag = async (event) => {
-    if (newHashtag.trim(' ') != '') {
-      hashtags.push(newHashtag.trim(' '));
-      hashtags = hashtags;
+    newHashtag = newHashtag.trim(' ')
+
+    if (newHashtag != '' && newHashtag != '#') {
+      if (newHashtag.slice(0, 1) == '#') {
+        newHashtag = newHashtag.substring(1);
+      }
+      if (!hashtags.includes(newHashtag)) {
+        hashtags.push(newHashtag);
+        hashtags = hashtags;
+      }
       newHashtag = '';
     }
   };
