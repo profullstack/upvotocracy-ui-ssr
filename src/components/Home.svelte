@@ -152,6 +152,13 @@
     <meta property="og:url" content="BASE_URL/a/{category}" />
     <meta name="twitter:title" content="{category} - SITE_DOMAIN" />
     <meta name="twitter:url" content="BASE_URL/a/{category}" />
+  {:else if hashtag}
+    <meta property="og:description" content="#{hashtag} - SITE_NAME" />
+    <meta property="description" content="#{hashtag} - SITE_NAME" />
+    <meta property="og:title" content="#{hashtag} - SITE_DOMAIN" />
+    <meta property="og:url" content="BASE_URL/tag/{hashtag}" />
+    <meta name="twitter:title" content="#{hashtag} - SITE_DOMAIN" />
+    <meta name="twitter:url" content="BASE_URL/tag/{hashtag}" />
   {:else}
     <meta property="og:title" content="SITE_DESCRIPTION - SITE_DOMAIN" />
     <meta property="og:url" content="SITE_URL" />

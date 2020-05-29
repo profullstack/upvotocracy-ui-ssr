@@ -45,12 +45,8 @@
   export let sort;
 </script>
 
-<!-- <svelte:head>
- <title>#{hashtag} - Upvotocracy</title>
-  <meta property="og:description" content={`${category} - ${categoryData.description}`}>
-  <meta property="description" content={`${category} - ${categoryData.description}`}>
-  <meta property="og:title" content={`${category} - ${categoryData.description}`}>
-  <meta name="twitter:title" content={`${category} - ${categoryData.description}`}>
-</svelte:head> -->
+<svelte:head>
+ <title>#{hashtag} - SITE_DOMAIN</title>
+</svelte:head>
 
 <Home posts={posts} page={page} hashtag={hashtag} morePosts={morePosts} sort={sort}/>
