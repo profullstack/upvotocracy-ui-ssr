@@ -32,7 +32,7 @@
       } else if (post.url.indexOf('youtu.be') > -1) {
         youtubeId = post.url.match(/youtu.be\/([^&\?]*)/);
         postVideo = post.url;
-      } else if (post.url.indexOf('nullvideo') > -1) {
+      } else if (post.url.indexOf('skip.nullvideo') > -1) {
         postVideo = post.url.replace('/user/', '/uploads/') + '.mp4';
         postVideo = postVideo.replace(/(\?.*)/, '.mp4$1');
         nullvideo = postVideo;
