@@ -56,7 +56,8 @@
 <form on:submit|preventDefault={uploadFile} method="post" enctype="multipart/form-data">
   <input bind:files={files} type="file" accept="image/*,video/*"/>
   <button disabled={uploadDisabled} type="submit">Upload</button>
+  <br>
+  <progress id="progressBar" value={progress} max="100"></progress>
+  <span>{progress}%</span>
 </form>
 
-<progress id="progressBar" value={progress} max="100"></progress>
-<span>{progress}%</span>
