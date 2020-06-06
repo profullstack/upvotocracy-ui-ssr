@@ -32,7 +32,7 @@
       } else if (post.url.indexOf('youtu.be') > -1) {
         youtubeId = post.url.match(/youtu.be\/([^&\?]*)/);
         postVideo = post.url;
-      } else if (post.url.indexOf('nullvideo') > -1) {
+      } else if (post.url.indexOf('skip.nullvideo') > -1) {
         postVideo = post.url.replace('/user/', '/uploads/') + '.mp4';
         postVideo = postVideo.replace(/(\?.*)/, '.mp4$1');
         nullvideo = postVideo;
@@ -264,6 +264,11 @@
           <span id={ post.id } class="remove-button float-right" on:click={ removePost }>Delete</span>
         {/if}
         {#if !post.sponsored && post.author.id === user.id}<a href="/sponsor?postId={post.id}" style="margin-left: 1rem;">Sponsor this post</a>{/if}
+      </div>
+      <div class="hashtags">
+        {#each post.hashtags as hashtag}
+          <a rel=prefetch href="/tag/{hashtag}">#{hashtag}</a>&nbsp
+        {/each}
       </div>
       <hr>
     {/if}

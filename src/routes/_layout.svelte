@@ -19,10 +19,6 @@
   const url = 'MATOMO_URL';
   const siteId = MATOMO_ID;
  
-  onMount(() => {
-    matomo.trackPageView()
-  })
-
 	export let cats;
   categories.set(cats);
   let ga_measurment_id = 'GOOGLE_ANALYTICS'
@@ -40,6 +36,7 @@
 
   onMount(() => {
     document.getElementById('bookmarklet').setAttribute('href', "javascript:void(open(`SITE_URL/compose?link=${encodeURIComponent(`${location.href}${location.href.includes('?')?'&':'?'}_snoorandom=${crypto.getRandomValues(new Uint8Array(4)).reduce((a,v)=>a+=(v.toString(16).padStart(2,'0')),'')}`)}&title=${encodeURIComponent(document.querySelector('meta[name=title][content]')?document.querySelector('meta[name=title][content]').content:document.title)}`))");
+    matomo.trackPageView()
   })
 </script>
 

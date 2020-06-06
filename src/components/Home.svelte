@@ -9,6 +9,7 @@
 
   export let username = null;
   export let category = null;
+  export let hashtag = null;
   export let subscriptions = null;
   export let searchResults = null;
   export let posts = [];
@@ -151,6 +152,13 @@
     <meta property="og:url" content="BASE_URL/a/{category}" />
     <meta name="twitter:title" content="{category} - SITE_DOMAIN" />
     <meta name="twitter:url" content="BASE_URL/a/{category}" />
+  {:else if hashtag}
+    <meta property="og:description" content="#{hashtag} - SITE_NAME" />
+    <meta property="description" content="#{hashtag} - SITE_NAME" />
+    <meta property="og:title" content="#{hashtag} - SITE_DOMAIN" />
+    <meta property="og:url" content="BASE_URL/tag/{hashtag}" />
+    <meta name="twitter:title" content="#{hashtag} - SITE_DOMAIN" />
+    <meta name="twitter:url" content="BASE_URL/tag/{hashtag}" />
   {:else}
     <meta property="og:title" content="SITE_DESCRIPTION - SITE_DOMAIN" />
     <meta property="og:url" content="SITE_URL" />
@@ -224,6 +232,8 @@
   {#if pageUser.created}
     <p>Joined {timeSince(pageUser.created)} ago</p>
   {/if}
+{:else if hashtag}
+  <h3>#{hashtag}</h3>
 {/if}
 
 {#if !searchResults}
@@ -235,6 +245,11 @@
     <a rel="prefetch" href="{page.path}?sort=not">Controversial</a>
     {#if subscriptions && user}
       <a href={`/api/1/posts/rss/${user.id}`}>RSS</a>
+    {:else if hashtag}
+      <a
+        href={`/api/1/posts/rss/tags/${hashtag}?sort=${sort}`}>
+        RSS
+      </a>
     {:else}
       <a
         href={`/api/1/${username ? 'user' : 'posts'}/${category || username ? (category || username) + '/' : ''}rss?sort=${sort}`}>
