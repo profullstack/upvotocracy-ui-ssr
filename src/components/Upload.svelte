@@ -1,10 +1,11 @@
 <script>
   import { globalErrorHandler } from '../components/create-api';
 
+  export let link;
+  export let mediaName;
   let files;
   let progress = 0;
   let uploadDisabled = true;
-  let fileUrl;
 
   $: {
     globalErrorHandler(false);
@@ -14,7 +15,7 @@
     }
     else if (files && files[0].size < 'MAX_UPLOAD_SIZE') uploadDisabled = false;
     progress = 0;
-    fileUrl = undefined;
+    link = undefined;
   }
 
   const uploadFile = () => {
@@ -38,10 +39,11 @@
   function completeHandler(event) {
     const response = JSON.parse(event.target.response);
 
-    if (response.errors) globalErrorHandler(response.errors);
+    if (response.errors) globalErrorHandler(JSON.stringify(response.errors));
     
     if (response.url) {
-      fileUrl = response.url;
+      link = response.url;
+      mediaName = response.mediaName;
       uploadDisabled = true;
     }
   }
@@ -58,10 +60,3 @@
 
 <progress id="progressBar" value={progress} max="100"></progress>
 <span>{progress}%</span>
-
-{#if fileUrl}
-  <div>
-    File uploaded to:
-    <a href="{fileUrl}">{fileUrl}</a>
-  </div>
-{/if}
