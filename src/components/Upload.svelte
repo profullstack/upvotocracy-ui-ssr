@@ -26,7 +26,7 @@
     ajax.upload.addEventListener("progress", progressHandler, false);
     ajax.addEventListener("load", completeHandler, false);
     ajax.addEventListener("error", errorHandler, false);
-    ajax.open("POST", "http://localhost:8537/api/1/upload"); 
+    ajax.open("POST", `${'API_BASE_URL'}/upload`); 
     ajax.setRequestHeader('Authorization', `Bearer ${localStorage.getItem('token')}`);
     ajax.send(formdata);
   }
