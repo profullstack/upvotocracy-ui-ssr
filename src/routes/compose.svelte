@@ -22,6 +22,7 @@
   import { goto } from '@sapper/app';
   import { userStore, currentCategory, categories as cats } from '../store'
   import { makeApiRequest, globalErrorHandler } from '../components/create-api'
+  import Upload from '../components/Upload.svelte'
 
   export let scoops = 'link'
   export let title = ''
@@ -34,6 +35,7 @@
   let categories = []
   let sortedCategories = [];
   let newHashtag = '';
+  let mediaName = null;
 
   let user
   userStore.subscribe(value => {
@@ -104,10 +106,10 @@
     const formData = new FormData(form);
     form.reset()
 
-    const url = formData.get('url');
+    const url = link != '' ? link : formData.get('url');
     const category = formData.get('category');
     const thumbEl = document.getElementById('thumb');
-    const thumb = thumbEl && thumbEl.src.indexOf('placeholder.png') === -1 ? thumbEl.src : null;
+    const thumb = thumbEl && thumbEl.src.indexOf('placeholder.png') === -1 ? thumbEl.src : formData.get('type') == 'media' ? url : null;
     console.log(thumb, 'thumb');
 
     let res = await makeApiRequest('/posts', {
@@ -118,6 +120,7 @@
       text: formData.get('text'),
       thumb,
       hashtags,
+      mediaName,
     }, { method: 'POST' })
       .catch(err => globalErrorHandler(err))
     
@@ -158,6 +161,7 @@
   }
   .category-toggle {
     margin-bottom: 1.5em;
+    display: flex;
   }
   .btn {
     display: inline-block;
@@ -170,42 +174,12 @@
   input[type="radio"].toggle {
     display: none;
   }
+  input[type="radio"]:checked + label{
+    border-bottom: 0.1rem solid var(--link-color);
+  }
   input[type="radio"].toggle + label {
     cursor: pointer;
     min-width: 60px;
-  }
-  input[type="radio"].toggle + label:hover {
-    background: none;
-  }
-  input[type="radio"].toggle + label:after {
-    border-bottom: 0.1rem solid var(--link-color);
-    content: "";
-    height: 100%;
-    position: absolute;
-    top: 0;
-    transition: left 200ms cubic-bezier(0.77, 0, 0.175, 1);
-    width: 100%;
-    z-index: -1;
-  }
-  input[type="radio"].toggle.toggle-left + label {
-    border-right: 0;
-  }
-  input[type="radio"].toggle.toggle-left + label:after {
-    left: 100%;
-  }
-  input[type="radio"].toggle.toggle-right + label {
-    margin-left: -5px;
-  }
-  input[type="radio"].toggle.toggle-right + label:after {
-    left: -100%;
-  }
-  input[type="radio"].toggle:checked + label {
-    cursor: default;
-    color: var(--link-color);
-    transition: color 200ms;
-  }
-  input[type="radio"].toggle:checked + label:after {
-    left: 0;
   }
 
   #thumb {
@@ -224,10 +198,12 @@
 <form id="create-post">
   <fieldset>
     <div class="category-toggle">
-      <input id="toggle-on" class="toggle toggle-left" name="type" type="radio" checked bind:group={scoops} value={ 'link' }>
+      <input id="toggle-on" class="toggle" name="type" type="radio" bind:group={scoops} value={ 'link' }>
       <label for="toggle-on" class="btn">Link</label>
-      <input id="toggle-off" class="toggle toggle-right" name="type" type="radio" bind:group={scoops} value={ 'text' }>
+      <input id="toggle-off" class="toggle" name="type" type="radio" bind:group={scoops} value={ 'text' }>
       <label for="toggle-off" class="btn">Text</label>
+      <input id="toggle-m" class="toggle" name="type" type="radio" bind:group={scoops} value={ 'media' }>
+      <label for="toggle-m" class="btn">Media</label>
     </div>
     <label for="category">Category</label>
     <select id="category" name="category">
@@ -249,9 +225,11 @@
         <img id="thumb" src="/images/placeholder.png" alt="Thumbnail" />
         <button type="button" on:click={onUrlBlur}>Fetch</button>
       </div>
-      {:else}
+    {:else if scoops === 'text'}
       <label for="text">Text</label>
       <textarea placeholder="Put your text here ..." id="text" name="text" value="{text}"></textarea>
+    {:else if scoops === 'media'}
+      <Upload bind:link bind:mediaName/>
     {/if}
     <label for="hashtags">Hashtags</label>
     {#each hashtags as hashtag}
