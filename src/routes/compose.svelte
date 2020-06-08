@@ -36,6 +36,7 @@
   let sortedCategories = [];
   let newHashtag = '';
   let mediaName = null;
+  let mediaThumb = null;
 
   let user
   userStore.subscribe(value => {
@@ -109,7 +110,7 @@
     const url = link != '' ? link : formData.get('url');
     const category = formData.get('category');
     const thumbEl = document.getElementById('thumb');
-    const thumb = thumbEl && thumbEl.src.indexOf('placeholder.png') === -1 ? thumbEl.src : formData.get('type') == 'media' ? url : null;
+    const thumb = thumbEl && thumbEl.src.indexOf('placeholder.png') === -1 ? thumbEl.src : formData.get('type') == 'media' ? mediaThumb : null;
     console.log(thumb, 'thumb');
 
     let res = await makeApiRequest('/posts', {
@@ -229,7 +230,7 @@
       <label for="text">Text</label>
       <textarea placeholder="Put your text here ..." id="text" name="text" value="{text}"></textarea>
     {:else if scoops === 'media'}
-      <Upload bind:link bind:mediaName/>
+      <Upload bind:link bind:mediaName bind:mediaThumb/>
     {/if}
     <label for="hashtags">Hashtags</label>
     {#each hashtags as hashtag}
