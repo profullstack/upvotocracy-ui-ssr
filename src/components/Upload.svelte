@@ -3,6 +3,7 @@
 
   export let link;
   export let mediaName;
+  export let mediaThumb;
   let files;
   let progress = 0;
   let uploadDisabled = true;
@@ -44,6 +45,7 @@
     if (response.url) {
       link = response.url;
       mediaName = response.mediaName;
+      mediaThumb = response.thumb;
       uploadDisabled = true;
     }
   }
