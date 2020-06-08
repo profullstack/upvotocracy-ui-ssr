@@ -70,6 +70,8 @@
     else if (subscriptions) {
       noauth = false;
       url += `/subscriptions?sort=${sort}&page=${pageNumber}`;
+    } else if (hashtag) {
+      url += `/tags/${hashtag}?sort=${sort}&page=${pageNumber}`;
     } else url += `/posts?sort=${sort}&page=${pageNumber}`;
 
     let res = await makeApiRequest(url, null, { method: "GET", noauth }).catch(
