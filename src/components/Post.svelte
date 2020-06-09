@@ -238,6 +238,10 @@
         <video class="mp4" poster={nullvideo.replace('.mp4', '.png')} id={`vid-${new Date().getTime()}`} playsinline controls crossorigin>
             <source src={nullvideo} type="video/mp4" />
         </video>
+        {:else if post.type == 'media'}
+        <video class="mp4" poster={postThumb} id={`vid-${new Date().getTime()}`} playsinline controls crossorigin>
+            <source src={postVideo} type="video/mp4" />
+        </video>
         {:else}
         <video class="mp4" poster={postVideo.replace('.mp4', '.png')} id={`vid-${new Date().getTime()}`} playsinline controls crossorigin>
             <source src={postVideo} type="video/mp4" />
