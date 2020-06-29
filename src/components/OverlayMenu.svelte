@@ -2,8 +2,13 @@
   import { slide } from 'svelte/transition'
   import { userStore, categories, showOverlay } from '../store'
   import Searchbar from './Searchbar.svelte'
+  import Sidebar from '../components/Sidebar.svelte';
+  import { onMount } from 'svelte';
 
   export let inboxCount
+  let filtered = [];
+  let search = '';
+  let showNsfw = false;
 
   let cats = []
   categories.subscribe(value => {
@@ -24,6 +29,30 @@
   const hideOverlay = () => {
     showOverlay.set(false)
   }
+
+  function sort(type) {
+    filtered = filtered.sort((a, b) => {
+      if (type === 'new') {
+        return new Date(b.created).getTime() - new Date(a.created).getTime();
+      } else if (type === 'top') {
+        return b.subscriberCount - a.subscriberCount;
+      }
+
+      return new Date(a.created).getTime() - new Date(b.created).getTime();
+    });
+  }
+
+  function filterCategories() {
+    filtered = cats.filter(c => {
+      if (c.name.toLowerCase().indexOf(search.toLowerCase()) > -1){
+        return c;
+      }
+    })
+  }
+
+  onMount(() => {
+    filterCategories();
+  })
 </script>
 
 <style>
@@ -51,12 +80,11 @@
     text-decoration: underline;
   }
   .categories {
-    margin-top: 20px;
-    max-height: 100vh;
-    overflow-y: auto;
   }
   .menu {
-    margin-top: 50px;
+    position: sticky;
+    background-color: #eafff6;
+    top: 0;
   }
   .vertical {
     vertical-align: bottom;
@@ -70,6 +98,12 @@
     margin-left: .2em;
     font-weight: 500;
     font-size: 18px;
+  }
+  .nsfw {
+    color: red;
+  }
+  .filter-categories {
+    width: 60%;
   }
   span{
 		color: #13d583;
@@ -100,16 +134,28 @@
       <a on:click={ hideOverlay } href="/register"><button class="navbar-item">REGISTER</button></a>
     {/if}
     <Searchbar/>
+    <h3> Categories </h3>
+    <div class="sort-nav">
+      Sort: 
+      <a href="javascript:void(0)" on:click|preventDefault={() => sort('top')}>Top</a>
+      <a href="javascript:void(0)" on:click|preventDefault={() => sort('new')}>New</a>
+    </div>
+    Show NSFW: <input type="checkbox" bind:checked={showNsfw} />
+    <br>
+    <input type="text" class="filter-categories" placeholder="Filter" bind:value={search} on:keyup={filterCategories} />
   </div>
   <div class="categories">
-    <h3> Categories </h3>
     <ul>
-      {#each cats as category}
-        <li>
-          <a on:click={ hideOverlay } rel=prefetch href="/a/{ category.name }"><span>{ category.name }</span></a>
-        </li>
+      {#each filtered as category}
+        {#if (!showNsfw && !category.nsfw) || showNsfw}
+          <li>
+            <a on:click={ hideOverlay } rel=prefetch href="/a/{ category.name }"><span>{ category.name }</span></a>
+            {#if category.nsfw}
+              <span class="nsfw">(nsfw)</span>
+            {/if}
+          </li>
+        {/if}
       {/each}
     </ul>
   </div>
-  <a href="javascript:void(0)" on:click={ hideOverlay }><img class="close-button" src="/close.png" alt="close menu"></a>
 </div>
