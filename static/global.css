@@ -12,6 +12,7 @@ html {
 body {
     font-size: 1.6rem;
     margin: 0 auto;
+    overflow-x: hidden;
 }
 pre > code {
     line-height: 1 !important;

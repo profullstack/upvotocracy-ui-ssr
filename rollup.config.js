@@ -40,6 +40,7 @@ export default {
 				MATOMO_URL: process.env.MATOMO_URL,
 				MATOMO_ID: process.env.MATOMO_ID,
 				MAX_UPLOAD_SIZE: process.env.MAX_UPLOAD_SIZE,
+				ONION_URL: process.env.ONION_URL,
 			}),
 			svelte({
 				dev,
@@ -97,6 +98,7 @@ export default {
 				MATOMO_URL: process.env.MATOMO_URL,
 				MATOMO_ID: process.env.MATOMO_ID,
 				MAX_UPLOAD_SIZE: process.env.MAX_UPLOAD_SIZE,
+				ONION_URL: process.env.ONION_URL,
 			}),
 			svelte({
 				generate: 'ssr',
@@ -135,6 +137,7 @@ export default {
 				MATOMO_URL: process.env.MATOMO_URL,
 				MATOMO_ID: process.env.MATOMO_ID,
 				MAX_UPLOAD_SIZE: process.env.MAX_UPLOAD_SIZE,
+				ONION_URL: process.env.ONION_URL,
 			}),
 			commonjs(),
 			!dev && terser()
