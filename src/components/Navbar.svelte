@@ -26,7 +26,7 @@
   }
 
   const toggleOverlay = () => {
-    showOverlay.set(true)
+    showOverlay.set(!show)
   }
 
   const getInboxCount = async (link) => {
@@ -132,6 +132,6 @@
       <span class="navbar-item"><a href="/login">LOGIN</a></span>
       <span class="navbar-item"><a href="/register">REGISTER</a></span>
     {/if}
-    <button id="toggle-overlay" on:click={ toggleOverlay }>Menu</button>
+    <button id="toggle-overlay" on:click={ toggleOverlay }>{ !show ? 'Menu' : 'Close'}</button>
   </div>
 </div>
