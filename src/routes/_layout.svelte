@@ -139,6 +139,7 @@
           <span class="legal">&copy; 2020</span>
         </div>
         <div>
+          <a href="http://ONION_URL/">Tor: ONION_URL</a>
           <a href="https://discord.gg/VfGmeKn">Discord</a>
 					<a href="https://reddit.com/r/CouponsDealsSavings">r/CouponsDealsSavings</a>
         </div>
