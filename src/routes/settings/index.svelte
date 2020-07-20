@@ -83,6 +83,7 @@ onMount(() => {
 <div>
 {#if user}
 <a href="/settings/invoices"><button>Your Invoices</button></a>
+<a rel="prefetch" href="/settings/apikeys"><button>API Keys</button></a>
 <form id="settings">
   <fieldset>
     <legend>Bitcoin Address</legend>
