@@ -64,6 +64,10 @@
 
 <h2>Your API Keys</h2>
 
+<p>
+  To use include the header: <code>Authorization: Api-Key [yourapikey]</code> with your API request
+</p>
+
 {#each keys as key, i}
   <span>{ key.keyName }</span>
   <input class="keyBox" value={ showKey ? key.key : hiddenKeys[i] }>
