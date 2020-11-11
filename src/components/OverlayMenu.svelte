@@ -106,7 +106,7 @@
     width: 60%;
   }
   span {
-    color: #13d583;
+    color: var(--link-color);
     font-weight: 500;
     font-size: 24px;
   }
