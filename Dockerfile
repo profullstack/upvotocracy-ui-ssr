@@ -1,4 +1,4 @@
-FROM node:12-alpine
+FROM node:15-alpine
 RUN mkdir -p /usr/src/app
 RUN apk add vim
 WORKDIR /usr/src/app

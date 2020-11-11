@@ -61,7 +61,7 @@
     justify-content: center;
     width: 100%;
     height: 100%;
-    background-color: #eafff6;
+    background-color: var(--muted-color);
     position: fixed;
     z-index: 1;
     top: 6.8rem;
@@ -83,7 +83,7 @@
   }
   .menu {
     position: sticky;
-    background-color: #eafff6;
+    background-color: var(--muted-color);
     top: 0;
   }
   .vertical {
