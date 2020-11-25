@@ -33,7 +33,7 @@ pre > code {
 }
 
 .post-detail a {
-    color: var(--muted-color);
+    color: var(--link-color-muted);
 }
 
 code {
