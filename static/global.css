@@ -1,0 +1,65 @@
+:root {
+  --top-bar-bg: #ffffff;
+  --bg: #ffffff;
+  --search-bar-bg: #f6f6f6;
+  --text-color: #3b3b3b;
+  --text-color-opposite: #ffffff;
+  --green-accent: #147b50;
+  --sidebar-bg: #f9f9f9;
+}
+
+[data-theme='dark'] {
+  --top-bar-bg: #111212;
+  --bg: #1f2724;
+  --search-bar-bg: #000000;
+  --text-color: #ffffff;
+  --text-color-opposite: #3b3b3b;
+  --green-accent: #12f595;
+  --sidebar-bg: #1b1f1e;
+}
+
+@font-face {
+  font-family: Noto Sans;
+  src: url(NotoSans-Regular.ttf);
+}
+
+body {
+  font-family: Noto Sans;
+  margin: 0;
+}
+
+div {
+  color: var(--text-color);
+}
+
+input {
+  border: none;
+  background-color: unset;
+  color: unset;
+}
+
+input:focus {
+  outline: unset;
+}
+
+button {
+  font-family: Noto Sans;
+  border: unset;
+  border-width: unset;
+  border-style: unset;
+  border-color: unset;
+  border-image: unset;
+}
+
+a {
+  color: var(--text-color);
+  text-decoration: none;
+}
+a:visited {
+  color: var(--text-color);
+  text-decoration: none;
+}
+a:-webkit-any-link {
+  color: var(--text-color);
+  text-decoration: none;
+}
