@@ -1,42 +1,49 @@
 <script>
+  import { userStore } from '../../store';
+
+  let user;
+  userStore.subscribe((val) => (user = val));
+  console.log(user);
 </script>
 
-<div class="profile-container">
-  <img
-    class="profile-image"
-    src="https://st3.depositphotos.com/1767687/16607/v/600/depositphotos_166074422-stock-illustration-default-avatar-profile-icon-grey.jpg"
-    alt=""
-  />
-  <div class="name-and-coin">
-    <span class="username">RoundedHexagon</span>
-    <br />
+{#if user}
+  <div class="profile-container">
+    <img
+      class="profile-image"
+      src="https://st3.depositphotos.com/1767687/16607/v/600/depositphotos_166074422-stock-illustration-default-avatar-profile-icon-grey.jpg"
+      alt=""
+    />
+    <div class="name-and-coin">
+      <span class="username">{user.username}</span>
+      <br />
+      <svg
+        class="coin-icon"
+        width="20"
+        height="20"
+        viewBox="0 0 20 20"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M10 20C4.477 20 0 15.523 0 10C0 4.477 4.477 0 10 0C15.523 0 20 4.477 20 10C20 15.523 15.523 20 10 20ZM10 5.757L5.757 10L10 14.243L14.243 10L10 5.757Z"
+          fill="var(--green-accent)"
+        />
+      </svg>
+      <span class="coin-amount">{user.karma}</span>
+    </div>
     <svg
-      class="coin-icon"
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
+      class="arrow"
+      width="12"
+      height="8"
+      viewBox="0 0 12 8"
       fill="none"
       xmlns="http://www.w3.org/2000/svg">
       <path
-        d="M10 20C4.477 20 0 15.523 0 10C0 4.477 4.477 0 10 0C15.523 0 20 4.477 20 10C20 15.523 15.523 20 10 20ZM10 5.757L5.757 10L10 14.243L14.243 10L10 5.757Z"
-        fill="var(--green-accent)"
+        d="M10 0.292999L5.707 4.586L1.414 0.292999L0 1.707L5.707 7.414L11.414 1.707L10 0.292999Z"
+        fill="var(--text-color)"
       />
     </svg>
-    <span class="coin-amount">999 999</span>
   </div>
-  <svg
-    class="arrow"
-    width="12"
-    height="8"
-    viewBox="0 0 12 8"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg">
-    <path
-      d="M10 0.292999L5.707 4.586L1.414 0.292999L0 1.707L5.707 7.414L11.414 1.707L10 0.292999Z"
-      fill="var(--text-color)"
-    />
-  </svg>
-</div>
+{/if}
 
 <style>
   .profile-container {
@@ -56,6 +63,7 @@
     vertical-align: sub;
   }
   .name-and-coin {
+    width: 136px;
     margin: 0 46px 0 15px;
   }
   @media screen and (max-width: 750px) {
