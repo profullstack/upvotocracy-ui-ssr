@@ -28,7 +28,7 @@
     display: inline-flex;
     justify-content: space-between;
     background-color: var(--search-bar-bg);
-    max-width: 413px;
+    width: 413px;
     height: 55px;
     padding: 0 20px 0 20px;
     flex-grow: 1;

@@ -22,7 +22,7 @@
   .top-bar {
     background-color: var(--top-bar-bg);
     display: flex;
-    padding: 17px;
+    padding: 15px;
     justify-content: space-between;
     position: sticky;
     top: 0;
@@ -33,9 +33,11 @@
     align-items: center;
     min-width: 200px;
   }
-  .left > * {
-    margin-left: 5px;
-    margin-right: 5px;
+  .logo {
+    margin-right: 5vw;
+  }
+  .right {
+    margin-left: 15px;
   }
   :global([data-theme='light']) .top-bar {
     box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.08);
