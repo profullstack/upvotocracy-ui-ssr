@@ -77,7 +77,7 @@
 <style>
   .categories {
     position: sticky;
-    top: 95px;
+    top: 85px;
     height: calc(100vh - 95px);
     width: 300px;
     background-color: var(--sidebar-bg);
