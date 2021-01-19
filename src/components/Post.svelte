@@ -13,6 +13,7 @@
   let postVideo = null;
   let youtubeId = null;
   let nullvideo = null;
+  let userVote = null;
 
   const getThumb = (post) => {
     if (post.url && /\.(jpg|jpeg|png|gif)/.test(post.url.toLowerCase())) {
@@ -50,9 +51,19 @@
     }
   };
 
+  const getUserVote = () => {
+    const vote = post.votes.filter((vote) => vote.user == user.id);
+
+    if (vote[0]) {
+      if (vote[0].vote == -1) userVote = 'downvote';
+      else if (vote[0].vote == 1) userVote = 'upvote';
+    }
+  };
+
   $: {
     getThumb(post);
     getVideo(post);
+    getUserVote(post);
   }
 
   let user = {};
@@ -70,6 +81,7 @@
 
     post.score = data.score;
     post.upvotePercentage = data.upvotePercentage;
+    post.votes = data.votes;
   };
 
   const upvote = () => vote('upvote');
@@ -89,13 +101,12 @@
 
 <div class="post-outer-container">
   <div class="score">
-    <VoteArrow type="up" />
+    <VoteArrow type="up" click={upvote} selected={userVote == 'upvote'} />
     {post.score}
-    <VoteArrow type="down" />
+    <VoteArrow type="down" click={downvote} selected={userVote == 'downvote'} />
   </div>
   <div class="post-inner-container">
     {#if postThumb}
-      <!-- <img class="post-thumb" src={postThumb} alt={post.title} /> -->
       <div class="post-thumb" style={`background-image: url(${postThumb})`} />
     {/if}
     <div class="post-info">

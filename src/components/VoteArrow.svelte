@@ -1,10 +1,12 @@
 <script>
   export let type = 'down';
   export let selected = false;
+  export let click;
 </script>
 
 {#if !selected}
   <svg
+    on:click={click}
     class="arrow"
     class:down={type == 'down'}
     width="11"
@@ -19,6 +21,7 @@
   </svg>
 {:else}
   <svg
+    on:click={click}
     class="arrow"
     class:down={type == 'down'}
     width="17"
