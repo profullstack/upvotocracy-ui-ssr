@@ -86,6 +86,7 @@
     scrollbar-width: 4px;
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
+    z-index: 2;
   }
   .categories::-webkit-scrollbar {
     display: none;
