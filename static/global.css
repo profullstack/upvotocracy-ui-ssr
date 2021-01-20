@@ -22,7 +22,9 @@
   font-family: Noto Sans;
   src: url(NotoSans-Regular.ttf);
 }
-
+html, body, #sapper {
+  min-height: 100%;
+}
 body {
   font-family: Noto Sans;
   margin: 0;
@@ -62,4 +64,10 @@ a:visited {
 a:-webkit-any-link {
   color: var(--text-color);
   text-decoration: none;
+}
+.btn-lrg {
+  background: var(--green-accent);
+  color: var(--text-color-opposite) !important;
+  border-radius: 3px;
+  padding: 11px 18px;
 }

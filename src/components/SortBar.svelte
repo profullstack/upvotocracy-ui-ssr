@@ -106,7 +106,6 @@
     nav {
       z-index: 1;
       flex-direction: column;
-      width: 100%;
       max-width: unset;
     }
     nav a {

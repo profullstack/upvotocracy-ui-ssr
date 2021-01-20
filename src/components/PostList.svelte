@@ -117,6 +117,16 @@
 {#each posts as post}
   <Post {post} />
 {/each}
+{#if posts.length > 0 && morePosts}
+  <div class="btn-container">
+    <a class="btn-lrg" href={nextURL} on:click|preventDefault={fetchPost}> Load More </a>
+  </div>
+{/if}
 
 <style>
+  .btn-container {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+  }
 </style>

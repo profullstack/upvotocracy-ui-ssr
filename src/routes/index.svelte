@@ -43,6 +43,10 @@
   export let sort;
 </script>
 
+<svelte:head>
+  <title>SITE_DESCRIPTION</title>
+</svelte:head>
+
 <div>
   <PostList {posts} {page} {morePosts} {sort} />
 </div>

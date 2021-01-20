@@ -57,6 +57,7 @@
 <style>
   .main-container {
     background-color: var(--bg);
+    height: 100%;
   }
   .content {
     display: flex;
