@@ -36,7 +36,7 @@
 </script>
 
 <script>
-  import Post from '../components/Post.svelte';
+  import PostList from '../components/PostList.svelte';
   export let posts;
   export let page;
   export let morePosts;
@@ -44,9 +44,7 @@
 </script>
 
 <div>
-  {#each posts as post}
-    <Post {post} />
-  {/each}
+  <PostList {posts} {page} {morePosts} {sort} />
 </div>
 
 <style>
