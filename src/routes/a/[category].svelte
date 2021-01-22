@@ -57,12 +57,7 @@
   <meta name="twitter:title" content={`${category} - ${categoryData.description}`} />
 </svelte:head>
 
-<div>
-  <PostList {posts} {page} {category} {morePosts} {categoryData} {sort} />
-</div>
+<PostList {posts} {page} {category} {morePosts} {categoryData} {sort} />
 
 <style>
-  div {
-    max-width: 800px;
-  }
 </style>

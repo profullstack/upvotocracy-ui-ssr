@@ -18,7 +18,6 @@ async function makeApiRequest(url, payload = null, opts = {}) {
 
       console.log(myUrl);
     } else {
-      console.log('e')
       options.body = JSON.stringify(payload);
     }
   }

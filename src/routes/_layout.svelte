@@ -30,7 +30,6 @@
     if (!me) return;
 
     userStore.set(me);
-    console.log(user);
   };
 
   onMount(async () => {

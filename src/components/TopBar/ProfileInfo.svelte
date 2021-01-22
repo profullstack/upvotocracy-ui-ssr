@@ -8,11 +8,7 @@
 
 {#if user}
   <div class="profile-container">
-    <img
-      class="profile-image"
-      src="https://st3.depositphotos.com/1767687/16607/v/600/depositphotos_166074422-stock-illustration-default-avatar-profile-icon-grey.jpg"
-      alt=""
-    />
+    <img class="profile-image" src="/images/profile_image_placeholder.jpg" alt="" />
     <div class="name-and-coin">
       <span class="username">{user.username}</span>
       <br />

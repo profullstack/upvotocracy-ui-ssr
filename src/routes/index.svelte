@@ -47,12 +47,7 @@
   <title>SITE_DESCRIPTION</title>
 </svelte:head>
 
-<div>
-  <PostList {posts} {page} {morePosts} {sort} />
-</div>
+<PostList {posts} {page} {morePosts} {sort} />
 
 <style>
-  div {
-    max-width: 800px;
-  }
 </style>

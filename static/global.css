@@ -34,7 +34,9 @@ body {
 div {
   color: var(--text-color);
 }
-
+p {
+  margin: 0;
+}
 input {
   border: none;
   background-color: unset;
@@ -52,6 +54,7 @@ button {
   border-style: unset;
   border-color: unset;
   border-image: unset;
+  cursor: pointer;
 }
 
 a {
