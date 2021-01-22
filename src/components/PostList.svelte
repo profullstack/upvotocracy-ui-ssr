@@ -113,17 +113,23 @@
   getNextUrl();
 </script>
 
-<SortBar {page} {username} {hashtag} {category} {user} {subscriptions} {sort} />
-{#each posts as post}
-  <Post {post} />
-{/each}
-{#if posts.length > 0 && morePosts}
-  <div class="btn-container">
-    <a class="btn-lrg" href={nextURL} on:click|preventDefault={fetchPost}> Load More </a>
-  </div>
-{/if}
+<div class="container">
+  <SortBar {page} {username} {hashtag} {category} {user} {subscriptions} {sort} />
+  {#each posts as post}
+    <Post {post} />
+  {/each}
+  {#if posts.length > 0 && morePosts}
+    <div class="btn-container">
+      <a class="btn-lrg" href={nextURL} on:click|preventDefault={fetchPost}> Load More </a>
+    </div>
+  {/if}
+</div>
 
 <style>
+  .container {
+    max-width: 750px;
+    flex-grow: 1;
+  }
   .btn-container {
     display: flex;
     justify-content: center;

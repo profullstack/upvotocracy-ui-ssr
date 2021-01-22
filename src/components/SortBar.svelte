@@ -1,17 +1,25 @@
 <script>
   import { onMount } from 'svelte';
-  export let page;
+  import { stores } from '@sapper/app';
+
   export let username;
   export let category;
   export let hashtag;
   export let user;
   export let subscriptions;
   export let sort;
+  export let comments = false;
 
   let showDropdown = false;
   let sortChoice;
+  let page;
+  const store = stores();
+
+  store.page.subscribe((val) => (page = val));
+
   $: {
-    if (typeof page.query.sort == 'undefined') sortChoice = 'hot';
+    if (typeof page.query.sort == 'undefined' && comments == true) sortChoice = 'new';
+    else if (typeof page.query.sort == 'undefined') sortChoice = 'hot';
     else if (page.query.sort == 'not') sortChoice = 'controversial';
     else sortChoice = page.query.sort;
   }
@@ -26,7 +34,6 @@
   };
 
   onMount(() => {
-    console.log(isMobile());
     if (isMobile()) showDropdown = false;
     else showDropdown = true;
   });
@@ -43,28 +50,35 @@
 </button>
 {#if showDropdown}
   <nav on:click={hideDropdown}>
-    <a
-      class:selected={page.query.sort == 'hot' || typeof page.query.sort == 'undefined'}
-      rel="prefetch"
-      href="{page.path}?sort=hot"> Hot </a>
-    <a class:selected={page.query.sort == 'new'} rel="prefetch" href="{page.path}?sort=new">New</a>
-    <a class:selected={page.query.sort == 'top'} rel="prefetch" href="{page.path}?sort=top">Top</a>
-    <a
-      class:selected={page.query.sort == 'comments'}
-      rel="prefetch"
-      href="{page.path}?sort=comments"> Comments </a>
-    <a class:selected={page.query.sort == 'not'} rel="prefetch" href="{page.path}?sort=not">
-      Controversial
-    </a>
-    {#if subscriptions && user}
-      <a href={`/api/1/posts/rss/${user.id}`}>RSS</a>
-    {:else if hashtag}
-      <a href={`/api/1/posts/rss/tags/${hashtag}?sort=${sort}`}> RSS </a>
+    {#if comments}
+      <a class:selected={sortChoice == 'new'} rel="prefetch" href="{page.path}?sort=new">New</a>
+      <a class:selected={sortChoice == 'top'} rel="prefetch" href="{page.path}?sort=top">Top</a>
+      <a class:selected={sortChoice == 'original'} rel="prefetch" href="{page.path}?sort=original"
+        >Original</a
+      >
     {:else}
       <a
-        href={`/api/1/${username ? 'user' : 'posts'}/${
-          category || username ? (category || username) + '/' : ''
-        }rss?sort=${sort}`}> RSS </a>
+        class:selected={sortChoice == 'hot' || typeof page.query.sort == 'undefined'}
+        rel="prefetch"
+        href="{page.path}?sort=hot"> Hot </a>
+      <a class:selected={sortChoice == 'new'} rel="prefetch" href="{page.path}?sort=new">New</a>
+      <a class:selected={sortChoice == 'top'} rel="prefetch" href="{page.path}?sort=top">Top</a>
+      <a class:selected={sortChoice == 'comments'} rel="prefetch" href="{page.path}?sort=comments">
+        Comments
+      </a>
+      <a class:selected={sortChoice == 'controversial'} rel="prefetch" href="{page.path}?sort=not">
+        Controversial
+      </a>
+      {#if subscriptions && user}
+        <a href={`/api/1/posts/rss/${user.id}`}>RSS</a>
+      {:else if hashtag}
+        <a href={`/api/1/posts/rss/tags/${hashtag}?sort=${sort}`}> RSS </a>
+      {:else}
+        <a
+          href={`/api/1/${username ? 'user' : 'posts'}/${
+            category || username ? (category || username) + '/' : ''
+          }rss?sort=${sort}`}> RSS </a>
+      {/if}
     {/if}
   </nav>
 {/if}
@@ -72,15 +86,16 @@
 <style>
   nav {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     max-width: 393px;
-    margin: 15px 5px 15px 5px;
+    margin: 15px 0;
   }
   nav a {
     font-weight: bold;
     font-size: 13px;
     text-transform: uppercase;
+    margin: 0 7px;
   }
   .selected {
     color: var(--text-color-opposite);
