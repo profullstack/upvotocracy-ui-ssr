@@ -6,6 +6,7 @@
   --text-color-opposite: #ffffff;
   --green-accent: #147b50;
   --sidebar-bg: #f9f9f9;
+  --input-bg: #F6F6F6;
 }
 
 [data-theme='dark'] {
@@ -16,6 +17,7 @@
   --text-color-opposite: #3b3b3b;
   --green-accent: #12f595;
   --sidebar-bg: #1b1f1e;
+  --input-bg: #171B19;
 }
 
 @font-face {
@@ -75,4 +77,15 @@ a:-webkit-any-link {
   border-radius: 3px;
   padding: 11px 18px;
   text-transform: uppercase;
+}
+
+.input {
+  font-size: 16px;
+  background-color: var(--input-bg);
+  padding: 15px;
+  border-radius: 3px;
+  border: 2px solid var(--input-bg);
+}
+.input:focus {
+  border-color: var(--green-accent);
 }

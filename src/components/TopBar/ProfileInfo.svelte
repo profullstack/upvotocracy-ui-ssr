@@ -6,8 +6,8 @@
   console.log(user);
 </script>
 
-{#if user}
-  <div class="profile-container">
+<div class="profile-container">
+  {#if user}
     <img class="profile-image" src="/images/profile_image_placeholder.jpg" alt="" />
     <div class="name-and-coin">
       <span class="username">{user.username}</span>
@@ -38,8 +38,12 @@
         fill="var(--text-color)"
       />
     </svg>
-  </div>
-{/if}
+  {:else}
+    <a href="/login">Login</a>
+    /
+    <a href="/register">Register</a>
+  {/if}
+</div>
 
 <style>
   .profile-container {
