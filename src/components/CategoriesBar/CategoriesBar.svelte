@@ -49,7 +49,7 @@
   <div class="categories" transition:fly={{ x: -350, opacity: 1 }}>
     <header>
       <h3>Categories</h3>
-      <button>My Categories</button>
+      <a rel="prefetch" href="/mycategories"><button>My Categories</button></a>
       <SearchBar bind:search />
       <HideToggle bind:toggleOn={hideNsfw} />
       <div class="sort-container">
