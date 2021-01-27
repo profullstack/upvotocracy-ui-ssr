@@ -33,6 +33,7 @@
     padding: 0 20px 0 20px;
     flex-grow: 1;
     min-width: 50px;
+    border: 1px solid #ffffff00;
   }
   input {
     flex-grow: 1;

@@ -33,6 +33,7 @@
     padding: 3px 10px;
     font-weight: bold;
     font-size: 13px;
+    border: 1px solid #ffffff00;
   }
   .name {
     margin-left: 15px;
