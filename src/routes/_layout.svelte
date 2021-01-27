@@ -13,6 +13,7 @@
   import { darkTheme, userStore } from '../store';
   import { onMount } from 'svelte';
   import { makeApiRequest, globalErrorHandler } from '../api/create-api';
+  import NotificationsBar from '../components/NotificationsBar/NotificationsBar.svelte';
 
   export let cats;
   let dark;
@@ -44,6 +45,7 @@
     <div class="center">
       <slot />
     </div>
+    <NotificationsBar />
   </div>
   <!-- Dev dark mode toggle -->
   <div class="theme-toggle-btn" on:click={() => darkTheme.set(!dark)}>
@@ -74,5 +76,6 @@
     padding: 10px;
     border-radius: 4px;
     cursor: pointer;
+    z-index: 4;
   }
 </style>

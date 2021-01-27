@@ -5,6 +5,7 @@ import decode from 'jwt-decode';
 let token;
 let payload;
 let showCategories = false;
+let showNotifications = false;
 let theme = false;
 
 if (typeof window !== 'undefined') {
@@ -23,7 +24,9 @@ if (typeof window !== 'undefined') {
 }
 
 if (typeof screen !== 'undefined') {
-  showCategories = screen.width > 750 ? true : false;
+  const show = screen.width > 750 ? true : false;
+  showCategories = show;
+  showNotifications = show;
 }
 
 export const userStore = writable(payload);
@@ -41,6 +44,8 @@ export const globalError = writable();
 export const darkTheme = writable(theme);
 
 export const showCategoriesBar = writable(showCategories);
+
+export const showNotificationsBar = writable(showNotifications);
 
 darkTheme.subscribe((val) => {
   if (typeof window !== 'undefined') localStorage.setItem('darkTheme', val);

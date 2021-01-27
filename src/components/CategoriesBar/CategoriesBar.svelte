@@ -3,7 +3,7 @@
   import Category from './Category.svelte';
   import HideToggle from './HideToggle.svelte';
   import { fly } from 'svelte/transition';
-  import { showCategoriesBar } from '../../store';
+  import { showCategoriesBar, showNotificationsBar } from '../../store';
 
   export let cats;
   let filtered = [];
@@ -14,6 +14,7 @@
 
   showCategoriesBar.subscribe((value) => {
     show = value;
+    if (typeof screen !== 'undefined' && screen.width < 750) showNotificationsBar.set(false);
   });
 
   function sort(type) {
@@ -83,7 +84,6 @@
     background-color: var(--sidebar-bg);
     padding: 0 15px 0 15px;
     overflow-y: scroll;
-    scrollbar-width: 4px;
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
     z-index: 2;
