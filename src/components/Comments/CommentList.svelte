@@ -14,13 +14,13 @@
 
   const sortComments = () => {
     if (sort == 'top') {
-      comments = comments.sort((a, b) => {
+      comments = post.comments.sort((a, b) => {
         return b.score - a.score;
       });
     }
 
     if (sort == 'new') {
-      comments = comments.sort((a, b) => {
+      comments = post.comments.sort((a, b) => {
         b.created = new Date(b.created);
         a.created = new Date(a.created);
         return b.created - a.created;
@@ -28,7 +28,7 @@
     }
 
     if (sort == 'original') {
-      comments = comments.sort((a, b) => {
+      comments = post.comments.sort((a, b) => {
         b.created = new Date(b.created);
         a.created = new Date(a.created);
         return a.created - b.created;
@@ -42,6 +42,7 @@
   };
 
   $: {
+    post;
     if (typeof page.query.sort == 'undefined') sort = 'new';
     else sort = page.query.sort;
     sortComments();
