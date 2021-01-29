@@ -21,7 +21,7 @@
 </script>
 
 {#if show}
-  <div class="notifications-bar">
+  <div class="sticky-sidebar notifications-bar">
     <h3>Notifications</h3>
     <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
@@ -47,20 +47,7 @@
     margin: 10px 0;
   }
   .notifications-bar {
-    position: sticky;
-    top: 87px;
-    right: 0;
-    height: calc(100vh - 87px);
     width: 300px;
-    background-color: var(--sidebar-bg);
-    z-index: 2;
-    padding: 0 15px 0 15px;
-    overflow-y: scroll;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  .notifications-bar::-webkit-scrollbar {
-    display: none;
   }
   .notification-list {
     display: flex;

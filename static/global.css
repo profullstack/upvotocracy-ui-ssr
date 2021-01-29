@@ -92,3 +92,17 @@ a:-webkit-any-link {
 .input:focus {
   border-color: var(--green-accent);
 }
+.sticky-sidebar {
+  position: sticky;
+  top: 90px;
+  height: calc(100vh - 90px);
+  background-color: var(--sidebar-bg);
+  padding: 0 15px 0 15px;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  z-index: 2;
+}
+.sticky-sidebar::-webkit-scrollbar {
+  display: none;
+}

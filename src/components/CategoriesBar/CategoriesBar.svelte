@@ -47,7 +47,7 @@
 </script>
 
 {#if show}
-  <div class="categories" transition:fly={{ x: -350, opacity: 1 }}>
+  <div class="sticky-sidebar categories" transition:fly={{ x: -350, opacity: 1 }}>
     <header>
       <h3>Categories</h3>
       <a rel="prefetch" href="/mycategories"><button>My Categories</button></a>
@@ -77,19 +77,7 @@
 
 <style>
   .categories {
-    position: sticky;
-    top: 87px;
-    height: calc(100vh - 87px);
     width: 300px;
-    background-color: var(--sidebar-bg);
-    padding: 0 15px 0 15px;
-    overflow-y: scroll;
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
-    z-index: 2;
-  }
-  .categories::-webkit-scrollbar {
-    display: none;
   }
   .sort-container {
     font-size: 14px;
