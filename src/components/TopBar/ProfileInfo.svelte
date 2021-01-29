@@ -9,9 +9,11 @@
 
 <div class="profile-container">
   {#if user}
-    <img class="profile-image" src="/images/profile_image_placeholder.jpg" alt="" />
+    <a rel="prefetch" href="/settings">
+      <img class="profile-image" src="/images/profile_image_placeholder.jpg" alt="" />
+    </a>
     <div class="name-and-coin">
-      <span class="username">{user.username}</span>
+      <a rel="prefetch" href="/settings" class="username">{user.username}</a>
       <br />
       <svg
         class="coin-icon"
