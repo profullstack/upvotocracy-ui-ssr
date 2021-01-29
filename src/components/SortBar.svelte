@@ -60,7 +60,10 @@
       <a
         class:selected={sortChoice == 'hot' || typeof page.query.sort == 'undefined'}
         rel="prefetch"
-        href="{page.path}?sort=hot"> Hot </a>
+        href="{page.path}?sort=hot"
+      >
+        Hot
+      </a>
       <a class:selected={sortChoice == 'new'} rel="prefetch" href="{page.path}?sort=new">New</a>
       <a class:selected={sortChoice == 'top'} rel="prefetch" href="{page.path}?sort=top">Top</a>
       <a class:selected={sortChoice == 'comments'} rel="prefetch" href="{page.path}?sort=comments">
@@ -77,7 +80,10 @@
         <a
           href={`/api/1/${username ? 'user' : 'posts'}/${
             category || username ? (category || username) + '/' : ''
-          }rss?sort=${sort}`}> RSS </a>
+          }rss?sort=${sort}`}
+        >
+          RSS
+        </a>
       {/if}
     {/if}
   </nav>
@@ -98,7 +104,7 @@
     margin: 0 7px;
   }
   .selected {
-    color: var(--text-color-opposite);
+    color: var(--btn-bg);
     padding: 3px 10px;
     background: var(--green-accent);
     border-radius: 3px;

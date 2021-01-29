@@ -7,6 +7,7 @@
   --green-accent: #147b50;
   --sidebar-bg: #f9f9f9;
   --input-bg: #F6F6F6;
+  --btn-bg: #ffffff;
 }
 
 [data-theme='dark'] {
@@ -18,6 +19,7 @@
   --green-accent: #12f595;
   --sidebar-bg: #1b1f1e;
   --input-bg: #171B19;
+  --btn-bg: #1b1f1e;
 }
 
 @font-face {
@@ -73,9 +75,10 @@ a:-webkit-any-link {
 }
 .btn-lrg {
   background: var(--green-accent);
-  color: var(--text-color-opposite) !important;
+  color: var(--btn-bg) !important;
   border-radius: 3px;
   padding: 11px 18px;
+  font-weight: bold;
   text-transform: uppercase;
 }
 
