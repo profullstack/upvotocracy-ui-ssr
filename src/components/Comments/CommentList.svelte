@@ -37,7 +37,7 @@
   };
 
   const updateComment = (event) => {
-    comments = event.detail.comments;
+    post.comments = event.detail.comments;
     sortComments();
   };
 
