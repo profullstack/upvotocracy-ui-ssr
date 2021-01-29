@@ -13,9 +13,10 @@
 
   onMount(async () => {
     const url = '/inbox';
-    notifications = await makeApiRequest(url, null, { method: 'GET' }).catch((err) =>
+    const res = await makeApiRequest(url, null, { method: 'GET' }).catch((err) =>
       globalErrorHandler(err),
     );
+    if (res && res[0]) notifications = res;
   });
 </script>
 
