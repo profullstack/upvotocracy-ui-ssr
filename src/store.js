@@ -24,7 +24,7 @@ if (typeof window !== 'undefined') {
 }
 
 if (typeof screen !== 'undefined') {
-  const show = screen.width > 750 ? true : false;
+  const show = screen.width > MOBILE_BREAK_POINT ? true : false;
   showCategories = show;
   showNotifications = show;
 }

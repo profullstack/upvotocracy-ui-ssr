@@ -46,6 +46,8 @@ export default {
 				MATOMO_ID: process.env.MATOMO_ID,
 				MAX_UPLOAD_SIZE: process.env.MAX_UPLOAD_SIZE,
 				ONION_URL: process.env.ONION_URL,
+				MOBILE_BREAK_POINT_PX: process.env.MOBILE_BREAK_POINT_PX,
+				MOBILE_BREAK_POINT: process.env.MOBILE_BREAK_POINT,
 			}),
 			svelte({
 				dev,
@@ -109,6 +111,8 @@ export default {
 				MATOMO_ID: process.env.MATOMO_ID,
 				MAX_UPLOAD_SIZE: process.env.MAX_UPLOAD_SIZE,
 				ONION_URL: process.env.ONION_URL,
+				MOBILE_BREAK_POINT_PX: process.env.MOBILE_BREAK_POINT_PX,
+				MOBILE_BREAK_POINT: process.env.MOBILE_BREAK_POINT,
 			}),
 			svelte({
 				generate: 'ssr',
@@ -152,6 +156,8 @@ export default {
 				MATOMO_ID: process.env.MATOMO_ID,
 				MAX_UPLOAD_SIZE: process.env.MAX_UPLOAD_SIZE,
 				ONION_URL: process.env.ONION_URL,
+				MOBILE_BREAK_POINT_PX: process.env.MOBILE_BREAK_POINT_PX,
+				MOBILE_BREAK_POINT: process.env.MOBILE_BREAK_POINT,
 			}),
 			commonjs(),
 			!dev && terser()

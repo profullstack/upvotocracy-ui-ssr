@@ -36,7 +36,7 @@
   :global([data-theme='light']) div {
     border: 1px solid #d9d9d9;
   }
-  @media screen and (min-width: 750px) {
+  @media screen and (min-width: MOBILE_BREAK_POINT_PX) {
     .hamburger {
       display: none;
     }

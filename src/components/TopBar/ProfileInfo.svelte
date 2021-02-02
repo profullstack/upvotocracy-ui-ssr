@@ -74,7 +74,7 @@
   .arrow {
     cursor: pointer;
   }
-  @media screen and (max-width: 750px) {
+  @media screen and (max-width: MOBILE_BREAK_POINT_PX) {
     .name-and-coin {
       display: none;
     }

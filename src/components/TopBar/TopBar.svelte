@@ -43,7 +43,7 @@
   :global([data-theme='light']) .top-bar {
     box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.08);
   }
-  @media screen and (max-width: 750px) {
+  @media screen and (max-width: MOBILE_BREAK_POINT_PX) {
     .logo {
       display: none;
     }

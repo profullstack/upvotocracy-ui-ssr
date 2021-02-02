@@ -14,7 +14,8 @@
 
   showCategoriesBar.subscribe((value) => {
     show = value;
-    if (typeof screen !== 'undefined' && screen.width < 750) showNotificationsBar.set(false);
+    if (typeof screen !== 'undefined' && screen.width < MOBILE_BREAK_POINT)
+      showNotificationsBar.set(false);
   });
 
   function sort(type) {
@@ -126,7 +127,7 @@
     background-color: var(--sidebar-bg);
   }
 
-  @media screen and (max-width: 750px) {
+  @media screen and (max-width: MOBILE_BREAK_POINT_PX) {
     .categories {
       position: fixed;
     }

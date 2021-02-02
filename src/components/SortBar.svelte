@@ -25,7 +25,7 @@
   }
 
   const isMobile = () => {
-    if (screen && screen.width < 750) return true;
+    if (screen && screen.width < MOBILE_BREAK_POINT) return true;
     else return false;
   };
 
@@ -120,7 +120,7 @@
     font-weight: bold;
     font-size: 13px;
   }
-  @media screen and (max-width: 750px) {
+  @media screen and (max-width: MOBILE_BREAK_POINT_PX) {
     .dropdown-btn {
       display: block;
     }

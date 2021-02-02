@@ -8,7 +8,8 @@
 
   showNotificationsBar.subscribe((value) => {
     show = value;
-    if (typeof screen !== 'undefined' && screen.width < 750) showCategoriesBar.set(false);
+    if (typeof screen !== 'undefined' && screen.width < MOBILE_BREAK_POINT)
+      showCategoriesBar.set(false);
   });
 
   onMount(async () => {
@@ -53,7 +54,7 @@
     display: flex;
     flex-direction: column;
   }
-  @media screen and (max-width: 750px) {
+  @media screen and (max-width: MOBILE_BREAK_POINT_PX) {
     .notifications-bar {
       position: fixed;
     }

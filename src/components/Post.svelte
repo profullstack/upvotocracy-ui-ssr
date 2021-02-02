@@ -230,7 +230,7 @@
     vertical-align: middle;
     fill: var(--text-color);
   }
-  @media screen and (max-width: 750px) {
+  @media screen and (max-width: MOBILE_BREAK_POINT_PX) {
     .score {
       display: none;
     }
