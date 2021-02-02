@@ -117,7 +117,9 @@
         <div class="lower">
           <div class="lower-left">
             <a class="category-link" href={`/a/${post.category.name}`}>/a/{post.category.name}</a>
-            <span class="by-username">by <span class="username">{post.author.username}</span></span>
+            <a href={`/u/${post.author.username}`} class="by-username"
+              >by <span class="username">{post.author.username}</span></a
+            >
           </div>
           <div class="lower-right">
             <a rel="prefetch" href={`/a/${post.category.name}/${post.id}`} class="comment-count">
