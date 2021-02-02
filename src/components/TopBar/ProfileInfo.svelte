@@ -57,11 +57,6 @@
     display: flex;
     align-items: center;
   }
-  .profile-image {
-    max-width: 55px;
-    max-height: 55px;
-    border-radius: 3px;
-  }
   .coin-amount {
     color: var(--green-accent);
     font-size: 14px;

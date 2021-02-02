@@ -106,3 +106,8 @@ a:-webkit-any-link {
 .sticky-sidebar::-webkit-scrollbar {
   display: none;
 }
+.profile-image {
+  max-width: 55px;
+  max-height: 55px;
+  border-radius: 3px;
+}

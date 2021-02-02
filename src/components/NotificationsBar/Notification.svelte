@@ -39,9 +39,6 @@
     font-size: 12px;
   }
   .profile-image {
-    max-width: 55px;
-    max-height: 55px;
-    border-radius: 3px;
     margin-right: 15px;
   }
 </style>
