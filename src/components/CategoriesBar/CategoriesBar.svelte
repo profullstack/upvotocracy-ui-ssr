@@ -77,7 +77,7 @@
 
 <style>
   .categories {
-    width: 300px;
+    width: 270px;
   }
   .sort-container {
     font-size: 14px;
