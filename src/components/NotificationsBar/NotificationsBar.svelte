@@ -57,6 +57,7 @@
   @media screen and (max-width: MOBILE_BREAK_POINT_PX) {
     .notifications-bar {
       position: fixed;
+      right: 0;
     }
   }
 </style>
