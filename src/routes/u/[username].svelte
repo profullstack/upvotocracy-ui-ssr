@@ -40,6 +40,7 @@
 </script>
 
 <script>
+  import MoreInfo from '../../components/MoreInfoBar/MoreInfo.svelte';
   import PostList from '../../components/PostList.svelte';
   export let posts;
   export let page;
@@ -52,4 +53,5 @@
   <title>SITE_DOMAIN</title>
 </svelte:head>
 
+<MoreInfo user={pageUser} />
 <PostList {posts} {page} {morePosts} {username} {pageUser} />

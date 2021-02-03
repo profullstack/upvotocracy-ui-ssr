@@ -6,6 +6,7 @@ let token;
 let payload;
 let showCategories = false;
 let showNotifications = false;
+let showMore = false;
 let theme = false;
 
 if (typeof window !== 'undefined') {
@@ -27,6 +28,7 @@ if (typeof screen !== 'undefined') {
   const show = screen.width > MOBILE_BREAK_POINT ? true : false;
   showCategories = show;
   showNotifications = show;
+  showMore = show;
 }
 
 export const userStore = writable(payload);
@@ -46,6 +48,8 @@ export const darkTheme = writable(theme);
 export const showCategoriesBar = writable(showCategories);
 
 export const showNotificationsBar = writable(showNotifications);
+
+export const showMoreInfo = writable(showMore);
 
 darkTheme.subscribe((val) => {
   if (typeof window !== 'undefined') localStorage.setItem('darkTheme', val);

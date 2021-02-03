@@ -40,6 +40,8 @@
 </script>
 
 <script>
+  import MoreInfo from '../../components/MoreInfoBar/MoreInfo.svelte';
+
   import PostList from '../../components/PostList.svelte';
   export let category;
   export let posts;
@@ -57,6 +59,7 @@
   <meta name="twitter:title" content={`${category} - ${categoryData.description}`} />
 </svelte:head>
 
+<MoreInfo category={categoryData} />
 <PostList {posts} {page} {category} {morePosts} {categoryData} {sort} />
 
 <style>

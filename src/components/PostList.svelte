@@ -7,6 +7,7 @@
   //import { addSubscription, removeSubscription } from '..//editSubscriptions';
   import { makeApiRequest, globalErrorHandler } from '../api/create-api';
   import SortBar from './SortBar.svelte';
+  import MoreInfoSmall from './MoreInfoBar/MoreInfoSmall.svelte';
 
   export let username = null;
   export let category = null;
@@ -113,19 +114,27 @@
   getNextUrl();
 </script>
 
-<div class="container">
-  <SortBar {page} {username} {hashtag} {category} {user} {subscriptions} {sort} />
-  {#each posts as post}
-    <Post {post} />
-  {/each}
-  {#if posts.length > 0 && morePosts}
-    <div class="btn-container">
-      <a class="btn-lrg" href={nextURL} on:click|preventDefault={fetchPost}> Load More </a>
-    </div>
-  {/if}
+<div class="center">
+  <div class="container">
+    <MoreInfoSmall category={categoryData} user={pageUser} />
+    <SortBar {page} {username} {hashtag} {category} {user} {subscriptions} {sort} />
+    {#each posts as post}
+      <Post {post} />
+    {/each}
+    {#if posts.length > 0 && morePosts}
+      <div class="btn-container">
+        <a class="btn-lrg" href={nextURL} on:click|preventDefault={fetchPost}> Load More </a>
+      </div>
+    {/if}
+  </div>
 </div>
 
 <style>
+  .center {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+  }
   .container {
     max-width: 750px;
     flex-grow: 1;
