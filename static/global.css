@@ -111,3 +111,7 @@ a:-webkit-any-link {
   max-height: 55px;
   border-radius: 3px;
 }
+textarea {
+  color: var(--text-color);
+  font-family: Noto Sans;
+}

@@ -10,7 +10,7 @@
 <script>
   import CategoriesBar from '../components/CategoriesBar/CategoriesBar.svelte';
   import TopBar from '../components/TopBar/TopBar.svelte';
-  import { darkTheme, userStore } from '../store';
+  import { darkTheme, userStore, categories } from '../store';
   import { onMount } from 'svelte';
   import { makeApiRequest, globalErrorHandler } from '../api/create-api';
   import NotificationsBar from '../components/NotificationsBar/NotificationsBar.svelte';
@@ -21,6 +21,8 @@
 
   let user;
   userStore.subscribe((val) => (user = val));
+
+  categories.set(cats);
 
   const fetchMe = async () => {
     if (!user) return;
