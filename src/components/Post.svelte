@@ -108,8 +108,64 @@
       <VoteArrow type="down" click={downvote} selected={userVote == 'downvote'} />
     </div>
     <div class="post-inner-container">
-      {#if postThumb}
+      {#if (postThumb && !withDetails) || (postThumb && withDetails && !postVideo)}
         <div class="post-thumb" style={`background-image: url(${postThumb})`} />
+      {/if}
+      {#if withDetails}
+        {#if postVideo}
+          {#if youtubeId && youtubeId[1]}
+            <div class="plyr__video-embed youtube">
+              <iframe
+                style="border: none;"
+                src={`https://www.youtube.com/embed/${youtubeId[1]}?origin=https://plyr.io&amp;iv_load_policy=3&amp;modestbranding=1&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;enablejsapi=1`}
+                allowfullscreen
+                allowtransparency
+                title="YouTube"
+              />
+            </div>
+          {:else if nullvideo}
+            <video
+              class="mp4"
+              poster={nullvideo.replace('.mp4', '.png')}
+              id={`vid-${new Date().getTime()}`}
+              playsinline
+              controls
+              crossorigin
+            >
+              <source src={nullvideo} type="video/mp4" />
+            </video>
+          {:else if post.type == 'media'}
+            <video
+              class="mp4"
+              poster={postThumb}
+              id={`vid-${new Date().getTime()}`}
+              playsinline
+              controls
+              crossorigin
+            >
+              <source src={postVideo} type="video/mp4" />
+            </video>
+          {:else}
+            <video
+              class="mp4"
+              poster={postVideo.replace('.mp4', '.png')}
+              id={`vid-${new Date().getTime()}`}
+              playsinline
+              controls
+              crossorigin
+            >
+              <source src={postVideo} type="video/mp4" />
+            </video>
+          {/if}
+        {:else}
+          <p class="text">
+            {#if post.url}
+              <a href={post.url} target="_blank">{@html post.url}</a>
+            {:else}
+              {@html converter.makeHtml(post.text)}
+            {/if}
+          </p>
+        {/if}
       {/if}
       <div class="post-info">
         <a class="title" rel="prefetch" href={`/a/${post.category.name}/${post.id}`}>{post.title}</a
@@ -228,9 +284,20 @@
     margin-block-start: 1em;
     margin-block-end: 1em;
   }
+  .text {
+    word-break: break-all;
+    margin: 10px;
+  }
   svg {
     vertical-align: middle;
     fill: var(--text-color);
+  }
+  video,
+  .youtube,
+  iframe {
+    width: 100%;
+    height: 300px;
+    border-radius: 5px;
   }
   @media screen and (max-width: MOBILE_BREAK_POINT_PX) {
     .score {
