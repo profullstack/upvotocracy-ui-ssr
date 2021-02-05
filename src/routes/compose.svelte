@@ -271,7 +271,6 @@
   #create-post {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     padding: 15px;
     max-width: 550px;
     flex-grow: 2;
