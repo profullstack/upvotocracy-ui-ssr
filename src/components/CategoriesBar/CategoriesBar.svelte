@@ -4,6 +4,7 @@
   import HideToggle from './HideToggle.svelte';
   import { fly } from 'svelte/transition';
   import { showCategoriesBar, showNotificationsBar } from '../../store';
+  import { stores } from '@sapper/app';
 
   export let cats;
   let filtered = [];
@@ -11,6 +12,16 @@
   let hideNsfw = true;
   let sortBy = 'top';
   let show;
+  let page;
+  const store = stores();
+
+  store.page.subscribe((val) => (page = val));
+  console.log(page);
+
+  store.preloading.subscribe((val) => {
+    if (typeof screen != 'undefined' && screen.width < MOBILE_BREAK_POINT)
+      showCategoriesBar.set(false);
+  });
 
   showCategoriesBar.subscribe((value) => {
     show = value;
@@ -70,7 +81,7 @@
     </header>
     {#each filtered as category}
       {#if (hideNsfw && !category.nsfw) || !hideNsfw}
-        <Category {category} />
+        <Category selected={page.params.category == category.name} {category} />
       {/if}
     {/each}
   </div>
@@ -78,7 +89,8 @@
 
 <style>
   .categories {
-    width: 270px;
+    width: 298px;
+    padding: 0;
   }
   .sort-container {
     font-size: 14px;
@@ -123,7 +135,7 @@
     margin: 0 0 5px 0;
     position: sticky;
     top: 0px;
-    padding-top: 10px;
+    padding: 10px 15px;
     background-color: var(--sidebar-bg);
   }
 
