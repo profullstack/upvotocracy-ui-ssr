@@ -8,4 +8,4 @@
 - no way to create new category
 - mobile topnav is squished
 - need sponsored post payment page
-
+- on post page, title is below content, should be above
