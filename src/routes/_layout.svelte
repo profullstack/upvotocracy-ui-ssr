@@ -2,150 +2,82 @@
   export async function preload(page, session) {
     const res = await this.fetch(`API_BASE_URL/category`);
     const article = await res.json();
-    const cats = article
+    const cats = article;
     return { cats };
   }
 </script>
+
 <script>
-  import GoogleAnalytics from "sapper-google-analytics/GoogleAnalytics.svelte"
-  import Matomo, { matomo } from '@dexlib/svelte-matomo'
-	import Navbar from '../components/Navbar.svelte';
-	import Sidebar from '../components/Sidebar.svelte';
-  import { onMount } from 'svelte'
-  import { categories, globalError } from '../store'
-  import { stores } from '@sapper/app';
-  const { page } = stores();
- 
-  const url = 'MATOMO_URL';
-  const siteId = MATOMO_ID;
- 
-	export let cats;
+  import CategoriesBar from '../components/CategoriesBar/CategoriesBar.svelte';
+  import TopBar from '../components/TopBar/TopBar.svelte';
+  import { darkTheme, userStore, categories } from '../store';
+  import { onMount } from 'svelte';
+  import { makeApiRequest, globalErrorHandler } from '../api/create-api';
+  import NotificationsBar from '../components/NotificationsBar/NotificationsBar.svelte';
+
+  export let cats;
+  let dark;
+  darkTheme.subscribe((val) => (dark = val));
+
+  let user;
+  userStore.subscribe((val) => (user = val));
+
   categories.set(cats);
-  let ga_measurment_id = 'GOOGLE_ANALYTICS'
-  let err;
-  globalError.subscribe(msg => err = msg);
 
-  let currentPath;
-  page.subscribe(data => currentPath = data.path)
+  const fetchMe = async () => {
+    if (!user) return;
+    const me = await makeApiRequest('/me', null, { method: 'GET' }).catch((err) =>
+      globalErrorHandler(err),
+    );
 
-  $: {
-    currentPath;
-    globalError.set(false);
-    if ($page) matomo.trackPageView()
-  }
+    if (!me) return;
 
-  onMount(() => {
-    document.getElementById('bookmarklet').setAttribute('href', "javascript:void(open(`SITE_URL/compose?link=${encodeURIComponent(`${location.href}${location.href.includes('?')?'&':'?'}_snoorandom=${crypto.getRandomValues(new Uint8Array(4)).reduce((a,v)=>a+=(v.toString(16).padStart(2,'0')),'')}`)}&title=${encodeURIComponent(document.querySelector('meta[name=title][content]')?document.querySelector('meta[name=title][content]').content:document.title)}`))");
-    matomo.trackPageView()
-  })
+    userStore.set(me);
+  };
+
+  onMount(async () => {
+    fetchMe();
+  });
 </script>
 
+<div class="main-container" data-theme={dark ? 'dark' : 'light'}>
+  <TopBar />
+  <div class="content">
+    <CategoriesBar {cats} />
+    <div class="center">
+      <slot />
+    </div>
+    <NotificationsBar />
+  </div>
+  <!-- Dev dark mode toggle -->
+  <div class="theme-toggle-btn" on:click={() => darkTheme.set(!dark)}>
+    Try
+    {dark ? 'light' : 'dark'}
+    theme
+  </div>
+</div>
+
 <style>
-  :global(.row) {
-    justify-content: center;
-  }
-  :global(a) {
-    color: var(--link-color);
-    font-weight: 500;
-  }
-
-  :global(button, .button) {
-    background-color: var(--link-color);
-    border-color: var(--link-color);
-  }
-
-  :global(.button.button-outline, button.button-outline){
-    border-color: var(--link-color);
-    color: var(--link-color);
-  }
-
-  :global(input[type="radio"].toggle:checked+label){
-    color: var(--link-color);
-  }
-
-  :global(input[type='text']:focus, textarea:focus, select:focus) {
-    border-color: var(--link-color);
-  }
-
-  :global(input[type="radio"].toggle+label:after) {
-    border-bottom-color: var(--link-color);
-  }
-
-  .container {
-    max-width: 75%;
-  }
-  .main {
-    width: 100%;
-    display: flex;
-    justify-content: flex-start;
+  .main-container {
+    background-color: var(--bg);
+    min-height: 100vh;
   }
   .content {
-    margin-top: 2rem;
-    padding: 1rem;
-    word-wrap: anywhere;
-    width: 100%;
-  }
-  .error {
-    color: #d70707;
-  }
-
-  footer > div {
-    font-size: 1.2rem;
     display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
-    flex-wrap: wrap;
-    margin: 0 2rem;
   }
-
-  footer > div * {
-    margin-left: 1rem;
+  .center {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
   }
-
-  @media only screen and (max-width: 1650px) {
-    .container {
-      max-width: 100%;
-      padding: 0px;
-    }
-    :global(.row) {
-      max-width: 90%;
-    }
+  .theme-toggle-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: var(--bg);
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    z-index: 4;
   }
 </style>
-
-<div class="container">
-  <Navbar/>
-  <div class="main">
-    <Sidebar/>
-    <div class="content">
-      {#if err}
-        <div class="error">
-          <p>{err}</p>
-        </div>
-      {/if}
-      <main>
-      	<slot></slot>
-      </main>
-      <footer>
-        <div>
-          <a href="/leaderboard">Leaderboard</a>
-          <a id="bookmarklet" href="#" title="Drag to bookmark bar">Bookmarklet</a>
-          <a href="SITE_URL/api/1/posts/rss">RSS</a>
-          <a href="/sponsor">Advertise</a>
-          <a href="mailto:SITE_EMAIL?subject=SITE_EMAIL_SUBJECT">SITE_EMAIL</a>
-          <a href="https://github.com/profullstack/upvotocracy-ui-ssr" title="MIT">open source</a>
-          <a href="https://www.facebook.com/pg/upvoGoCrazy/" title="Facebook: upvoGoCrazy">Facebook</a>
-          <a href="https://profullstack.com">Profullstack.com</a>
-          <span class="legal">&copy; 2020</span>
-        </div>
-        <div>
-          <a href="http://ONION_URL/">Tor: ONION_URL</a>
-          <a href="https://discord.gg/VfGmeKn">Discord</a>
-					<a href="https://reddit.com/r/CouponsDealsSavings">r/CouponsDealsSavings</a>
-        </div>
-      </footer>
-    </div>
-  </div>
-  <GoogleAnalytics {stores} id={ga_measurment_id}/>
-  <Matomo {url} {siteId} />
-</div>

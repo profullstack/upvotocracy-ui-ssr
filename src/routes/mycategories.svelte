@@ -5,9 +5,9 @@
 </script>
 
 <script>
-  import Home from '../components/Home.svelte';
+  import PostList from '../components/PostList.svelte';
   import { onMount } from 'svelte';
-  import { makeApiRequest, globalErrorHandler } from '../components/create-api';
+  import { makeApiRequest, globalErrorHandler } from '../api/create-api';
 
   export let page;
   let morePosts;
@@ -37,7 +37,7 @@
 
     let url = `/subscriptions?sort=${sort}&page=${pageNumber}`;
 
-    const res = await makeApiRequest(url, null, { method: 'GET' }).catch(err =>
+    const res = await makeApiRequest(url, null, { method: 'GET' }).catch((err) =>
       globalErrorHandler(err),
     );
 
@@ -60,4 +60,4 @@
   <title>SITE_DESCRIPTION</title>
 </svelte:head>
 
-<Home {posts} {page} {morePosts} {sort} subscriptions={true} />
+<PostList {posts} {page} {morePosts} {sort} subscriptions={true} />

@@ -1,41 +1,117 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+:root {
+  --top-bar-bg: #ffffff;
+  --bg: #ffffff;
+  --search-bar-bg: #f6f6f6;
+  --text-color: #3b3b3b;
+  --text-color-opposite: #ffffff;
+  --green-accent: #147b50;
+  --sidebar-bg: #f9f9f9;
+  --input-bg: #F6F6F6;
+  --btn-bg: #ffffff;
 }
 
-html {
-    font-size: 62.5%;
+[data-theme='dark'] {
+  --top-bar-bg: #111212;
+  --bg: #1f2724;
+  --search-bar-bg: #000000;
+  --text-color: #ffffff;
+  --text-color-opposite: #3b3b3b;
+  --green-accent: #12f595;
+  --sidebar-bg: #1b1f1e;
+  --input-bg: #171B19;
+  --btn-bg: #1b1f1e;
 }
 
-
+@font-face {
+  font-family: Noto Sans;
+  src: url(NotoSans-Regular.ttf);
+}
+html, body, #sapper {
+  min-height: 100vh;
+  width: 100%;
+}
 body {
-    font-size: 1.6rem;
-    margin: 0 auto;
-    overflow-x: hidden;
-}
-pre > code {
-    line-height: 1 !important;
+  font-family: Noto Sans;
+  margin: 0;
 }
 
-.comment-body a, .post-preview a {
-    font-weight: normal;
-    color: var(--link-color);
+div {
+  color: var(--text-color);
+}
+p {
+  margin: 0;
+}
+input {
+  border: none;
+  background-color: unset;
+  color: unset;
 }
 
-.navbar a, .topnav a, .post-title a, .sidebar a {
-    color:  var(--link-color);
+input:focus {
+  outline: unset;
 }
 
-.navbar button {
-    background-color: var(--link-color);
-    border-color: var(--link-color);
+button {
+  font-family: Noto Sans;
+  border: unset;
+  border-width: unset;
+  border-style: unset;
+  border-color: unset;
+  border-image: unset;
+  cursor: pointer;
 }
 
-.post-detail a {
-    color: var(--link-color-muted);
+a {
+  color: var(--text-color);
+  text-decoration: none;
+}
+a:visited {
+  color: var(--text-color);
+  text-decoration: none;
+}
+a:-webkit-any-link {
+  color: var(--text-color);
+  text-decoration: none;
+}
+.btn-lrg {
+  background: var(--green-accent);
+  color: var(--btn-bg) !important;
+  border-radius: 3px;
+  padding: 11px 18px;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
-code {
-    white-space: pre-wrap !important;
+.input {
+  font-size: 16px;
+  background-color: var(--input-bg);
+  padding: 15px;
+  border-radius: 3px;
+  border: 2px solid var(--input-bg);
+}
+.input:focus {
+  border-color: var(--green-accent);
+}
+.sticky-sidebar {
+  position: sticky;
+  top: 90px;
+  height: calc(100vh - 90px);
+  background-color: var(--sidebar-bg);
+  padding: 0 15px 0 15px;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  z-index: 2;
+}
+.sticky-sidebar::-webkit-scrollbar {
+  display: none;
+}
+.profile-image {
+  max-width: 55px;
+  max-height: 55px;
+  border-radius: 3px;
+}
+textarea {
+  color: var(--text-color);
+  font-family: Noto Sans;
 }

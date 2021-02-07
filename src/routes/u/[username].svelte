@@ -2,32 +2,32 @@
   export async function preload(page, session) {
     const { username } = page.params;
 
-    let url = 'API_BASE_URL'
-    let headers
-    let sort
-    let type
-    let pageNumber = 0
+    let url = 'API_BASE_URL';
+    let headers;
+    let sort;
+    let type;
+    let pageNumber = 0;
 
-    if (page.query.sort) type = page.query.sort
-    if (page.query.page) pageNumber = parseInt(page.query.page)
+    if (page.query.sort) type = page.query.sort;
+    if (page.query.page) pageNumber = parseInt(page.query.page);
 
     if (type === 'hot') {
-      sort = '-rank'
+      sort = '-rank';
     } else if (type === 'top') {
-      sort = '-score'
+      sort = '-score';
     } else if (type === 'new') {
-      sort = '-created'
+      sort = '-created';
     } else if (type === 'comments') {
       sort = 'comments';
     } else if (type === 'not') {
       sort = '+score';
     }
 
-    if (username) url += `/user/${username}?sort=${sort}&page=${pageNumber}`
+    if (username) url += `/user/${username}?sort=${sort}&page=${pageNumber}`;
 
-    const pageUserUrl = 'API_BASE_URL' + `/users/${username}`
+    const pageUserUrl = 'API_BASE_URL' + `/users/${username}`;
 
-    const requests = await Promise.all([ this.fetch(url), this.fetch(pageUserUrl) ]);
+    const requests = await Promise.all([this.fetch(url), this.fetch(pageUserUrl)]);
 
     const res = await requests[0].json();
     const posts = res.posts;
@@ -38,17 +38,20 @@
     return { posts, page, morePosts, username, pageUser };
   }
 </script>
+
 <script>
-  import Home from '../../components/Home.svelte'
+  import MoreInfo from '../../components/MoreInfoBar/MoreInfo.svelte';
+  import PostList from '../../components/PostList.svelte';
   export let posts;
   export let page;
   export let morePosts;
   export let username;
-  export let pageUser
+  export let pageUser;
 </script>
 
 <svelte:head>
- <title>SITE_DOMAIN</title>
+  <title>SITE_DOMAIN</title>
 </svelte:head>
 
-<Home posts={posts} page={page} morePosts={morePosts} username={username} pageUser={pageUser}/>
+<MoreInfo user={pageUser} />
+<PostList {posts} {page} {morePosts} {username} {pageUser} />

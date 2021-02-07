@@ -2,7 +2,7 @@
   export async function preload(page, session) {
     //const { category } = page.params;
 
-    let url = "API_BASE_URL";
+    let url = 'API_BASE_URL';
     let headers;
     let username;
     let sort;
@@ -12,16 +12,16 @@
     if (page.query.sort) type = page.query.sort;
     if (page.query.page) pageNumber = parseInt(page.query.page);
 
-    if (type === "hot") {
-      sort = "-rank";
-    } else if (type === "top") {
-      sort = "-score";
-    } else if (type === "new") {
-      sort = "-created";
-    } else if (type === "comments") {
-      sort = "comments";
-    } else if (type === "not") {
-      sort = "+score";
+    if (type === 'hot') {
+      sort = '-rank';
+    } else if (type === 'top') {
+      sort = '-score';
+    } else if (type === 'new') {
+      sort = '-created';
+    } else if (type === 'comments') {
+      sort = 'comments';
+    } else if (type === 'not') {
+      sort = '+score';
     }
 
     url += `/posts/?sort=${sort}&page=${pageNumber}`;
@@ -36,7 +36,7 @@
 </script>
 
 <script>
-  import Home from "../components/Home.svelte";
+  import PostList from '../components/PostList.svelte';
   export let posts;
   export let page;
   export let morePosts;
@@ -47,4 +47,7 @@
   <title>SITE_DESCRIPTION</title>
 </svelte:head>
 
-<Home {posts} {page} {morePosts} {sort} />
+<PostList {posts} {page} {morePosts} {sort} />
+
+<style>
+</style>
