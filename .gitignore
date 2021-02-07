@@ -9,6 +9,4 @@ yarn-error.log
 .env.local
 custom.css
 docker-compose.yml
-static/icons/
-static/images/logo.*
 static/custom.css
