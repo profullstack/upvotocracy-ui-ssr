@@ -158,6 +158,9 @@
             </video>
           {/if}
         {:else}
+          <a class="title title-above" rel="prefetch" href={`/a/${post.category.name}/${post.id}`}
+            >{post.title}</a
+          >
           <p class="text">
             {#if post.url}
               <a href={post.url} target="_blank">{@html post.url}</a>
@@ -168,8 +171,11 @@
         {/if}
       {/if}
       <div class="post-info">
-        <a class="title" rel="prefetch" href={`/a/${post.category.name}/${post.id}`}>{post.title}</a
-        >
+        {#if !withDetails || postVideo}
+          <a class="title" rel="prefetch" href={`/a/${post.category.name}/${post.id}`}
+            >{post.title}</a
+          >
+        {/if}
         <div class="lower">
           <div class="lower-left">
             <a class="category-link" href={`/a/${post.category.name}`}>/a/{post.category.name}</a>
@@ -220,6 +226,9 @@
 </div>
 
 <style>
+  .title-above {
+    margin: 0 10px;
+  }
   .sponsored {
     border: 1px solid var(--green-accent) !important;
   }

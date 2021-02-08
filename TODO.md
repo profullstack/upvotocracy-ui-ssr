@@ -8,5 +8,5 @@
 - no way to create new category
 - mobile topnav is squished
 - ~~need sponsored post payment page~~
-- on post page, title is below content, should be above
+- ~~on post page, title is below content, should be above~~
 - subnav at top is missing, should follow user around: new, top, etc
