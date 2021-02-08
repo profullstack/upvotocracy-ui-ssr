@@ -13,3 +13,9 @@
 - add field for NIMIQ address (next to Bitcoin address) in settings
 - sponsored post link is messed up: https://upvotocracy.com/sponsor
 - each post should have a "sponsor this post" link: https://upvotocracy.com/a/CoronaVirus/5f2086a5f55cfd001c237e3c
+- joining a category doesn't seem to work
+
+# features
+
+- upload optional category image when creating a category
+- add share links on post pages (see briskreader.com)
