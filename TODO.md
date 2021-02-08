@@ -10,3 +10,4 @@
 - ~~need sponsored post payment page~~
 - ~~on post page, title is below content, should be above~~
 - subnav at top is missing, should follow user around: new, top, etc
+- add field for NIMIQ address (next to Bitcoin address) in settings
