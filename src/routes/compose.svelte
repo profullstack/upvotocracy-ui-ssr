@@ -265,6 +265,7 @@
   <footer>
     <button class="btn-lrg float-right" type="submit" on:click={createPost}>Create Post</button>
   </footer>
+  <a class="new-category" href="/newcategory">Create a category</a>
 </form>
 
 <style>
@@ -330,5 +331,9 @@
     display: flex;
     flex-direction: column;
     margin: 10px 0;
+  }
+  .new-category {
+    margin: 25px 0;
+    color: var(--green-accent);
   }
 </style>

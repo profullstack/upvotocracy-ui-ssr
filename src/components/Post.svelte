@@ -107,7 +107,7 @@
       {post.score}
       <VoteArrow type="down" click={downvote} selected={userVote == 'downvote'} />
     </div>
-    <div class="post-inner-container">
+    <div class:sponsored={post.sponsored} class="post-inner-container">
       {#if (postThumb && !withDetails) || (postThumb && withDetails && !postVideo)}
         <div class="post-thumb" style={`background-image: url(${postThumb})`} />
       {/if}
@@ -158,6 +158,9 @@
             </video>
           {/if}
         {:else}
+          <a class="title title-above" rel="prefetch" href={`/a/${post.category.name}/${post.id}`}
+            >{post.title}</a
+          >
           <p class="text">
             {#if post.url}
               <a href={post.url} target="_blank">{@html post.url}</a>
@@ -168,8 +171,11 @@
         {/if}
       {/if}
       <div class="post-info">
-        <a class="title" rel="prefetch" href={`/a/${post.category.name}/${post.id}`}>{post.title}</a
-        >
+        {#if !withDetails || postVideo}
+          <a class="title" rel="prefetch" href={`/a/${post.category.name}/${post.id}`}
+            >{post.title}</a
+          >
+        {/if}
         <div class="lower">
           <div class="lower-left">
             <a class="category-link" href={`/a/${post.category.name}`}>/a/{post.category.name}</a>
@@ -206,6 +212,9 @@
               </svg>
               {moment(post.created).fromNow()}
             </span>
+            {#if post.sponsored}
+              <a rel="prefetch" href="/sponsor" class="sponsored-txt">sponsored</a>
+            {/if}
           </div>
         </div>
       </div>
@@ -217,6 +226,17 @@
 </div>
 
 <style>
+  .title-above {
+    margin: 0 10px;
+  }
+  .sponsored {
+    border: 1px solid var(--green-accent) !important;
+  }
+  .sponsored-txt {
+    font-size: small;
+    margin-left: 5px;
+    color: var(--green-accent);
+  }
   .container {
     max-width: 750px;
     flex-grow: 1;
