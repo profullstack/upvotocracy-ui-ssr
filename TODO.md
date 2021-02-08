@@ -5,7 +5,7 @@
 - ~~add leaderboard and footer links back~~
 - creating post doesn't redirect to post
 - ~~call out sponsored posts~~
-- no way to create new category
+- ~~no way to create new category~~
 - mobile topnav is squished
 - ~~need sponsored post payment page~~
 - ~~on post page, title is below content, should be above~~
