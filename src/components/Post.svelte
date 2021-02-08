@@ -107,7 +107,7 @@
       {post.score}
       <VoteArrow type="down" click={downvote} selected={userVote == 'downvote'} />
     </div>
-    <div class="post-inner-container">
+    <div class:sponsored={post.sponsored} class="post-inner-container">
       {#if (postThumb && !withDetails) || (postThumb && withDetails && !postVideo)}
         <div class="post-thumb" style={`background-image: url(${postThumb})`} />
       {/if}
@@ -206,6 +206,9 @@
               </svg>
               {moment(post.created).fromNow()}
             </span>
+            {#if post.sponsored}
+              <a rel="prefetch" href="/sponsor" class="sponsored-txt">sponsored</a>
+            {/if}
           </div>
         </div>
       </div>
@@ -217,6 +220,14 @@
 </div>
 
 <style>
+  .sponsored {
+    border: 1px solid var(--green-accent) !important;
+  }
+  .sponsored-txt {
+    font-size: small;
+    margin-left: 5px;
+    color: var(--green-accent);
+  }
   .container {
     max-width: 750px;
     flex-grow: 1;
