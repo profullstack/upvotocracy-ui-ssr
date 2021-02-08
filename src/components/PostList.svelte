@@ -8,6 +8,7 @@
   import { makeApiRequest, globalErrorHandler } from '../api/create-api';
   import SortBar from './SortBar.svelte';
   import MoreInfoSmall from './MoreInfoBar/MoreInfoSmall.svelte';
+  import Footer from './Footer.svelte';
 
   export let username = null;
   export let category = null;
@@ -126,6 +127,7 @@
         <a class="btn-lrg" href={nextURL} on:click|preventDefault={fetchPost}> Load More </a>
       </div>
     {/if}
+    <Footer />
   </div>
 </div>
 
