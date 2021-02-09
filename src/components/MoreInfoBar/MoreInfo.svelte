@@ -30,7 +30,7 @@
       <h2>
         {#if category}
           a/{category.name}
-          <SubscribeButton showText={true} />
+          <SubscribeButton categoryID={category._id} showText={true} />
         {:else if user}
           {user.username}
           {#if user.bitcoinAddress}

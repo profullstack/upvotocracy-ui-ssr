@@ -24,7 +24,7 @@
         <button on:click={() => showMoreInfo.set(true)} class="btn-lrg more-info">MORE INFO</button>
       </div>
       {#if category}
-        <SubscribeButton showText={true} />
+        <SubscribeButton categoryID={category._id} showText={true} />
       {/if}
     </div>
     {#if category}
