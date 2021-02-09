@@ -218,6 +218,9 @@
           </div>
         </div>
       </div>
+      {#if withDetails && !post.sponsored && post.author.id === user.id}
+        <a class="sponsor-this" href={`/sponsor?postId=${post.id}`}>sponsor this post</a>
+      {/if}
     </div>
   </div>
   {#if withDetails}
@@ -226,6 +229,12 @@
 </div>
 
 <style>
+  .sponsor-this {
+    margin: 7px 14px;
+    display: block;
+    color: var(--green-accent);
+    font-size: 15px;
+  }
   .title-above {
     margin: 0 10px;
   }
