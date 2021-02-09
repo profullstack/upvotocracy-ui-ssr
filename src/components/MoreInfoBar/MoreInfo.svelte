@@ -2,6 +2,7 @@
   import SubscriberCount from '../CategoriesBar/SubscriberCount.svelte';
   import { showMoreInfo } from '../../store';
   import SubscribeButton from '../CategoriesBar/SubscribeButton.svelte';
+  import moment from 'moment';
 
   export let category = null;
   export let user = null;
@@ -47,6 +48,9 @@
           {category.description}
         </p>
       {:else if user}
+        {#if user.created}
+          <p class="member-since">Member since: {moment(user.created).fromNow()}</p>
+        {/if}
         <h3>Links</h3>
         {#each user.links as link}
           <a href={link.url} target="_blank">- {link.name}</a>
@@ -62,6 +66,9 @@
 {/if}
 
 <style>
+  .member-since {
+    margin: 5px 0;
+  }
   .more-info {
     width: 339px;
     padding: 0;
