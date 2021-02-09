@@ -1,6 +1,10 @@
 <script>
   import moment from 'moment';
   export let notification;
+
+  if (notification.body.length > 40) {
+    notification.body = notification.body.slice(0, 37) + '...';
+  }
 </script>
 
 <div class="notification-container">
@@ -34,6 +38,8 @@
   .body {
     display: block;
     font-size: 12px;
+    max-height: 20px;
+    overflow-x: hidden;
   }
   .time {
     font-size: 12px;

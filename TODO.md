@@ -1,6 +1,5 @@
 # todo
 
-- squished text in messaging window (see screenshot)
 - creating post doesn't redirect to post
 - add field for NIMIQ address (next to Bitcoin address) in settings
 - sponsored post link is messed up: https://upvotocracy.com/sponsor
@@ -22,3 +21,4 @@
 - ~~subnav at top is missing, should follow user around: new, top, etc~~
 - ~~mobile topnav is squished~~
 - ~~show account age on account summary~~
+- ~~squished text in messaging window (see screenshot)~~
