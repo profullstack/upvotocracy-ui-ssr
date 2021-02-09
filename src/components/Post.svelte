@@ -218,7 +218,7 @@
           </div>
         </div>
       </div>
-      {#if withDetails}
+      {#if withDetails && !post.sponsored && post.author.id === user.id}
         <a class="sponsor-this" href={`/sponsor?postId=${post.id}`}>sponsor this post</a>
       {/if}
     </div>
