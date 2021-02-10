@@ -3,6 +3,7 @@
 - creating post doesn't redirect to post
 - add field for NIMIQ address (next to Bitcoin address) in settings
 - sponsored post link is messed up: https://upvotocracy.com/sponsor
+- no way to delete/clear notifications
 
 # features
 
