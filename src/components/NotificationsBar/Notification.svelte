@@ -1,6 +1,9 @@
 <script>
   import moment from 'moment';
+  import { createEventDispatcher } from 'svelte';
   export let notification;
+
+  const dispatch = createEventDispatcher();
 
   if (notification.body.length > 40) {
     notification.body = notification.body.slice(0, 37) + '...';
@@ -18,6 +21,7 @@
       {notification.body}
     </a>
     <span class="time">{moment(notification.created).fromNow()}</span>
+    <a class="delete" href="javascript:void(0);" on:click={() => dispatch('delete')}>delete</a>
   </div>
 </div>
 
@@ -46,5 +50,9 @@
   }
   .profile-image {
     margin-right: 15px;
+  }
+  .delete {
+    float: right;
+    font-size: 13px;
   }
 </style>
