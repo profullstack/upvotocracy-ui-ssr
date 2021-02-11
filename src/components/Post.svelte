@@ -328,9 +328,4 @@
     height: 300px;
     border-radius: 5px;
   }
-  @media screen and (max-width: MOBILE_BREAK_POINT_PX) {
-    .score {
-      display: none;
-    }
-  }
 </style>
