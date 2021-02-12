@@ -11,7 +11,7 @@
     <span class="logo"><Logo /></span>
     <Hamburger />
     <ComposeButton />
-    <SearchBar />
+    <SearchBar linkToSearch={true} />
   </div>
   <div class="right">
     <ProfileInfo />
