@@ -196,6 +196,13 @@
             ></span
           >
         {/if}
+        {#if user.nimiqAddress}
+          <span class="nimiq"
+            >Nimiq: <a href="https://wallet.nimiq.com/pay/{user.bitcoinAddress}">{user.nimiqAddress}</a>
+            <a href="#" on:click|preventDefault={() => copyToClipboard(user.nimiqAddress)}>copy</a
+            ></span
+          >
+        {/if}
       </li>
     {/each}
   </ol>
