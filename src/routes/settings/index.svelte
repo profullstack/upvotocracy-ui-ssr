@@ -49,6 +49,22 @@
     ).catch((err) => globalErrorHandler(err));
   };
 
+  const updateNIM = async (event) => {
+    event.preventDefault();
+    const form = document.getElementById('settings');
+    const token = localStorage.getItem('token');
+    const formData = new FormData(form);
+
+    const url = '/me/nimiqaddress';
+    const res = await makeApiRequest(
+      url,
+      {
+        nimiqaddress: formData.get('nimiqAddress'),
+      },
+      { method: 'POST' },
+    ).catch((err) => globalErrorHandler(err));
+  };
+
   const updateLinks = async (event) => {
     event.preventDefault();
     const form = document.getElementById('links');
@@ -95,6 +111,20 @@
       />
     {:else}
       <input type="text" placeholder="Bitcoin Address" id="btAddress" name="bitcoinAddress" />
+    {/if}
+
+    <label for="nimAddress">Nimiq Address</label>
+    {#if user.nimiqAddress != null}
+      <input
+        class="input"
+        type="text"
+        placeholder="Nimiq Address"
+        id="nimAddress"
+        name="nimiqAddress"
+        value={user.nimiqAddress}
+      />
+    {:else}
+      <input type="text" placeholder="Nimiq Address" id="nimAddress" name="nimiqAddress" />
     {/if}
   </form>
   <form id="links">
@@ -143,6 +173,7 @@
     on:click={(e) => {
       updateLinks(e);
       updateBT(e);
+      updateNIM(e);
     }}>Save Settings</button
   >
 </div>
