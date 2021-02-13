@@ -1,10 +1,10 @@
 # todo
 
 - creating post doesn't redirect to post
-- add field for NIMIQ address (next to Bitcoin address) in settings
 - sponsored post link is messed up: https://upvotocracy.com/sponsor
 - no way to delete/clear notifications
 - no way to vote on mobile view
+- no way to logout
 
 # features
 
@@ -24,3 +24,4 @@
 - ~~squished text in messaging window (see screenshot)~~
 - ~~each post should have a "sponsor this post" link: https://upvotocracy.com/a/CoronaVirus/5f2086a5f55cfd001c237e3c~~
 - ~~joining a category doesn't seem to work~~
+- ~~add field for NIMIQ address (next to Bitcoin address) in settings~~
