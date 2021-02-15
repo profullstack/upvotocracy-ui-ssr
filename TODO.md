@@ -2,7 +2,6 @@
 
 - creating post doesn't redirect to post
 - sponsored post link is messed up: https://upvotocracy.com/sponsor
-- no way to logout
 
 # features
 
@@ -25,3 +24,4 @@
 - ~~no way to delete/clear notifications~~
 - ~~no way to vote on mobile view~~
 - ~~add field for NIMIQ address (next to Bitcoin address) in settings~~
+- ~~no way to logout~~
