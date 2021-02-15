@@ -198,7 +198,6 @@
         {/if}
         {#if user.nimiqAddress}
           <span class="nimiq"
-          Jack, [13.02.21 01:31]
             >Nimiq: <a href="https://wallet.nimiq.com/nimiq:{user.bitcoinAddress}">{user.nimiqAddress}</a>
             <a href="#" on:click|preventDefault={() => copyToClipboard(user.nimiqAddress)}>copy</a
             ></span
