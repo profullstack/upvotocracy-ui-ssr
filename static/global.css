@@ -101,7 +101,7 @@ a:-webkit-any-link {
   overflow-y: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;
-  z-index: 2;
+  z-index: 1;
 }
 .sticky-sidebar::-webkit-scrollbar {
   display: none;

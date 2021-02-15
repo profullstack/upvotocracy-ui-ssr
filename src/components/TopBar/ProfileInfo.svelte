@@ -1,17 +1,31 @@
 <script>
   import { userStore, showNotificationsBar } from '../../store';
+  import DropdownMenu from './DropdownMenu.svelte';
+  import { stores } from '@sapper/app';
 
   let user;
   let showNotifications;
+  let showDropdown = false;
+  const store = stores();
+
   userStore.subscribe((val) => (user = val));
   showNotificationsBar.subscribe((val) => (showNotifications = val));
+
+  store.preloading.subscribe((val) => {
+    showDropdown = false;
+  });
 </script>
 
 <div class="profile-container">
   {#if user}
-    <a rel="prefetch" href="/settings">
-      <img class="profile-image" src="/images/profile_image_placeholder.jpg" alt="" />
-    </a>
+    <div class="dropdown-container">
+      <a on:click|preventDefault={() => (showDropdown = !showDropdown)} href="javascript:void(0)">
+        <img class="profile-image" src="/images/profile_image_placeholder.jpg" alt="" />
+      </a>
+      {#if showDropdown}
+        <DropdownMenu />
+      {/if}
+    </div>
     <div class="name-and-coin">
       <a rel="prefetch" href="/settings" class="username">{user.username}</a>
       <br />
@@ -73,6 +87,9 @@
   }
   .arrow {
     cursor: pointer;
+  }
+  .dropdown-container {
+    position: relative;
   }
   @media screen and (max-width: MOBILE_BREAK_POINT_PX) {
     .name-and-coin {

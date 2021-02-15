@@ -19,6 +19,15 @@
     );
     if (res && res[0]) notifications = res;
   });
+
+  const deleteNotification = async (id) => {
+    const url = `/inbox/${id}`;
+    const res = await makeApiRequest(url, null, { method: 'DELETE' }).catch((err) =>
+      globalErrorHandler(err),
+    );
+
+    notifications = notifications.filter((item) => item.id !== id);
+  };
 </script>
 
 {#if show}
@@ -34,7 +43,7 @@
     </svg>
     <div class="notification-list">
       {#each notifications as notification}
-        <Notification {notification} />
+        <Notification on:delete={() => deleteNotification(notification.id)} {notification} />
       {/each}
     </div>
   </div>
