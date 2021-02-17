@@ -2,7 +2,7 @@
 
 - creating post doesn't redirect to post
 - sponsored post link is messed up: https://upvotocracy.com/sponsor
-- meta tags missing, we need the same social media meta tags we had before: categories and posts
+- twitter:image meta tags missing on uploaded images https://cards-dev.twitter.com/validator to test
 
 # features
 
