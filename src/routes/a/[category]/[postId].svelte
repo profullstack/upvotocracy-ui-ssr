@@ -28,21 +28,6 @@
   };
 </script>
 
-<svelte:head>
-  <title>{post.title}</title>
-  <meta property="og:description" content={post.text || post.title} />
-  <meta property="description" content={post.text || post.title} />
-  <meta property="og:title" content={post.title} />
-  <meta property="og:url" content="BASE_URL/a/{post.category.name}/{post.id}" />
-  <meta name="twitter:title" content={post.title} />
-  <meta name="twitter:url" content="BASE_URL/a/{post.category.name}/{post.id}" />
-  {#if post.thumb}
-    <meta property="og:image" content={post.thumb} />
-    <meta property="twitter:image" content={post.thumb} />
-    <meta name="twitter:card" content="summary_large_image" />
-  {/if}
-</svelte:head>
-
 {#if post}
   <Post {post} withDetails={true} />
 {/if}
