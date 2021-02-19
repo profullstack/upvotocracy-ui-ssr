@@ -2,7 +2,6 @@
 
 - creating post doesn't redirect to post
 - sponsored post link is messed up: https://upvotocracy.com/sponsor
-- twitter:image meta tags missing on uploaded images https://cards-dev.twitter.com/validator to test
 
 # features
 
@@ -26,3 +25,4 @@
 - ~~no way to vote on mobile view~~
 - ~~add field for NIMIQ address (next to Bitcoin address) in settings~~
 - ~~no way to logout~~
+- ~~twitter:image meta tags missing on uploaded images https://cards-dev.twitter.com/validator to test~~
