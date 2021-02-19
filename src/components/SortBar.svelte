@@ -9,10 +9,12 @@
   export let subscriptions;
   export let sort;
   export let comments = false;
+  export let showHome = false;
 
   let showDropdown = false;
   let sortChoice;
   let page;
+  let path;
   const store = stores();
 
   store.page.subscribe((val) => (page = val));
@@ -36,6 +38,7 @@
   onMount(() => {
     if (isMobile()) showDropdown = false;
     else showDropdown = true;
+    path = category ? `/a/${category}` : page.path;
   });
 </script>
 
@@ -50,26 +53,29 @@
 </button>
 {#if showDropdown}
   <nav on:click={hideDropdown}>
+    {#if showHome}
+      <a rel="prefetch" href="/">Home</a>
+    {/if}
     {#if comments}
-      <a class:selected={sortChoice == 'new'} rel="prefetch" href="{page.path}?sort=new">New</a>
-      <a class:selected={sortChoice == 'top'} rel="prefetch" href="{page.path}?sort=top">Top</a>
-      <a class:selected={sortChoice == 'original'} rel="prefetch" href="{page.path}?sort=original"
+      <a class:selected={sortChoice == 'new'} rel="prefetch" href="{path}?sort=new">New</a>
+      <a class:selected={sortChoice == 'top'} rel="prefetch" href="{path}?sort=top">Top</a>
+      <a class:selected={sortChoice == 'original'} rel="prefetch" href="{path}?sort=original"
         >Original</a
       >
     {:else}
       <a
         class:selected={sortChoice == 'hot' || typeof page.query.sort == 'undefined'}
         rel="prefetch"
-        href="{page.path}?sort=hot"
+        href="{path}?sort=hot"
       >
         Hot
       </a>
-      <a class:selected={sortChoice == 'new'} rel="prefetch" href="{page.path}?sort=new">New</a>
-      <a class:selected={sortChoice == 'top'} rel="prefetch" href="{page.path}?sort=top">Top</a>
-      <a class:selected={sortChoice == 'comments'} rel="prefetch" href="{page.path}?sort=comments">
+      <a class:selected={sortChoice == 'new'} rel="prefetch" href="{path}?sort=new">New</a>
+      <a class:selected={sortChoice == 'top'} rel="prefetch" href="{path}?sort=top">Top</a>
+      <a class:selected={sortChoice == 'comments'} rel="prefetch" href="{path}?sort=comments">
         Comments
       </a>
-      <a class:selected={sortChoice == 'controversial'} rel="prefetch" href="{page.path}?sort=not">
+      <a class:selected={sortChoice == 'controversial'} rel="prefetch" href="{path}?sort=not">
         Controversial
       </a>
       {#if subscriptions && user}

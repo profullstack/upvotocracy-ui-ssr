@@ -6,6 +6,7 @@
   import showdown from 'showdown';
   import VoteArrow from './VoteArrow.svelte';
   import CommentList from './Comments/CommentList.svelte';
+  import SortBar from './SortBar.svelte';
   const converter = new showdown.Converter({ simplifiedAutoLink: true });
 
   export let post = {};
@@ -101,6 +102,9 @@
 </script>
 
 <div class="container">
+  {#if withDetails}
+    <SortBar showHome={true} category={post.category.name} />
+  {/if}
   <div class="post-outer-container">
     <div class="score">
       <VoteArrow type="up" click={upvote} selected={userVote == 'upvote'} />
