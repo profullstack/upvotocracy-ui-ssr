@@ -6,6 +6,7 @@
   import showdown from 'showdown';
   import VoteArrow from './VoteArrow.svelte';
   import CommentList from './Comments/CommentList.svelte';
+  import SortBar from './SortBar.svelte';
   const converter = new showdown.Converter({ simplifiedAutoLink: true });
 
   export let post = {};
@@ -100,7 +101,25 @@
   };
 </script>
 
+<svelte:head>
+  <title>{post.title}</title>
+  <meta property="og:description" content={post.text || post.title} />
+  <meta property="description" content={post.text || post.title} />
+  <meta property="og:title" content={post.title} />
+  <meta property="og:url" content="BASE_URL/a/{post.category.name}/{post.id}" />
+  <meta name="twitter:title" content={post.title} />
+  <meta name="twitter:url" content="BASE_URL/a/{post.category.name}/{post.id}" />
+  {#if postThumb}
+    <meta property="og:image" content={postThumb} />
+    <meta property="twitter:image" content={postThumb} />
+    <meta name="twitter:card" content="summary_large_image" />
+  {/if}
+</svelte:head>
+
 <div class="container">
+  {#if withDetails}
+    <SortBar showHome={true} category={post.category.name} />
+  {/if}
   <div class="post-outer-container">
     <div class="score">
       <VoteArrow type="up" click={upvote} selected={userVote == 'upvote'} />

@@ -118,7 +118,9 @@
 <div class="center">
   <div class="container">
     <MoreInfoSmall category={categoryData} user={pageUser} />
-    <SortBar {page} {username} {hashtag} {category} {user} {subscriptions} {sort} />
+    <div class="padding">
+      <SortBar {page} {username} {hashtag} {category} {user} {subscriptions} {sort} />
+    </div>
     {#each posts as post}
       <Post {post} />
     {/each}
@@ -145,5 +147,8 @@
     display: flex;
     justify-content: center;
     margin: 10px;
+  }
+  .padding {
+    padding: 0 15px;
   }
 </style>
