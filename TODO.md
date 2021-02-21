@@ -3,6 +3,7 @@
 - creating post doesn't redirect to post
 - sponsored post link is messed up: https://upvotocracy.com/sponsor
 - add visits back to post page
+- add delete button to post pages
 
 # features
 
