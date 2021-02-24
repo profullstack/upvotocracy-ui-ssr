@@ -1,6 +1,5 @@
 # todo
 
-- creating post doesn't redirect to post
 - sponsored post link is messed up: https://upvotocracy.com/sponsor
 
 # features
@@ -10,6 +9,7 @@
 
 # done
 
+- ~~creating post doesn't redirect to post~~
 - ~~add leaderboard and footer links back~~
 - ~~call out sponsored posts~~
 - ~~no way to create new category~~
