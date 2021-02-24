@@ -96,7 +96,7 @@
       globalErrorHandler(err),
     );
 
-    if (!res.ok) return;
+    if (res.message !== 'success') return globalErrorHandler('error deleting post');
     return goto('/');
   };
 </script>
@@ -237,8 +237,13 @@
           </div>
         </div>
       </div>
-      {#if withDetails && !post.sponsored && post.author.id === user.id}
-        <a class="sponsor-this" href={`/sponsor?postId=${post.id}`}>sponsor this post</a>
+      {#if withDetails && post.author.id === user.id}
+        <div class="sponsor-delete">
+          {#if !post.sponsored}
+            <a class="sponsor-this" href={`/sponsor?postId=${post.id}`}>sponsor this post</a>
+          {/if}
+          <a href="javascript:void(0)" class="remove-button" on:click={removePost}>delete</a>
+        </div>
       {/if}
     </div>
   </div>
@@ -248,11 +253,14 @@
 </div>
 
 <style>
-  .sponsor-this {
+  .sponsor-delete {
     margin: 7px 14px;
-    display: block;
-    color: var(--green-accent);
+    display: flex;
+    justify-content: space-between;
+  }
+  .sponsor-delete > a {
     font-size: 15px;
+    color: var(--green-accent);
   }
   .title-above {
     margin: 0 10px;
