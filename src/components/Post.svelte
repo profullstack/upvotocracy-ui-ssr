@@ -231,6 +231,7 @@
               </svg>
               {moment(post.created).fromNow()}
             </span>
+            <span>{post.views} views</span>
             {#if post.sponsored}
               <a rel="prefetch" href="/sponsor" class="sponsored-txt">sponsored</a>
             {/if}
@@ -297,6 +298,9 @@
     justify-content: space-between;
     flex-wrap: wrap;
     font-size: 14px;
+  }
+  .lower-right > * {
+    margin-right: 1vw;
   }
   .category-link {
     font-weight: bold;

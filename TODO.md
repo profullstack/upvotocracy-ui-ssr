@@ -2,7 +2,6 @@
 
 - creating post doesn't redirect to post
 - sponsored post link is messed up: https://upvotocracy.com/sponsor
-- add visits back to post page
 
 # features
 
@@ -28,3 +27,4 @@
 - ~~no way to logout~~
 - ~~twitter:image meta tags missing on uploaded images https://cards-dev.twitter.com/validator to test~~
 - ~~add delete button to post pages~~
+- ~~add visits back to post page~~
