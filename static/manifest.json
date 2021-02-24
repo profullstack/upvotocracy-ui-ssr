@@ -1,15 +1,15 @@
 {
-	"background_color": "#ffffff",
-	"theme_color": "#147b50",
-	"name": "Upvotocracy",
-	"short_name": "Upvotocracy",
-	"display": "Upvotocracy",
-	"start_url": "/",
-	"icons": [
-		{
-			"src": "icons/favicon-196x196.png",
-			"sizes": "196x196",
-			"type": "image/png"
-		}
-	]
+  "background_color": "#ffffff",
+  "theme_color": "#147b50",
+  "name": "Upvotocracy",
+  "short_name": "Upvotocracy",
+  "display": "standalone",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "icons/favicon-196x196.png",
+      "sizes": "196x196",
+      "type": "image/png"
+    }
+  ]
 }
