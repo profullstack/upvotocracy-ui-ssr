@@ -3,7 +3,6 @@
 - creating post doesn't redirect to post
 - sponsored post link is messed up: https://upvotocracy.com/sponsor
 - add visits back to post page
-- add delete button to post pages
 
 # features
 
@@ -28,3 +27,4 @@
 - ~~add field for NIMIQ address (next to Bitcoin address) in settings~~
 - ~~no way to logout~~
 - ~~twitter:image meta tags missing on uploaded images https://cards-dev.twitter.com/validator to test~~
+- ~~add delete button to post pages~~
