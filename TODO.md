@@ -5,6 +5,7 @@
 # features
 
 - upload optional category image when creating a category
+- add invite system (abiblity to configure to invite-only), inviters earn karma 1k
 
 # done
 
