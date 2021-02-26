@@ -5,10 +5,10 @@
 # features
 
 - upload optional category image when creating a category
-- add share links on post pages (see briskreader.com)
 
 # done
 
+- ~~add share links on post pages (see briskreader.com)~~
 - ~~creating post doesn't redirect to post~~
 - ~~add leaderboard and footer links back~~
 - ~~call out sponsored posts~~
