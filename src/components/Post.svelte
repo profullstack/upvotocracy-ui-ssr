@@ -7,6 +7,7 @@
   import VoteArrow from './VoteArrow.svelte';
   import CommentList from './Comments/CommentList.svelte';
   import SortBar from './SortBar.svelte';
+import { onMount } from 'svelte';
   const converter = new showdown.Converter({ simplifiedAutoLink: true });
 
   export let post = {};
@@ -62,6 +63,15 @@
     }
   };
 
+  function share(name, script) {
+    const el = document.querySelector(`.share ${name}`);
+
+    if (!el) return;
+
+    el.setAttribute('href', script);
+  }
+
+
   $: {
     getThumb(post);
     getVideo(post);
@@ -99,6 +109,44 @@
     if (res.message !== 'success') return globalErrorHandler('error deleting post');
     return goto('/');
   };
+
+  onMount(() => {
+    share(
+      '.twitter',
+      "javascript:(async () => {const title = encodeURIComponent(document.title); const url = encodeURIComponent(window.location.href); window.open(`https://twitter.com/intent/tweet?text=${title}&url=${url}`, '_blank'); })();",
+    );
+
+    share(
+      '.ruqqus',
+      "javascript:(async () => {const title = document.title; const url = window.location.href; window.open(`https://www.ruqqus.com/submit?guild=news&url=${url}`, '_blank'); })();",
+    );
+
+    share(
+      '.upvotocracy',
+      "javascript:void(open(`https://upvotocracy.com/compose?link=${encodeURIComponent(`${location.href}${location.href.includes('?')?'&':'?'}_snoorandom=${crypto.getRandomValues(new Uint8Array(4)).reduce((a,v)=>a+=(v.toString(16).padStart(2,'0')),'')}`)}&title=${encodeURIComponent(document.querySelector('meta[name=title][content]')?document.querySelector('meta[name=title][content]').content:document.title)}`))",
+    );
+
+    share(
+      '.reddit',
+      "javascript:(async () => {const title = encodeURIComponent(document.title); const url = encodeURIComponent(window.location.href); window.open(`https://www.reddit.com/submit?url=${url}&title=${title}`, '_blank'); })();",
+    );
+
+    share(
+      '.bitcoinlatte',
+      "javascript:void(open(`https://bitcoinlatte.com/compose?link=${encodeURIComponent(`${location.href}${location.href.includes('?')?'&':'?'}_snoorandom=${crypto.getRandomValues(new Uint8Array(4)).reduce((a,v)=>a+=(v.toString(16).padStart(2,'0')),'')}`)}&title=${encodeURIComponent(document.querySelector('meta[name=title][content]')?document.querySelector('meta[name=title][content]').content:document.title)}`))",
+    );
+
+    share(
+      '.hackernews',
+      "javascript:(async () => {const title = encodeURIComponent(document.title); const url = encodeURIComponent(window.location.href); window.open(`https://news.ycombinator.com/submitlink?u=${url}&t=${title}`, '_blank'); })();",
+    );
+
+    share(
+      '.facebook',
+      "javascript:(async () => {open('https://www.facebook.com/sharer.php?src=bm&v=4&i=1301235609&u='+encodeURIComponent(window.location.href)+'&t='+encodeURIComponent(document.title), '_blank') })();",
+    );
+
+  })
 </script>
 
 <svelte:head>
@@ -237,6 +285,16 @@
             {/if}
           </div>
         </div>
+        <div class="share">
+            <strong>Share:</strong>
+            <a href="#" class="twitter">twitter</a>
+            <a href="#" class="ruqqus">ruqqus</a>
+            <a href="#" class="reddit">reddit</a>
+            <a href="#" class="upvotocracy">upvotocracy</a>
+            <a href="#" class="hackernews">hackernews</a>
+            <a href="#" class="bitcoinlatte">bitcoinlatte</a>
+            <a href="#" class="facebook">facebook</a>
+        </div>
       </div>
       {#if withDetails && post.author.id === user.id}
         <div class="sponsor-delete">
@@ -352,6 +410,17 @@
     vertical-align: middle;
     fill: var(--text-color);
   }
+
+  .share {
+    margin: 1rem 0;
+  }
+
+  .share a {
+    text-transform: capitalize;
+    color: var(--green-accent);
+    margin-right:.5rem;
+  }
+
   video,
   .youtube,
   iframe {
