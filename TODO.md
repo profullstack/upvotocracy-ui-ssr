@@ -1,6 +1,7 @@
 # todo
 
 - sponsored post link is messed up: https://upvotocracy.com/sponsor
+- title on category pages is wrong, not sure where its coming from
 
 # features
 
