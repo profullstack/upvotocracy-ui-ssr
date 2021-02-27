@@ -3,8 +3,10 @@
   import { goto } from '@sapper/app';
   import { userStore } from '../store';
   import { makeApiRequest, globalErrorHandler } from '../api/create-api';
+  import Upload from '../components/Upload.svelte';
 
   let nsfw = false;
+  let imageLink = null;
 
   let user;
 
@@ -35,6 +37,7 @@
         name,
         description: formData.get('description'),
         nsfw,
+        image: imageLink,
       },
       { method: 'POST' },
     ).catch((err) => globalErrorHandler(err));
@@ -47,6 +50,8 @@
 {#if !msg.ok} <div class="message error">{msg.error}</div>{/if}
 
 <form id="create-category">
+  <label for="upload">Upload Category Image</label>
+  <Upload bind:link={imageLink} acceptTypes="image/*" />
   <label for="name">Category Name</label>
   <input
     class="input"
@@ -78,6 +83,6 @@
     font-display: normal;
     font-weight: 300;
     font-size: 1em;
-    margin-top: 10px;
+    margin: 10px 0;
   }
 </style>

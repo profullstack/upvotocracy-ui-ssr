@@ -4,6 +4,7 @@
   export let link;
   export let mediaName;
   export let mediaThumb;
+  export let acceptTypes = 'image/*,video/*,application/pdf';
   let files;
   let progress = 0;
   let uploadDisabled = true;
@@ -55,8 +56,8 @@
 </script>
 
 <form on:submit|preventDefault={uploadFile} method="post" enctype="multipart/form-data">
-  <input bind:files type="file" accept="image/*,video/*,application/pdf" />
-  <button disabled={uploadDisabled} type="submit">Upload</button>
+  <input bind:files type="file" accept={acceptTypes} />
+  <button class="btn-lrg" disabled={uploadDisabled} type="submit">Upload</button>
   <br />
   <progress id="progressBar" value={progress} max="100" />
   <span>{progress}%</span>
