@@ -5,7 +5,6 @@
 
 # features
 
-- upload optional category image when creating a category
 - add invite system (abiblity to configure to invite-only), inviters earn karma 1k
 
 # done
@@ -30,3 +29,4 @@
 - ~~twitter:image meta tags missing on uploaded images https://cards-dev.twitter.com/validator to test~~
 - ~~add delete button to post pages~~
 - ~~add visits back to post page~~
+- ~~upload optional category image when creating a category~~
