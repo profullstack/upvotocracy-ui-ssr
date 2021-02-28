@@ -15,7 +15,11 @@
 {#if showOverlay}
   <div class="more-info sticky-sidebar">
     <div
-      style={`background-image: url(${'https://img.currency.com/imgs/articles/1472xx/shutterstock_1239869347.jpg'})`}
+      style={`background-image: url(${
+        category.image
+          ? category.image
+          : 'https://img.currency.com/imgs/articles/1472xx/shutterstock_1239869347.jpg'
+      })`}
       class="banner-img"
     >
       {#if showOverlay}
