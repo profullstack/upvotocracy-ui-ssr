@@ -285,6 +285,7 @@ import { onMount } from 'svelte';
             {/if}
           </div>
         </div>
+      {#if withDetails}
         <div class="share">
             <strong>Share:</strong>
             <a href="#" class="twitter">twitter</a>
@@ -295,6 +296,7 @@ import { onMount } from 'svelte';
             <a href="#" class="bitcoinlatte">bitcoinlatte</a>
             <a href="#" class="facebook">facebook</a>
         </div>
+      {/if}
       </div>
       {#if withDetails && post.author.id === user.id}
         <div class="sponsor-delete">
