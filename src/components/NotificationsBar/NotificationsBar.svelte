@@ -1,5 +1,5 @@
 <script>
-  import { showNotificationsBar, showCategoriesBar } from '../../store';
+  import { showNotificationsBar, showCategoriesBar, userStore } from '../../store';
   import { onMount } from 'svelte';
   import { makeApiRequest, globalErrorHandler } from '../../api/create-api.js';
   import Notification from './Notification.svelte';
@@ -12,12 +12,17 @@
       showCategoriesBar.set(false);
   });
 
+  let user;
+  userStore.subscribe((value) => (user = value));
+
   onMount(async () => {
-    const url = '/inbox';
-    const res = await makeApiRequest(url, null, { method: 'GET' }).catch((err) =>
-      globalErrorHandler(err),
-    );
-    if (res && res[0]) notifications = res;
+    if (user) {
+      const url = '/inbox';
+      const res = await makeApiRequest(url, null, { method: 'GET' }).catch((err) =>
+        globalErrorHandler(err),
+      );
+      if (res && res[0]) notifications = res;
+    }
   });
 
   const deleteNotification = async (id) => {
