@@ -41,7 +41,7 @@ export const showOverlay = writable(false);
 
 export const currentCategory = writable();
 
-export const globalError = writable();
+export const globalError = writable(null);
 
 export const darkTheme = writable(theme);
 

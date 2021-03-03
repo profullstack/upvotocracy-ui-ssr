@@ -8,18 +8,18 @@
 </script>
 
 <script>
-  
   import CategoriesBar from '../components/CategoriesBar/CategoriesBar.svelte';
   import TopBar from '../components/TopBar/TopBar.svelte';
   import { darkTheme, userStore, categories } from '../store';
   import { onMount } from 'svelte';
   import { makeApiRequest, globalErrorHandler } from '../api/create-api';
   import NotificationsBar from '../components/NotificationsBar/NotificationsBar.svelte';
-  import GoogleAnalytics from "sapper-google-analytics/GoogleAnalytics.svelte"
-  import { stores } from "@sapper/app"
+  import GoogleAnalytics from 'sapper-google-analytics/GoogleAnalytics.svelte';
+  import { stores } from '@sapper/app';
+  import ErrorDropdown from '../components/ErrorDropdown.svelte';
 
   export let cats;
-  let ga_measurment_id = "GOOGLE_ANALYTICS"  // your analytics id
+  let ga_measurment_id = 'GOOGLE_ANALYTICS'; // your analytics id
   let dark;
   darkTheme.subscribe((val) => (dark = val));
 
@@ -45,6 +45,7 @@
 </script>
 
 <div class="main-container" data-theme={dark ? 'dark' : 'light'}>
+  <ErrorDropdown />
   <TopBar />
   <div class="content">
     <CategoriesBar {cats} />
@@ -59,7 +60,7 @@
     {dark ? 'light' : 'dark'}
     theme
   </div>
-  <GoogleAnalytics {stores} id={ga_measurment_id}/>
+  <GoogleAnalytics {stores} id={ga_measurment_id} />
 </div>
 
 <style>

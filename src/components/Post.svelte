@@ -7,7 +7,7 @@
   import VoteArrow from './VoteArrow.svelte';
   import CommentList from './Comments/CommentList.svelte';
   import SortBar from './SortBar.svelte';
-import { onMount } from 'svelte';
+  import { onMount } from 'svelte';
   const converter = new showdown.Converter({ simplifiedAutoLink: true });
 
   export let post = {};
@@ -70,7 +70,6 @@ import { onMount } from 'svelte';
 
     el.setAttribute('href', script);
   }
-
 
   $: {
     getThumb(post);
@@ -145,24 +144,8 @@ import { onMount } from 'svelte';
       '.facebook',
       "javascript:(async () => {open('https://www.facebook.com/sharer.php?src=bm&v=4&i=1301235609&u='+encodeURIComponent(window.location.href)+'&t='+encodeURIComponent(document.title), '_blank') })();",
     );
-
-  })
+  });
 </script>
-
-<svelte:head>
-  <title>{post.title}</title>
-  <meta property="og:description" content={post.text || post.title} />
-  <meta property="description" content={post.text || post.title} />
-  <meta property="og:title" content={post.title} />
-  <meta property="og:url" content="BASE_URL/a/{post.category.name}/{post.id}" />
-  <meta name="twitter:title" content={post.title} />
-  <meta name="twitter:url" content="BASE_URL/a/{post.category.name}/{post.id}" />
-  {#if postThumb}
-    <meta property="og:image" content={postThumb} />
-    <meta property="twitter:image" content={postThumb} />
-    <meta name="twitter:card" content="summary_large_image" />
-  {/if}
-</svelte:head>
 
 <div class="container">
   {#if withDetails}
@@ -285,8 +268,8 @@ import { onMount } from 'svelte';
             {/if}
           </div>
         </div>
-      {#if withDetails}
-        <div class="share">
+        {#if withDetails}
+          <div class="share">
             <strong>Share:</strong>
             <a href="#" class="twitter">twitter</a>
             <a href="#" class="ruqqus">ruqqus</a>
@@ -295,8 +278,8 @@ import { onMount } from 'svelte';
             <a href="#" class="hackernews">hackernews</a>
             <a href="#" class="bitcoinlatte">bitcoinlatte</a>
             <a href="#" class="facebook">facebook</a>
-        </div>
-      {/if}
+          </div>
+        {/if}
       </div>
       {#if withDetails && post.author.id === user.id}
         <div class="sponsor-delete">
@@ -420,7 +403,7 @@ import { onMount } from 'svelte';
   .share a {
     text-transform: capitalize;
     color: var(--green-accent);
-    margin-right:.5rem;
+    margin-right: 0.5rem;
   }
 
   video,
