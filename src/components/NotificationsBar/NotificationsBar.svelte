@@ -46,11 +46,13 @@
         fill="#666666"
       />
     </svg>
-    <div class="notification-list">
-      {#each notifications as notification}
-        <Notification on:delete={() => deleteNotification(notification.id)} {notification} />
-      {/each}
-    </div>
+    {#if user}
+      <div class="notification-list">
+        {#each notifications as notification}
+          <Notification on:delete={() => deleteNotification(notification.id)} {notification} />
+        {/each}
+      </div>
+    {/if}
   </div>
 {/if}
 
