@@ -3,6 +3,7 @@
 - sponsored post link is messed up: https://upvotocracy.com/sponsor
 - add ability to edit categories
 - add avatar uploading from user settings
+- make up/down arrows larger
 
 # features
 
