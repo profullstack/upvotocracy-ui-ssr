@@ -54,12 +54,6 @@
     </div>
     <NotificationsBar />
   </div>
-  <!-- Dev dark mode toggle -->
-  <div class="theme-toggle-btn" on:click={() => darkTheme.set(!dark)}>
-    Try
-    {dark ? 'light' : 'dark'}
-    theme
-  </div>
   <GoogleAnalytics {stores} id={ga_measurment_id} />
 </div>
 

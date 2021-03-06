@@ -1,11 +1,13 @@
 <script>
-  import { userStore } from '../../store';
+  import { userStore, darkTheme } from '../../store';
 
   let user;
-
   userStore.subscribe((value) => {
     user = value;
   });
+
+  let dark;
+  darkTheme.subscribe((value) => (dark = value));
 
   const logout = () => {
     if (localStorage) {
@@ -19,6 +21,9 @@
   <a href={`/u/${user.username}`}>Profile</a>
   <a href="/settings">Settings</a>
   <a on:click={logout} href="javascript:void(0)">Logout</a>
+  <a on:click={() => darkTheme.set(!dark)} href="javascript:void(0)">
+    Switch to {dark ? 'light' : 'dark'} theme
+  </a>
 </nav>
 
 <style>
