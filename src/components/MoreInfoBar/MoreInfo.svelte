@@ -1,6 +1,6 @@
 <script>
   import SubscriberCount from '../CategoriesBar/SubscriberCount.svelte';
-  import { showMoreInfo } from '../../store';
+  import { showMoreInfo, userStore } from '../../store';
   import SubscribeButton from '../CategoriesBar/SubscribeButton.svelte';
   import moment from 'moment';
 
@@ -10,6 +10,9 @@
   let showOverlay = true;
 
   showMoreInfo.subscribe((val) => (showOverlay = val));
+
+  let currentUser;
+  userStore.subscribe((val) => (currentUser = val));
 </script>
 
 {#if showOverlay}
@@ -69,6 +72,9 @@
         <span class="sub-count">
           <SubscriberCount count={category.subscriberCount} />
         </span>
+        {#if category.owner.id == currentUser.id}
+          <a class="edit-link" href={`/a/${category.name}/edit`}>Edit</a>
+        {/if}
       {/if}
     </div>
   </div>
@@ -111,6 +117,10 @@
   .sub-count {
     display: block;
     margin: 20px 0;
+  }
+  .edit-link {
+    font-weight: bold;
+    color: var(--green-accent);
   }
   a {
     display: block;
