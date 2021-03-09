@@ -1,7 +1,6 @@
 # todo
 
 - sponsored post link is messed up: https://upvotocracy.com/sponsor
-- add ability to edit categories
 - add avatar uploading from user settings
 - make up/down arrows larger
 
@@ -33,3 +32,4 @@
 - ~~add visits back to post page~~
 - ~~upload optional category image when creating a category~~
 - ~~title on category pages is wrong, not sure where its coming from~~
+- ~~add ability to edit categories~~
