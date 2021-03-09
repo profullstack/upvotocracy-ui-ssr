@@ -3,6 +3,7 @@
 - sponsored post link is messed up: https://upvotocracy.com/sponsor
 - add avatar uploading from user settings
 - make up/down arrows larger
+- add an "admin" boolean flag that allows me (or any admin user) to modify/delete posts and categories. if we delete it shoudl cascade. ie: delete a category then all its posts should get deleted too, similar to what happens when we delete a user.  admin flag will just be set manually in db
 
 # features
 
