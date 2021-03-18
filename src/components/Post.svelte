@@ -281,7 +281,7 @@
           </div>
         {/if}
       </div>
-      {#if withDetails && post.author.id === user.id}
+      {#if withDetails && (post.author.id === user.id || user.admin)}
         <div class="sponsor-delete">
           {#if !post.sponsored}
             <a class="sponsor-this" href={`/sponsor?postId=${post.id}`}>sponsor this post</a>
