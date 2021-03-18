@@ -3,6 +3,8 @@
   import { showMoreInfo, userStore } from '../../store';
   import SubscribeButton from '../CategoriesBar/SubscribeButton.svelte';
   import moment from 'moment';
+  import { makeApiRequest, globalErrorHandler } from '../../api/create-api.js';
+  import { goto } from '@sapper/app';
 
   export let category = null;
   export let user = null;
@@ -13,6 +15,13 @@
 
   let currentUser;
   userStore.subscribe((val) => (currentUser = val));
+
+  const deleteCategory = async () => {
+    const res = await makeApiRequest(`/category/${category._id}`, null, {
+      method: 'DELETE',
+    }).catch((err) => globalErrorHandler(err));
+    if (res.status == 'deleted') return await goto('/');
+  };
 </script>
 
 {#if showOverlay}
@@ -72,8 +81,9 @@
         <span class="sub-count">
           <SubscriberCount count={category.subscriberCount} />
         </span>
-        {#if category.owner.id == currentUser.id}
+        {#if category.owner.id == currentUser.id || currentUser.admin}
           <a class="edit-link" href={`/a/${category.name}/edit`}>Edit</a>
+          <a on:click={deleteCategory} class="edit-link" href="javascript:void(0)">Delete</a>
         {/if}
       {/if}
     </div>
