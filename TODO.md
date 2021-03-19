@@ -3,6 +3,9 @@
 - sponsored post link is messed up: https://upvotocracy.com/sponsor
 - add avatar uploading from user settings
 - make up/down arrows larger
+- add ability to delete user from user page by admin
+- refresh category list after deleting category
+- show category creator in info box for categories
 
 # features
 
