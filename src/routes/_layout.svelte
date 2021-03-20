@@ -48,7 +48,7 @@
   <ErrorDropdown />
   <TopBar />
   <div class="content">
-    <CategoriesBar {cats} />
+    <CategoriesBar />
     <div class="center">
       <slot />
     </div>

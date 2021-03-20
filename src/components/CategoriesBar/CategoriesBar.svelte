@@ -3,10 +3,10 @@
   import Category from './Category.svelte';
   import HideToggle from './HideToggle.svelte';
   import { fly } from 'svelte/transition';
-  import { showCategoriesBar, showNotificationsBar } from '../../store';
+  import { showCategoriesBar, showNotificationsBar, categories } from '../../store';
   import { stores } from '@sapper/app';
 
-  export let cats;
+  let cats = [];
   let filtered = [];
   let search = '';
   let hideNsfw = true;
@@ -16,7 +16,8 @@
   const store = stores();
 
   store.page.subscribe((val) => (page = val));
-  console.log(page);
+
+  categories.subscribe((val) => (cats = val));
 
   store.preloading.subscribe((val) => {
     if (typeof screen != 'undefined' && screen.width < MOBILE_BREAK_POINT)
@@ -48,12 +49,14 @@
         return c;
       }
     });
+    sort(sortBy);
   }
 
   filterCategories();
 
   $: {
     search;
+    cats;
     filterCategories();
   }
 </script>
