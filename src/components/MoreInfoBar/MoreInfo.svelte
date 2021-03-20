@@ -72,6 +72,12 @@
         <p class="description">
           {category.description}
         </p>
+        <br />
+        <p class="description">
+          Created by: <a class="edit-link" rel="prefetch" href={`/u/${category.owner.username}`}
+            >{category.owner.username}</a
+          >
+        </p>
       {:else if user}
         {#if user.created}
           <p class="member-since">Member since: {moment(user.created).fromNow()}</p>
