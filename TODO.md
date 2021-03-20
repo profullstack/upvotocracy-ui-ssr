@@ -4,8 +4,6 @@
 - add avatar uploading from user settings
 - make up/down arrows larger
 - add ability to delete user from user page by admin
-- refresh category list after deleting category
-- show category creator in info box for categories
 
 # features
 
@@ -37,3 +35,5 @@
 - ~~upload optional category image when creating a category~~
 - ~~title on category pages is wrong, not sure where its coming from~~
 - ~~add ability to edit categories~~
+- ~~refresh category list after deleting category~~
+- ~~show category creator in info box for categories~~

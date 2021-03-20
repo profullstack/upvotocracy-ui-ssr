@@ -5,6 +5,7 @@
   import moment from 'moment';
   import { makeApiRequest, globalErrorHandler } from '../../api/create-api.js';
   import { goto } from '@sapper/app';
+  import { getCategoriesAndSave } from '../../api/categories';
 
   export let category = null;
   export let user = null;
@@ -20,7 +21,10 @@
     const res = await makeApiRequest(`/category/${category._id}`, null, {
       method: 'DELETE',
     }).catch((err) => globalErrorHandler(err));
-    if (res.status == 'deleted') return await goto('/');
+    if (res.status == 'deleted') {
+      getCategoriesAndSave();
+      return await goto('/');
+    }
   };
 </script>
 
@@ -67,6 +71,12 @@
       {#if category}
         <p class="description">
           {category.description}
+        </p>
+        <br />
+        <p class="description">
+          Created by: <a class="edit-link" rel="prefetch" href={`/u/${category.owner.username}`}
+            >{category.owner.username}</a
+          >
         </p>
       {:else if user}
         {#if user.created}

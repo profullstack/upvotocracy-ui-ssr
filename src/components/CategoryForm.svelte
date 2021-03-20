@@ -4,6 +4,7 @@
   import { userStore } from '../store';
   import { makeApiRequest, globalErrorHandler } from '../api/create-api';
   import Upload from '../components/Upload.svelte';
+  import { getCategoriesAndSave } from '../api/categories';
 
   export let category = null;
   let nsfw = category ? category.nsfw : false;
@@ -41,6 +42,7 @@
     ).catch((err) => globalErrorHandler(err));
 
     if (!res) return;
+    getCategoriesAndSave();
     goto(`/a/${name}`);
   };
 </script>
