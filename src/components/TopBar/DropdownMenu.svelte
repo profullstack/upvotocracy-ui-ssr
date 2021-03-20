@@ -20,10 +20,10 @@
 <nav class="dropdown">
   <a href={`/u/${user.username}`}>Profile</a>
   <a href="/settings">Settings</a>
-  <a on:click={logout} href="javascript:void(0)">Logout</a>
   <a on:click={() => darkTheme.set(!dark)} href="javascript:void(0)">
-    Switch to {dark ? 'light' : 'dark'} theme
+    {dark ? 'Light' : 'Dark'} theme
   </a>
+  <a on:click={logout} href="javascript:void(0)">Logout</a>
 </nav>
 
 <style>
