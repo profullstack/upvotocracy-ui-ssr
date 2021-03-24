@@ -11,7 +11,7 @@
 
 # done
 
-- ~~ add an "admin" boolean flag that allows me (or any admin user) to modify/delete posts and categories. if we delete it shoudl cascade. ie: delete a category then all its posts should get deleted too, similar to what happens when we delete a user.  admin flag will just be set manually in db~~
+- ~~add an "admin" boolean flag that allows me (or any admin user) to modify/delete posts and categories. if we delete it shoudl cascade. ie: delete a category then all its posts should get deleted too, similar to what happens when we delete a user.  admin flag will just be set manually in db~~
 - ~~add share links on post pages (see briskreader.com)~~
 - ~~creating post doesn't redirect to post~~
 - ~~add leaderboard and footer links back~~
