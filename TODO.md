@@ -4,6 +4,7 @@
 - add avatar uploading from user settings
 - make up/down arrows larger
 - add ability to delete user from user page by admin
+- mobile version has green up arrow on new posts i haven't upvoted
 
 # features
 
