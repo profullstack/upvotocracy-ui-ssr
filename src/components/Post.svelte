@@ -60,6 +60,8 @@
     if (vote[0]) {
       if (vote[0].vote == -1) userVote = 'downvote';
       else if (vote[0].vote == 1) userVote = 'upvote';
+    } else {
+      userVote = null;
     }
   };
 
