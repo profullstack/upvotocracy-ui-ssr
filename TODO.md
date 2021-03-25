@@ -1,9 +1,11 @@
 # todo
 
+- save settings/profile page results in UI error. Requests work, but there's no body so we get an error
 - sponsored post link is messed up: https://upvotocracy.com/sponsor
 - add avatar uploading from user settings
 - make up/down arrows larger
 - add ability to delete user from user page by admin
+- mobile version has green up arrow on new posts i haven't upvoted
 
 # features
 
