@@ -1,6 +1,5 @@
 # todo
 
-- save settings/profile page results in UI error. Requests work, but there's no body so we get an error
 - sponsored post link is messed up: https://upvotocracy.com/sponsor
 - add avatar uploading from user settings
 - add ability to delete user from user page by admin
@@ -39,3 +38,4 @@
 - ~~show category creator in info box for categories~~
 - ~~make up/down arrows larger~~
 - ~~mobile version has green up arrow on new posts i haven't upvoted~~
+- ~~save settings/profile page results in UI error. Requests work, but there's no body so we get an error~~

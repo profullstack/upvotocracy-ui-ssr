@@ -1,13 +1,10 @@
 <script>
-  import { goto } from '@sapper/app';
   import { userStore } from '../../store';
-  import { onMount } from 'svelte';
   import { makeApiRequest, globalErrorHandler } from '../../api/create-api';
 
   let user;
-  let isEditingFieldBT = false;
-  let isEditingFieldLinks = false;
   let numLinks = 1;
+  let showSaved = false;
 
   userStore.subscribe((val) => (user = val));
 
@@ -33,63 +30,75 @@
     }
   };
 
-  const updateBT = async (event) => {
-    event.preventDefault();
-    const form = document.getElementById('settings');
-    const token = localStorage.getItem('token');
-    const formData = new FormData(form);
+  const updateBT = () => {
+    return new Promise(async (resolve, reject) => {
+      const form = document.getElementById('settings');
+      const formData = new FormData(form);
 
-    const url = '/me/bitcoinaddress';
-    const res = await makeApiRequest(
-      url,
-      {
-        bitcoinaddress: formData.get('bitcoinAddress'),
-      },
-      { method: 'POST' },
-    ).catch((err) => globalErrorHandler(err));
+      const url = '/me/bitcoinaddress';
+      const res = await makeApiRequest(
+        url,
+        {
+          bitcoinaddress: formData.get('bitcoinAddress'),
+        },
+        { method: 'POST' },
+      ).catch((err) => reject(err));
+      resolve();
+    });
   };
 
-  const updateNIM = async (event) => {
-    event.preventDefault();
-    const form = document.getElementById('settings');
-    const token = localStorage.getItem('token');
-    const formData = new FormData(form);
+  const updateNIM = () => {
+    return new Promise(async (resolve, reject) => {
+      const form = document.getElementById('settings');
+      const formData = new FormData(form);
 
-    const url = '/me/nimiqaddress';
-    const res = await makeApiRequest(
-      url,
-      {
-        nimiqaddress: formData.get('nimiqAddress'),
-      },
-      { method: 'POST' },
-    ).catch((err) => globalErrorHandler(err));
+      const url = '/me/nimiqaddress';
+      await makeApiRequest(
+        url,
+        {
+          nimiqaddress: formData.get('nimiqAddress'),
+        },
+        { method: 'POST' },
+      ).catch((err) => reject(err));
+      resolve();
+    });
   };
 
-  const updateLinks = async (event) => {
-    event.preventDefault();
-    const form = document.getElementById('links');
-    const token = localStorage.getItem('token');
-    const formData = new FormData(form);
-    let links = [];
+  const updateLinks = () => {
+    return new Promise(async (resolve, reject) => {
+      const form = document.getElementById('links');
+      const formData = new FormData(form);
+      let links = [];
 
-    for (let i = 0; i < Math.max(numLinks, user.links.length); i++) {
-      if (
-        formData.get(`link-name${i}`) != '' &&
-        formData.get(`link-url${i}`) != '' &&
-        formData.get(`link-name${i}`) != null &&
-        formData.get(`link-url${i}`) != null
-      ) {
-        links.push({ name: formData.get(`link-name${i}`), url: formData.get(`link-url${i}`) });
+      for (let i = 0; i < Math.max(numLinks, user.links.length); i++) {
+        if (
+          formData.get(`link-name${i}`) != '' &&
+          formData.get(`link-url${i}`) != '' &&
+          formData.get(`link-name${i}`) != null &&
+          formData.get(`link-url${i}`) != null
+        ) {
+          links.push({ name: formData.get(`link-name${i}`), url: formData.get(`link-url${i}`) });
+        }
       }
-    }
-    const url = '/me/links';
-    const res = await makeApiRequest(
-      url,
-      {
-        socialLinks: links,
-      },
-      { method: 'POST' },
-    ).catch((err) => globalErrorHandler(err));
+      const url = '/me/links';
+      await makeApiRequest(
+        url,
+        {
+          socialLinks: links,
+        },
+        { method: 'POST' },
+      ).catch((err) => reject(err));
+      resolve();
+    });
+  };
+
+  const saveAll = async () => {
+    await Promise.all([updateLinks(), updateBT(), updateNIM()])
+      .then(() => {
+        showSaved = true;
+        setTimeout(() => (showSaved = false), 3000);
+      })
+      .catch((err) => globalErrorHandler(err));
   };
 </script>
 
@@ -167,14 +176,8 @@
       <button class="btn-lrg new-btn" on:click={newLink}>New Link</button>
     {/if}
   </form>
-  <button
-    class="btn-lrg submit-btn"
-    type="submit"
-    on:click={(e) => {
-      updateLinks(e);
-      updateBT(e);
-      updateNIM(e);
-    }}>Save Settings</button
+  <button class="btn-lrg submit-btn" type="submit" on:click|preventDefault={() => saveAll()}
+    >{showSaved ? 'Saved!' : 'Save Settings'}</button
   >
 </div>
 
