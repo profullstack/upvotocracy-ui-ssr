@@ -1,6 +1,5 @@
 # todo
 
-- sponsored post link is messed up: https://upvotocracy.com/sponsor
 - add avatar uploading from user settings
 - add ability to delete user from user page by admin
 
@@ -10,6 +9,7 @@
 
 # done
 
+- sponsored post link is messed up: https://upvotocracy.com/sponsor
 - ~~add an "admin" boolean flag that allows me (or any admin user) to modify/delete posts and categories. if we delete it shoudl cascade. ie: delete a category then all its posts should get deleted too, similar to what happens when we delete a user.  admin flag will just be set manually in db~~
 - ~~add share links on post pages (see briskreader.com)~~
 - ~~creating post doesn't redirect to post~~
