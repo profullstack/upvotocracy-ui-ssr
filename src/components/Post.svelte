@@ -367,7 +367,7 @@
     height: 280px;
     width: 100%;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain;
     background-position: center;
     border-radius: 5px;
   }
