@@ -1,7 +1,6 @@
 # todo
 
 - add avatar uploading from user settings
-- add ability to delete user from user page by admin
 
 # features
 
@@ -39,3 +38,4 @@
 - ~~make up/down arrows larger~~
 - ~~mobile version has green up arrow on new posts i haven't upvoted~~
 - ~~save settings/profile page results in UI error. Requests work, but there's no body so we get an error~~
+- ~~add ability to delete user from user page by admin~~
