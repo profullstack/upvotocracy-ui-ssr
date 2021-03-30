@@ -26,6 +26,15 @@
       return await goto('/');
     }
   };
+
+  const deleteUser = async () => {
+    const res = await makeApiRequest(`/user/${user.id}`, null, {
+      method: 'DELETE',
+    }).catch((err) => globalErrorHandler(err));
+    if (res.status == 'deleted') {
+      return await goto('/');
+    }
+  };
 </script>
 
 {#if showOverlay}
@@ -78,6 +87,13 @@
             >{category.owner.username}</a
           >
         </p>
+        <span class="sub-count">
+          <SubscriberCount count={category.subscriberCount} />
+        </span>
+        {#if category.owner.id == currentUser.id || currentUser.admin}
+          <a class="edit-link" href={`/a/${category.name}/edit`}>Edit</a>
+          <a on:click={deleteCategory} class="edit-link" href="javascript:void(0)">Delete</a>
+        {/if}
       {:else if user}
         {#if user.created}
           <p class="member-since">Member since: {moment(user.created).fromNow()}</p>
@@ -86,14 +102,8 @@
         {#each user.links as link}
           <a href={link.url} target="_blank">- {link.name}</a>
         {/each}
-      {/if}
-      {#if category}
-        <span class="sub-count">
-          <SubscriberCount count={category.subscriberCount} />
-        </span>
-        {#if category.owner.id == currentUser.id || currentUser.admin}
-          <a class="edit-link" href={`/a/${category.name}/edit`}>Edit</a>
-          <a on:click={deleteCategory} class="edit-link" href="javascript:void(0)">Delete</a>
+        {#if currentUser.admin}
+          <a on:click={deleteUser} class="edit-link" href="javascript:void(0)">Delete</a>
         {/if}
       {/if}
     </div>
