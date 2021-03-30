@@ -26,6 +26,15 @@
       return await goto('/');
     }
   };
+
+  const deleteUser = async () => {
+    const res = await makeApiRequest(`/user/${user.id}`, null, {
+      method: 'DELETE',
+    }).catch((err) => globalErrorHandler(err));
+    if (res.status == 'deleted') {
+      return await goto('/');
+    }
+  };
 </script>
 
 {#if showOverlay}
@@ -86,6 +95,9 @@
         {#each user.links as link}
           <a href={link.url} target="_blank">- {link.name}</a>
         {/each}
+        {#if currentUser.admin}
+          <a on:click={deleteUser} class="edit-link" href="javascript:void(0)">Delete</a>
+        {/if}
       {/if}
       {#if category}
         <span class="sub-count">
