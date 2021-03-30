@@ -87,6 +87,13 @@
             >{category.owner.username}</a
           >
         </p>
+        <span class="sub-count">
+          <SubscriberCount count={category.subscriberCount} />
+        </span>
+        {#if category.owner.id == currentUser.id || currentUser.admin}
+          <a class="edit-link" href={`/a/${category.name}/edit`}>Edit</a>
+          <a on:click={deleteCategory} class="edit-link" href="javascript:void(0)">Delete</a>
+        {/if}
       {:else if user}
         {#if user.created}
           <p class="member-since">Member since: {moment(user.created).fromNow()}</p>
@@ -97,15 +104,6 @@
         {/each}
         {#if currentUser.admin}
           <a on:click={deleteUser} class="edit-link" href="javascript:void(0)">Delete</a>
-        {/if}
-      {/if}
-      {#if category}
-        <span class="sub-count">
-          <SubscriberCount count={category.subscriberCount} />
-        </span>
-        {#if category.owner.id == currentUser.id || currentUser.admin}
-          <a class="edit-link" href={`/a/${category.name}/edit`}>Edit</a>
-          <a on:click={deleteCategory} class="edit-link" href="javascript:void(0)">Delete</a>
         {/if}
       {/if}
     </div>
