@@ -160,6 +160,7 @@
       <VoteArrow type="down" click={downvote} selected={userVote == 'downvote'} />
     </div>
     <div class:sponsored={post.sponsored} class="post-inner-container">
+      <a class="title" rel="prefetch" href={`/a/${post.category.name}/${post.id}`}>{post.title}</a>
       <a rel="prefetch" href={`/a/${post.category.name}/${post.id}`}>
         {#if (postThumb && !withDetails) || (postThumb && withDetails && !postVideo)}
           <div class="post-thumb" style={`background-image: url(${postThumb})`} />
@@ -211,9 +212,6 @@
               </video>
             {/if}
           {:else}
-            <a class="title title-above" rel="prefetch" href={`/a/${post.category.name}/${post.id}`}
-              >{post.title}</a
-            >
             <p class="text">
               {#if post.url}
                 <a href={post.url} target="_blank">{@html post.url}</a>
@@ -225,11 +223,6 @@
         {/if}
       </a>
       <div class="post-info">
-        {#if !withDetails || postVideo}
-          <a class="title" rel="prefetch" href={`/a/${post.category.name}/${post.id}`}
-            >{post.title}</a
-          >
-        {/if}
         <div class="lower">
           <div class="lower-left">
             <a class="category-link" href={`/a/${post.category.name}`}>/a/{post.category.name}</a>
@@ -310,9 +303,6 @@
     font-size: 15px;
     color: var(--green-accent);
   }
-  .title-above {
-    margin: 0 10px;
-  }
   .sponsored {
     border: 1px solid var(--green-accent) !important;
   }
@@ -338,7 +328,7 @@
     width: 100%;
   }
   .post-info {
-    margin: 15px;
+    margin: 17px 15px;
   }
   .lower {
     display: flex;
@@ -390,6 +380,8 @@
     line-height: 26px;
     margin-block-start: 1em;
     margin-block-end: 1em;
+    margin-left: 15px;
+    margin-right: 15px;
   }
   .text {
     word-break: break-all;
