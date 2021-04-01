@@ -160,68 +160,70 @@
       <VoteArrow type="down" click={downvote} selected={userVote == 'downvote'} />
     </div>
     <div class:sponsored={post.sponsored} class="post-inner-container">
-      {#if (postThumb && !withDetails) || (postThumb && withDetails && !postVideo)}
-        <div class="post-thumb" style={`background-image: url(${postThumb})`} />
-      {/if}
-      {#if withDetails}
-        {#if postVideo}
-          {#if youtubeId && youtubeId[1]}
-            <div class="plyr__video-embed youtube">
-              <iframe
-                style="border: none;"
-                src={`https://www.youtube.com/embed/${youtubeId[1]}?origin=https://plyr.io&amp;iv_load_policy=3&amp;modestbranding=1&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;enablejsapi=1`}
-                allowfullscreen
-                allowtransparency
-                title="YouTube"
-              />
-            </div>
-          {:else if nullvideo}
-            <video
-              class="mp4"
-              poster={nullvideo.replace('.mp4', '.png')}
-              id={`vid-${new Date().getTime()}`}
-              playsinline
-              controls
-              crossorigin
-            >
-              <source src={nullvideo} type="video/mp4" />
-            </video>
-          {:else if post.type == 'media'}
-            <video
-              class="mp4"
-              poster={postThumb}
-              id={`vid-${new Date().getTime()}`}
-              playsinline
-              controls
-              crossorigin
-            >
-              <source src={postVideo} type="video/mp4" />
-            </video>
-          {:else}
-            <video
-              class="mp4"
-              poster={postVideo.replace('.mp4', '.png')}
-              id={`vid-${new Date().getTime()}`}
-              playsinline
-              controls
-              crossorigin
-            >
-              <source src={postVideo} type="video/mp4" />
-            </video>
-          {/if}
-        {:else}
-          <a class="title title-above" rel="prefetch" href={`/a/${post.category.name}/${post.id}`}
-            >{post.title}</a
-          >
-          <p class="text">
-            {#if post.url}
-              <a href={post.url} target="_blank">{@html post.url}</a>
-            {:else}
-              {@html converter.makeHtml(post.text)}
-            {/if}
-          </p>
+      <a rel="prefetch" href={`/a/${post.category.name}/${post.id}`}>
+        {#if (postThumb && !withDetails) || (postThumb && withDetails && !postVideo)}
+          <div class="post-thumb" style={`background-image: url(${postThumb})`} />
         {/if}
-      {/if}
+        {#if withDetails}
+          {#if postVideo}
+            {#if youtubeId && youtubeId[1]}
+              <div class="plyr__video-embed youtube">
+                <iframe
+                  style="border: none;"
+                  src={`https://www.youtube.com/embed/${youtubeId[1]}?origin=https://plyr.io&amp;iv_load_policy=3&amp;modestbranding=1&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;enablejsapi=1`}
+                  allowfullscreen
+                  allowtransparency
+                  title="YouTube"
+                />
+              </div>
+            {:else if nullvideo}
+              <video
+                class="mp4"
+                poster={nullvideo.replace('.mp4', '.png')}
+                id={`vid-${new Date().getTime()}`}
+                playsinline
+                controls
+                crossorigin
+              >
+                <source src={nullvideo} type="video/mp4" />
+              </video>
+            {:else if post.type == 'media'}
+              <video
+                class="mp4"
+                poster={postThumb}
+                id={`vid-${new Date().getTime()}`}
+                playsinline
+                controls
+                crossorigin
+              >
+                <source src={postVideo} type="video/mp4" />
+              </video>
+            {:else}
+              <video
+                class="mp4"
+                poster={postVideo.replace('.mp4', '.png')}
+                id={`vid-${new Date().getTime()}`}
+                playsinline
+                controls
+                crossorigin
+              >
+                <source src={postVideo} type="video/mp4" />
+              </video>
+            {/if}
+          {:else}
+            <a class="title title-above" rel="prefetch" href={`/a/${post.category.name}/${post.id}`}
+              >{post.title}</a
+            >
+            <p class="text">
+              {#if post.url}
+                <a href={post.url} target="_blank">{@html post.url}</a>
+              {:else}
+                {@html converter.makeHtml(post.text)}
+              {/if}
+            </p>
+          {/if}
+        {/if}
+      </a>
       <div class="post-info">
         {#if !withDetails || postVideo}
           <a class="title" rel="prefetch" href={`/a/${post.category.name}/${post.id}`}
