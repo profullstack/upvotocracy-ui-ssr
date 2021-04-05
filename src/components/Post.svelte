@@ -226,8 +226,11 @@
         <div class="lower">
           <div class="lower-left">
             <a class="category-link" href={`/a/${post.category.name}`}>/a/{post.category.name}</a>
-            <a href={`/u/${post.author.username}`} class="by-username"
-              >by <span class="username">{post.author.username}</span></a
+            <a
+              href={`/u/${post.author ? post.author.username : ''}`}
+              class="by-username"
+              on:click={(e) => (!post.author ? e.preventDefault() : null)}
+              >by <span class="username">{post.author ? post.author.username : 'deleted'}</span></a
             >
           </div>
           <div class="lower-right">
@@ -278,7 +281,7 @@
           </div>
         {/if}
       </div>
-      {#if withDetails && (post.author.id === user.id || user.admin)}
+      {#if withDetails && ((post.author && post.author.id === user.id) || user.admin)}
         <div class="sponsor-delete">
           {#if !post.sponsored}
             <a class="sponsor-this" href={`/sponsor?postId=${post.id}`}>sponsor this post</a>
