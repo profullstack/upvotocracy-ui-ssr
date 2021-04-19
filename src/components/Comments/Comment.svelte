@@ -115,7 +115,13 @@
   .time {
     font-size: 15px;
   }
+
   .comment-body {
     font-size: 15px;
+  }
+
+  :global(.comment-body a) {
+    text-decoration: underline;
+    color: var(--green-accent);
   }
 </style>
