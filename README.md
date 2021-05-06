@@ -1,3 +1,10 @@
+# upvotocracy-ui-ssr
+
+Live site at [upvotocracy.com](https://upvotocracy.com)
+
+Upvotocracy is an open source reddit clone.
+
+
 # sapper-template
 
 The default [Sapper](https://github.com/sveltejs/sapper) template, available for Rollup and webpack.
