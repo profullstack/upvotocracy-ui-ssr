@@ -63,6 +63,7 @@
 
 {#if show}
   <div class="sticky-sidebar categories" transition:fly={{ x: -350, opacity: 1 }}>
+    <a href="/"><img class="home-icon" src="/icons/favicon-196x196.png" alt="favicon"></a>
     <header>
       <h3>Categories</h3>
       <a rel="prefetch" href="/mycategories"><button>My Categories</button></a>
@@ -141,10 +142,20 @@
     padding: 10px 15px;
     background-color: var(--sidebar-bg);
   }
+  .home-icon {
+    display: none;
+  }
 
   @media screen and (max-width: MOBILE_BREAK_POINT_PX) {
     .categories {
       position: fixed;
+    }
+    .home-icon {
+      width: 50px;
+      height: 50px;
+      display: block;
+      margin: 5px 50%;
+      transform: translateX(-50%);
     }
   }
 </style>
