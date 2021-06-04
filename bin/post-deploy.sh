@@ -3,7 +3,7 @@
 cd "$(dirname "$0")/.."
 . .env
 . $HOME/.bashrc
-. "$NVM_DIR/nvm.sh" && nvm use v12
+. "$NVM_DIR/nvm.sh" && nvm use v16
 
 host=$HOST_DOMAIN
 name=$HOST_PATH
