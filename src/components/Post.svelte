@@ -224,6 +224,13 @@
         {/if}
       </a>
       <div class="post-info">
+        {#if withDetails && post.hashtags && post.hashtags.length > 0}
+        <ul class="hashtags">
+          {#each post.hashtags as hashtag}
+            <li><a rel="prefetch" href={`/tag/${hashtag}`}>{`#${hashtag}`}</a></li>
+          {/each}
+        </ul>
+        {/if}
         <div class="lower">
           <div class="lower-left">
             <a
@@ -421,5 +428,16 @@
     width: 100%;
     height: 300px;
     border-radius: 5px;
+  }
+
+  ul.hashtags {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    line-break: anywhere;
+    padding: 0;
+  }
+  ul.hashtags > li {
+    margin: 0 5px;
   }
 </style>
