@@ -12,4 +12,7 @@
 </a>
 
 <style>
+  img {
+    height: 3rem;
+  }
 </style>
