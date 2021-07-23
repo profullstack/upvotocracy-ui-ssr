@@ -8,6 +8,8 @@
   --sidebar-bg: #f9f9f9;
   --input-bg: #F6F6F6;
   --btn-bg: #ffffff;
+  --category-bg: rgba(18, 245, 149, 0.08);
+  --category-outline: rgba(20, 123, 80, 0.4);
 }
 
 [data-theme='dark'] {
@@ -20,6 +22,8 @@
   --sidebar-bg: #1b1f1e;
   --input-bg: #171B19;
   --btn-bg: #1b1f1e;
+  --category-bg: rgba(20, 123, 80, 0.08);
+  --category-outline: rgba(18, 245, 149, 0.4);
 }
 
 @font-face {
