@@ -40,19 +40,19 @@
     color: red;
   }
   .category.selected {
-    background: rgba(18, 245, 149, 0.08);
-    outline: 1px solid rgba(18, 245, 149, 0.4);
+    background: var(--category-bg);
+    outline: 1px solid var(--category-outline);
   }
   .name.selected {
-    color: #12f595;
+    color: var(--green-accent);
     font-weight: bold;
   }
   :global([data-theme='light']) .category.selected {
-    background: rgba(20, 123, 80, 0.08);
-    outline: 1px solid rgba(20, 123, 80, 0.4);
+    background: var(--category-bg);
+    outline: 1px solid var(--category-outline);
   }
   :global([data-theme='light']) .name.selected {
-    color: #147b50;
+    color: var(--green-accent);
     font-weight: bold;
   }
 </style>
