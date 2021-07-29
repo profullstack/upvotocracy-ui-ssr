@@ -64,6 +64,23 @@
     });
   };
 
+  const updateETH = () => {
+    return new Promise(async (resolve, reject) => {
+      const form = document.getElementById('settings');
+      const formData = new FormData(form);
+
+      const url = '/me/ethereumaddress';
+      await makeApiRequest(
+        url,
+        {
+          nimiqaddress: formData.get('ethereumAddress'),
+        },
+        { method: 'POST' },
+      ).catch((err) => reject(err));
+      resolve();
+    });
+  };
+
   const updateLinks = () => {
     return new Promise(async (resolve, reject) => {
       const form = document.getElementById('links');
@@ -93,7 +110,7 @@
   };
 
   const saveAll = async () => {
-    await Promise.all([updateLinks(), updateBT(), updateNIM()])
+    await Promise.all([updateLinks(), updateBT(), updateNIM(), updateETH()])
       .then(() => {
         showSaved = true;
         setTimeout(() => (showSaved = false), 3000);
@@ -134,6 +151,20 @@
       />
     {:else}
       <input type="text" placeholder="Nimiq Address" id="nimAddress" name="nimiqAddress" />
+    {/if}
+
+    <label for="nimAddress">Ethereum Address</label>
+    {#if user.ethereumAddress != null}
+      <input
+        class="input"
+        type="text"
+        placeholder="Ethereum Address"
+        id="ethereumAddress"
+        name="ethereumAddress"
+        value={user.ethereumAddress}
+      />
+    {:else}
+      <input type="text" placeholder="Ethereum Address" id="ethereumAddress" name="ethereumAddress" />
     {/if}
   </form>
   <form id="links">

@@ -62,7 +62,7 @@
           <SubscribeButton categoryID={category._id} showText={true} />
         {:else if user}
           {user.username}
-          {#if user.bitcoinAddress || user.nimiqAddress}
+          {#if user.bitcoinAddress || user.nimiqAddress || user.ethereumAddress}
             <button on:click={() => (showAddress = !showAddress)} class="btn-lrg">
               payment addresses
             </button>
@@ -76,6 +76,10 @@
       {#if showAddress && user.nimiqAddress}
         <div>Nimiq:</div>
         <code>{user.nimiqAddress}</code>
+      {/if}
+      {#if showAddress && user.ethereumAddress}
+        <div>Ethereum:</div>
+        <code>{user.ethereumAddress}</code>
       {/if}
       {#if category}
         <p class="description">
