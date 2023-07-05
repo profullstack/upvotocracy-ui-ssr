@@ -6,7 +6,7 @@
     "dev": "npx sapper dev",
     "build": "npx sapper build --legacy",
     "export": "npx sapper export --legacy",
-    "start": "node __sapper__/build",
+    "start": "npm run build && node __sapper__/build",
     "cy:run": "npx cypress run",
     "cy:open": "npx cypress open",
     "test": "run-p --race dev cy:run",
