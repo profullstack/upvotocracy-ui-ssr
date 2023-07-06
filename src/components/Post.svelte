@@ -124,8 +124,8 @@
     );
 
     share(
-      '.upvotocracy',
-      "javascript:void(open(`https://upvotocracy.com/compose?link=${encodeURIComponent(`${location.href}${location.href.includes('?')?'&':'?'}_snoorandom=${crypto.getRandomValues(new Uint8Array(4)).reduce((a,v)=>a+=(v.toString(16).padStart(2,'0')),'')}`)}&title=${encodeURIComponent(document.querySelector('meta[name=title][content]')?document.querySelector('meta[name=title][content]').content:document.title)}`))",
+      '.numelli',
+      "javascript:void(open(`https://numelli.com/compose?link=${encodeURIComponent(`${location.href}${location.href.includes('?')?'&':'?'}_snoorandom=${crypto.getRandomValues(new Uint8Array(4)).reduce((a,v)=>a+=(v.toString(16).padStart(2,'0')),'')}`)}&title=${encodeURIComponent(document.querySelector('meta[name=title][content]')?document.querySelector('meta[name=title][content]').content:document.title)}`))",
     );
 
     share(
@@ -291,7 +291,7 @@
             <a href="#" class="twitter">twitter</a>
             <a href="#" class="ruqqus">ruqqus</a>
             <a href="#" class="reddit">reddit</a>
-            <a href="#" class="upvotocracy">upvotocracy</a>
+            <a href="#" class="numelli">numelli</a>
             <a href="#" class="hackernews">hackernews</a>
             <a href="#" class="bitcoinlatte">bitcoinlatte</a>
             <a href="#" class="facebook">facebook</a>

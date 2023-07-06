@@ -1,8 +1,8 @@
 {
   "background_color": "#ffffff",
   "theme_color": "#ececec",
-  "name": "Upvotocracy",
-  "short_name": "Upvotocracy",
+  "name": "numelli",
+  "short_name": "numelli",
   "display": "standalone",
   "start_url": "/",
   "icons": [
