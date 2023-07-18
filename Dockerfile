@@ -1,4 +1,4 @@
-FROM node:lts-alpine3.12
+FROM node:18-alpine
 RUN mkdir -p /usr/src/app
 RUN apk add vim
 WORKDIR /usr/src/app
