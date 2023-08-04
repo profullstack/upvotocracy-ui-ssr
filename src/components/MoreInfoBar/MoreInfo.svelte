@@ -4,7 +4,7 @@
   import SubscribeButton from '../CategoriesBar/SubscribeButton.svelte';
   import moment from 'moment';
   import { makeApiRequest, globalErrorHandler } from '../../api/create-api.js';
-  import { goto } from '@sapper/app';
+  import { goto } from '$app/navigation';
   import { getCategoriesAndSave } from '../../api/categories';
 
   export let category = null;

@@ -1,7 +1,6 @@
 <script>
   import { onMount } from 'svelte';
-  import { stores } from '@sapper/app';
-
+  import { writable } from 'svelte/store';
   export let username;
   export let category;
   export let hashtag;
@@ -15,7 +14,7 @@
   let sortChoice;
   let page;
   let path;
-  const store = stores();
+  const store = writable();
 
   store.page.subscribe((val) => (page = val));
 

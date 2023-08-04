@@ -2,7 +2,7 @@
   import CommentForm from './CommentForm.svelte';
   import SortBar from '../SortBar.svelte';
   import Comment from './Comment.svelte';
-  import { stores } from '@sapper/app';
+  import { writable as stores } from 'svelte/store';
 
   export let post;
   let comments = post.comments;

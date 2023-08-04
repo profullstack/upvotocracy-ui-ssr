@@ -1,6 +1,6 @@
 <script>
   import { darkTheme } from '../store';
-  import { goto } from '@sapper/app';
+  import { goto } from '$app/navigation';
 
   export let linkToSearch = false;
   export let search = '';

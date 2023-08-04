@@ -1,6 +1,6 @@
 <script>
   import moment from 'moment';
-  import { goto } from '@sapper/app';
+  import { goto } from '$app/navigation';
   import { userStore } from '../store';
   import { makeApiRequest, globalErrorHandler } from '../api/create-api';
   import showdown from 'showdown';

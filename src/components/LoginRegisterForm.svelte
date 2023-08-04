@@ -1,6 +1,6 @@
 <script>
   import { onMount } from 'svelte';
-  import { goto } from '@sapper/app';
+  import { goto } from '$app/navigation';
   import { userStore } from '../store';
   import decode from 'jwt-decode';
   import { makeApiRequest, globalErrorHandler } from '../api/create-api';
