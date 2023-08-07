@@ -26,6 +26,8 @@
     <a href="https://t.me/Upvoto">Telegram: Upvoto</a>
     <a href="http://ONION_URL/">Tor: ONION_URL</a>
     <a href="https://discord.gg/VfGmeKn">Discord</a>
+    <a href="/privacy">Privacy</a>
+    <a href="/terms">Terms</a>
   </div>
 </footer>
 
