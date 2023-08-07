@@ -20,7 +20,7 @@
     <a href="https://github.com/profullstack/upvotocracy-ui-ssr" title="MIT">open source</a>
     <a href="https://www.facebook.com/pg/upvoGoCrazy/" title="Facebook: upvoGoCrazy">Facebook</a>
     <a href="https://profullstack.com">Profullstack.com</a>
-    <span class="legal">&copy; 2020</span>
+    <span class="legal">&copy; 2023</span>
   </div>
   <div>
     <a href="https://t.me/Upvoto">Telegram: Upvoto</a>
