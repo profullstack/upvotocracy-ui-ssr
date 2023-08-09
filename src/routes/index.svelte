@@ -6,7 +6,7 @@
     let headers;
     let username;
     let sort;
-    let type;
+    let type = 'new';
     let pageNumber = 0;
 
     if (page.query.sort) type = page.query.sort;

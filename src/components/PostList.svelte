@@ -18,7 +18,7 @@
   export let posts = [];
   export let page;
   export let morePosts = false;
-  export let sort = '-rank';
+  export let sort = '-created';
   export let categoryData;
   export let pageUser;
   let previousURL;

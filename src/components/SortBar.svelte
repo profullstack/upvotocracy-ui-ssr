@@ -21,7 +21,7 @@
 
   $: {
     if (typeof page.query.sort == 'undefined' && comments == true) sortChoice = 'new';
-    else if (typeof page.query.sort == 'undefined') sortChoice = 'hot';
+    else if (typeof page.query.sort == 'undefined') sortChoice = 'new';
     else if (page.query.sort == 'not') sortChoice = 'controversial';
     else sortChoice = page.query.sort;
   }
@@ -63,6 +63,7 @@
         >Original</a
       >
     {:else}
+      <a class:selected={sortChoice == 'new'} rel="prefetch" href="{path}?sort=new">New</a>
       <a
         class:selected={sortChoice == 'hot' || typeof page.query.sort == 'undefined'}
         rel="prefetch"
@@ -70,7 +71,6 @@
       >
         Hot
       </a>
-      <a class:selected={sortChoice == 'new'} rel="prefetch" href="{path}?sort=new">New</a>
       <a class:selected={sortChoice == 'top'} rel="prefetch" href="{path}?sort=top">Top</a>
       <a class:selected={sortChoice == 'comments'} rel="prefetch" href="{path}?sort=comments">
         Comments
