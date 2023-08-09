@@ -65,7 +65,7 @@
     {:else}
       <a class:selected={sortChoice == 'new'} rel="prefetch" href="{path}?sort=new">New</a>
       <a
-        class:selected={sortChoice == 'hot' || typeof page.query.sort == 'undefined'}
+        class:selected={sortChoice == 'hot'}
         rel="prefetch"
         href="{path}?sort=hot"
       >
